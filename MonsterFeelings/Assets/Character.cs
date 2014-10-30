@@ -8,7 +8,6 @@ public class Character : MonoBehaviour
 
 		private TileMap tileMap;
 		public Vector3 position;
-		private float tileSize;
 
 		private bool isTurn;
 		private List<Vector3> pastPos;
@@ -18,10 +17,9 @@ public class Character : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				// Fine the TileMap and get its tilesize.
+				// Fine the TileMap.
 				GameObject obj = GameObject.Find ("TileMap");
 				tileMap = obj.GetComponent<TileMap> ();
-				tileSize = tileMap.getTileSize ();
 
 				// Set the character to its runtime position.
 				transform.position = position;
@@ -86,8 +84,8 @@ public class Character : MonoBehaviour
 				if (tileMap.collider.Raycast (ray, out hitInfo, Mathf.Infinity)) {
 
 						// The tile that the mouse is at.
-						int x = Mathf.FloorToInt (hitInfo.point.x / tileSize);
-						int y = Mathf.FloorToInt (hitInfo.point.y / tileSize);
+						int x = Mathf.FloorToInt (hitInfo.point.x);
+						int y = Mathf.FloorToInt (hitInfo.point.y);
 
 						// Can move left, right, up, or down.
 						if (x == position.x && (y == position.y + 1 || y == position.y - 1) ||
@@ -109,7 +107,7 @@ public class Character : MonoBehaviour
 										position.x = x;
 										position.y = y;
 
-										transform.position = position * tileSize;
+										transform.position = position;
 								
 										// If we aren't out of move.
 								} else if (currMP != 0) {			
@@ -132,12 +130,10 @@ public class Character : MonoBehaviour
 										position.x = x;
 										position.y = y;
 				
-										transform.position = position * tileSize;
+										transform.position = position;
 										
 								}
 						}
-
-						Debug.Log (currMP);
 				}
 
 		}

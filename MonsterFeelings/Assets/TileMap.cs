@@ -13,9 +13,6 @@ public class TileMap : MonoBehaviour
 		public int mapX;
 		public int mapY;
 
-		// Size in Unity units of each tile.
-		public float tileSize;		
-
 		// The CSV file that tells the tilemap the data of each tile.
 		public TextAsset tileDataSource;
 		
@@ -52,7 +49,7 @@ public class TileMap : MonoBehaviour
 				// Fill mesh data
 				for (int y = 0; y < vertY; y++) {
 						for (int x = 0; x < vertX; x++) {
-								vertices [y * vertX + x] = new Vector3 (x * tileSize, y * tileSize, 0);
+								vertices [y * vertX + x] = new Vector3 (x, y, 0);
 								normals [y * vertX + x] = Vector3.up;
 								uv [y * vertX + x] = new Vector2 ((float)x / mapX, (float)y / mapY);
 						}
@@ -111,14 +108,7 @@ public class TileMap : MonoBehaviour
 		public int getTileData (int x, int y)
 		{
 				return tileData [x, y];
-		}
-
-		public float getTileSize ()
-		{
-				return tileSize;
-		}
-
-		
+		}		
 }
 
 
