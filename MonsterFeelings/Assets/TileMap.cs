@@ -9,11 +9,17 @@ using System.Collections;
 public class TileMap : MonoBehaviour
 {
 
+		// Height and width of the TileMap.
 		public int mapX;
 		public int mapY;
+
+		// Size in Unity units of each tile.
 		public float tileSize;		
+
+		// The CSV file that tells the tilemap the data of each tile.
 		public TextAsset tileDataSource;
 		
+		// A 2D array representing the TileMap to store each tile's terrain data.
 		private int[,] tileData;
 
 		public void Start ()
@@ -81,23 +87,27 @@ public class TileMap : MonoBehaviour
 		
 				meshFilter.mesh = mesh;
 				meshCollider.sharedMesh = mesh;
-
-				Debug.Log ("Done Mesh!");
 		}
 
+		// 
 		private void setTileData ()
 		{
+				// Gets each line of the CSV.
 				string[] lines = tileDataSource.text.Split ("\n" [0]);
-				
-				// Get Data from CSV
-				for (int y = 0; y < lines.Length - 1; y++) {
-						string[] row = lines [y].Split (',');
-						for (int x = 0; x < row.Length; x++) {
-								tileData [x, mapY - 1 - y] = Convert.ToInt32 (row [x]);
+
+				// Get Data from CSV.
+				for (int y = 0; y < mapY; y++) {
+						// Skips empty lines.
+						if (!lines [y].Equals ("")) {
+								string[] row = lines [y].Split (',');
+								for (int x = 0; x < mapX; x++) {
+										tileData [x, mapY - 1 - y] = Convert.ToInt32 (row [x]);
+								}
 						}
 				}				
 		}
 
+		// Used when asking for data of a single tile.
 		public int getTileData (int x, int y)
 		{
 				return tileData [x, y];
