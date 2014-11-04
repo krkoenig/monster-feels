@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Character.cs" />
      <Compile Include="Assets\Queue.cs" />
+     <Compile Include="Assets\Tile.cs" />
      <Compile Include="Assets\TileMap.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

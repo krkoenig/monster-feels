@@ -4,7 +4,6 @@ using System.Collections;
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
-[RequireComponent(typeof(MeshCollider))]
 
 public class TileMap : MonoBehaviour
 {
@@ -14,19 +13,26 @@ public class TileMap : MonoBehaviour
 		public int mapY;
 
 		// The CSV file that tells the tilemap the data of each tile.
-		public TextAsset tileDataSource;
+		public TextAsset terrainCSV;
 		
 		// A 2D array representing the TileMap to store each tile's terrain data.
-		private int[,] tileData;
+		private Tile[,] tiles;
 
 		public void Start ()
 		{
-				// Build TileData
-				tileData = new int[mapX, mapY];
-				setTileData ();
+				// Build tiles
+				tiles = new Tile[mapX, mapY];
+				for (int y = 0; y < mapY; y++) {
+						for (int x = 0; x < mapX; x++) {
+								tiles [x, y] = new Tile (x, y);
+						}
+				}
+
+				setTileTerrain ();
+				setTileOccupants ();
 
 				// Build the Mesh
-				BuildMesh ();
+				BuildMesh ();				
 		}
 	
 		public void BuildMesh ()
@@ -80,34 +86,45 @@ public class TileMap : MonoBehaviour
 		
 				// Assign the mesh to the filter and collider
 				MeshFilter meshFilter = GetComponent<MeshFilter> ();
-				MeshCollider meshCollider = GetComponent<MeshCollider> ();
-		
+
 				meshFilter.mesh = mesh;
-				meshCollider.sharedMesh = mesh;
 		}
 
-		// 
-		private void setTileData ()
+		// Grabs terrain data from the CSV and stores it into the tiles.
+		private void setTileTerrain ()
 		{
 				// Gets each line of the CSV.
-				string[] lines = tileDataSource.text.Split ("\n" [0]);
-
+				string[] lines = terrainCSV.text.Split ("\n" [0]);
+		
 				// Get Data from CSV.
 				for (int y = 0; y < mapY; y++) {
 						// Skips empty lines.
 						if (!lines [y].Equals ("")) {
 								string[] row = lines [y].Split (',');
 								for (int x = 0; x < mapX; x++) {
-										tileData [x, mapY - 1 - y] = Convert.ToInt32 (row [x]);
+										tiles [x, mapY - 1 - y].setTerrain (Convert.ToInt32 (row [x]));
 								}
 						}
-				}				
+				}	
+		}
+
+		// Set the occupants of each Tile.
+		private void setTileOccupants ()
+		{
+				Character[] charObjects = FindObjectsOfType<Character> ();
+
+				for (int i = 0; i < charObjects.Length; i++) {
+						int x = Mathf.FloorToInt (charObjects [i].position.x);
+						int y = Mathf.FloorToInt (charObjects [i].position.y);
+					
+						tiles [x, y].setOccupant (charObjects [i]);
+				}
 		}
 
 		// Used when asking for data of a single tile.
-		public int getTileData (int x, int y)
+		public Tile getTile (int x, int y)
 		{
-				return tileData [x, y];
+				return tiles [x, y];
 		}		
 }
 

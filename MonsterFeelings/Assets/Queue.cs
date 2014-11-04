@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 public class Queue : MonoBehaviour
 {
-		// Needed for grabbing Characters from scene.
-		private Character[] charObjects;
-
 		// The queue.
 		private LinkedList<Character> characters;
 
@@ -15,7 +12,7 @@ public class Queue : MonoBehaviour
 		{
 				// Grab all Characters from the scene and move them into the queue.
 				// TODO: Sort using Intitiative.
-				charObjects = (Character[])Object.FindObjectsOfType<Character> ();
+				Character[] charObjects = (Character[])Object.FindObjectsOfType<Character> ();
 				characters = new LinkedList<Character> ();
 				foreach (Character data in charObjects) {
 						characters.AddLast (data.GetComponent<Character> ());			
