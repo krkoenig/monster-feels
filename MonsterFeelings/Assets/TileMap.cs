@@ -22,13 +22,8 @@ public class TileMap : MonoBehaviour
 		{
 				// Build tiles
 				tiles = new Tile[mapX, mapY];
-				for (int y = 0; y < mapY; y++) {
-						for (int x = 0; x < mapX; x++) {
-								tiles [x, y] = new Tile (x, y);
-						}
-				}
 
-				setTileTerrain ();
+				createTiles ();
 				setTileOccupants ();
 
 				// Build the Mesh
@@ -84,26 +79,23 @@ public class TileMap : MonoBehaviour
 				mesh.normals = normals;
 				mesh.uv = uv;
 		
-				// Assign the mesh to the filter and collider
+				// Assign the mesh to the filter.
 				MeshFilter meshFilter = GetComponent<MeshFilter> ();
 
 				meshFilter.mesh = mesh;
 		}
 
-		// Grabs terrain data from the CSV and stores it into the tiles.
-		private void setTileTerrain ()
+		private void createTiles ()
 		{
 				// Gets each line of the CSV.
 				string[] lines = terrainCSV.text.Split ("\n" [0]);
 		
-				// Get Data from CSV.
 				for (int y = 0; y < mapY; y++) {
-						// Skips empty lines.
-						if (!lines [y].Equals ("")) {
-								string[] row = lines [y].Split (',');
-								for (int x = 0; x < mapX; x++) {
-										tiles [x, mapY - 1 - y].setTerrain (Convert.ToInt32 (row [x]));
-								}
+						string[] values = lines [mapY - 1 - y].Split (',');
+						for (int x = 0; x < mapX; x++) {
+								Vector3 pos = new Vector3 (x, y);
+								int terrain = Convert.ToInt32 (values [x]);
+								tiles [x, y] = new Tile (pos, terrain);
 						}
 				}	
 		}

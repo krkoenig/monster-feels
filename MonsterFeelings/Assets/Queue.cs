@@ -19,18 +19,15 @@ public class Queue : MonoBehaviour
 				}
 		}
 
-		// Update is called once per frame
-		void Update ()
+		public Character getActiveCharacter ()
 		{
-				// Makes the first character in the queue the active character.
-				characters.First.Value.setIsTurn (true);
+				return characters.First.Value;
+		}
 
-				// When space is pressed, the next character can move.
-				if (Input.GetKeyDown ("space")) {
-						characters.First.Value.setIsTurn (false);						
-						characters.AddLast (characters.First.Value);
-						characters.RemoveFirst ();
-				}
+		public void nextCharacter ()
+		{					
+				characters.AddLast (characters.First.Value);
+				characters.RemoveFirst ();
 		}
 
 }

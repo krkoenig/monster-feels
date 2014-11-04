@@ -1,11 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Tile.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Character.cs">
     <Files>
-      <File FileName="Assets\Tile.cs" Line="47" Column="13" />
-      <File FileName="Assets\Character.cs" Line="108" Column="54" />
-      <File FileName="Assets\TileMap.cs" Line="133" Column="1" />
-      <File FileName="Assets\Queue.cs" Line="1" Column="16" />
+      <File FileName="Assets\Character.cs" Line="99" Column="39" />
+      <File FileName="Assets\Tile.cs" Line="1" Column="1" />
+      <File FileName="Assets\TileMap.cs" Line="125" Column="1" />
+      <File FileName="Assets\Queue.cs" Line="28" Column="9" />
+      <File FileName="Assets\Controls.cs" Line="38" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

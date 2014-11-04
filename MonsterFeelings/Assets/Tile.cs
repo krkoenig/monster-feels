@@ -6,13 +6,21 @@ public class Tile
 		private int terrain;
 		private int mpCost;
 		private Character occupant;
-		private int x;
-		private int y;
+		private Vector3 position;
 
-		public Tile (int x, int y)
+		public Tile (Vector3 position, int terrain)
 		{
-				this.x = x;
-				this.y = y;
+				// Initialze values.
+				this.position = position;	
+				this.terrain = terrain;
+				
+				// Set the MP Cost.
+				setMpCost ();
+		}
+			
+		public Vector3 getPosition ()
+		{
+				return position;
 		}
 
 		public void setOccupant (Character occupant)
@@ -23,12 +31,6 @@ public class Tile
 		public Character getOccupant ()
 		{
 				return occupant;
-		}
-
-		public void setTerrain (int terrain)
-		{
-				this.terrain = terrain;
-				setMpCost ();
 		}
 
 		public int getTerrain ()
