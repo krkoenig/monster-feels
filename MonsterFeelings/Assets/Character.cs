@@ -9,28 +9,43 @@ public class Character : MonoBehaviour
 		private TileMap tileMap;
 		private Tile currentTile;
 
-		//private string name;
+		public string name;
 		
-		private int level;
-		private int xp;
+		// 100 xp = 1 level
+		public int level;
+		public int xp;
+
+		// Orc, Goblin, Ogre, Troll
+		public string charRace;	
+
+		// Rogue, Warrior, Thief
+		public string charClass;
+		
+		// Assassin, Archer, Blademaster, Barbarian, Guardian, 
+		// Spellsword, Cleric, Invoker, Spellthief
+		private string advanceClass;
 
 		// Str, Dex, Con, Int, Wis
-		private List<int> abilitites;
+		public List<int> abilitites;
 
-		// HP, PhyAtk, PhyDef, MagAtk, MagDef	
-		private List<float> stats;
+		// HP, Physical Attack, Physical Defense, Magical Attack, Magical Defense, Initiative	
+		public List<int> stats;
+	
+		//public Item[] inventory;
+		private static int INVENTORY_SIZE = 6;
+		//public Armor armor;
+		//public Weapon weapon;
 
-		//private List<Item> inventory;
-		//private Armor armor;
-		//private Weapon weapon;
-
-		//private List<Skill> skills;		
+		//public List<Skill> skills;
+	
+		public bool isAlly;
 
 		private List<Tile> pastPos;
+
 		private int currMP;
 		private static int TOT_MP = 5;
 
-		private List<GameObject> moveQuads;
+		private List<GameObject> moveTracker;
 
 		// Use this for initialization
 		void Start ()
@@ -48,7 +63,7 @@ public class Character : MonoBehaviour
 				pastPos = new List<Tile> ();
 				pastPos.Add (currentTile);
 
-				moveQuads = new List<GameObject> ();
+				moveTracker = new List<GameObject> ();
 		}
 	
 		// Update is called once per frame
@@ -59,85 +74,79 @@ public class Character : MonoBehaviour
 
 		public void endTurn ()
 		{
+				// Reset it.
 				currMP = TOT_MP;
 				pastPos.Clear ();
 				pastPos.Add (currentTile);
 		
-				int numMoved = moveQuads.Count;
+				int numMoved = moveTracker.Count;
 				for (int i = 0; i < numMoved; i++) {
-						Destroy (moveQuads [0]);
-						moveQuads.RemoveAt (0);
+						Destroy (moveTracker [0]);
+						moveTracker.RemoveAt (0);
 				}
 		}
 
 		public void move (Tile targetTile)
 		{				
-				// If the targetTile within 1 tile of the character...
-				if (isNextTo (targetTile)) {
-
-						int mpCost = targetTile.getMpCost ();
+				if ((Mathf.Abs (targetTile.getPosition ().x - transform.position.x) == 1 && Mathf.Abs (targetTile.getPosition ().y - transform.position.y) == 0) ||
+						(Mathf.Abs (targetTile.getPosition ().x - transform.position.x) == 0 && Mathf.Abs (targetTile.getPosition ().y - transform.position.y) == 1)) {
 
 						if (pastPos [0].Equals (targetTile)) {
 								
+								// Remove you last position.
 								pastPos.RemoveAt (0);
-				
-								Destroy (moveQuads [0]);
-								moveQuads.RemoveAt (0);
+
+								// Remove the tracker at your last position.
+								Destroy (moveTracker [0]);
+								moveTracker.RemoveAt (0);
+								
 								// Adjust your MP cost.	
 								currMP += currentTile.getMpCost ();
-								// Set your current tile to null.
-								currentTile.setOccupant (null);
-				
-				
-	
-								// Move.							
-								transform.position = targetTile.getPosition ();
-								currentTile = targetTile;
-								// Become this tile's occupant.
-								targetTile.setOccupant (this);
+							
+								// Make the movement.
+								makeMovement (targetTile);
 				
 								// else if the terrain is passable, there isn't an occupant, and you have enough MP...
-						} else if (mpCost != 0 && 
+						} else if (targetTile.getMpCost () != 0 && 
 								targetTile.getOccupant () == null &&
-								currMP - mpCost >= 0) {
+								currMP - targetTile.getMpCost () >= 0) {
 							
+								// Keep track of your last position.
 								pastPos.Insert (0, currentTile);
 
+								// Create and setup the movement tracking.
+								// TODO: Have arrows that face a direction.
 								GameObject quad = GameObject.CreatePrimitive (PrimitiveType.Quad);
 								quad.renderer.material.color = Color.cyan;
 								quad.transform.localScale = new Vector3 (.5f, .5f, 1f);
 								quad.transform.position = new Vector3 (transform.position.x + .5f, transform.position.y + .5f, -1);
+								moveTracker.Insert (0, quad);
 								
-								moveQuads.Insert (0, quad);
 								// Adjust your MP cost.	
-								currMP -= mpCost;
+								currMP -= targetTile.getMpCost ();
 
-								// Set your current tile to null.
-								currentTile.setOccupant (null);	
-								// Move.						
-								transform.position = targetTile.getPosition ();
-								currentTile = targetTile;
-								// Become this tile's occupant.
-								targetTile.setOccupant (this);
+								// Make the movement.
+								makeMovement (targetTile);
 						}
 				}
 		}
 
-		private bool isNextTo (Tile targetTile)
+		private void makeMovement (Tile targetTile)
 		{
-				int targetTileX = Mathf.FloorToInt (targetTile.getPosition ().x);
-				int targetTileY = Mathf.FloorToInt (targetTile.getPosition ().y);
-				
-				if ((Math.Abs (targetTileX - Mathf.FloorToInt (transform.position.x)) == 1 && Math.Abs (targetTileY - Mathf.FloorToInt (transform.position.y)) == 0) ||
-						(Math.Abs (targetTileX - Mathf.FloorToInt (transform.position.x)) == 0 && Math.Abs (targetTileY - Mathf.FloorToInt (transform.position.y)) == 1)) {
-						return true;
-				} 
-				return false;
+				// Set your current tile to null.
+				currentTile.setOccupant (null);	
+
+				// Set currentTile and move
+				transform.position = targetTile.getPosition ();
+				currentTile = targetTile;
+
+				// Become this tile's occupant.
+				targetTile.setOccupant (this);
 		}
 
-		private void attack ()
+		public void useSkill (int skillNum)
 		{	
-	
-	
+				Debug.Log (skillNum);
+				// Use the skill at skillNum in skills
 		}
 }

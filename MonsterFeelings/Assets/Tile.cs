@@ -15,7 +15,17 @@ public class Tile
 				this.terrain = terrain;
 				
 				// Set the MP Cost.
-				setMpCost ();
+				switch (terrain) {
+				case 0:
+						mpCost = 1;
+						break;
+				case 1:
+						mpCost = 2;
+						break;
+				default:
+						mpCost = 0;
+						break;
+				}
 		}
 			
 		public Vector3 getPosition ()
@@ -41,20 +51,5 @@ public class Tile
 		public int getMpCost ()
 		{
 				return mpCost;
-		}
-
-		private void setMpCost ()
-		{
-				switch (terrain) {
-				case 0:
-						mpCost = 1;
-						break;
-				case 1:
-						mpCost = 2;
-						break;
-				default:
-						mpCost = 0;
-						break;
-				}
 		}
 }

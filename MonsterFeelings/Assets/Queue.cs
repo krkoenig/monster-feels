@@ -2,13 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Queue : MonoBehaviour
+public class Queue
 {
 		// The queue.
 		private LinkedList<Character> characters;
 
 		// Use this for initialization
-		void Start ()
+		public Queue ()
 		{
 				// Grab all Characters from the scene and move them into the queue.
 				// TODO: Sort using Intitiative.
