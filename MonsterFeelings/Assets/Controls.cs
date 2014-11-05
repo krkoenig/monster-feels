@@ -28,8 +28,7 @@ public class Controls : MonoBehaviour
 				int mouseX = Mathf.FloorToInt (mousePos.x);
 				int mouseY = Mathf.FloorToInt (mousePos.y);
 
-				if (mouseX < tileMap.mapX && mouseY >= 0 &&
-						mouseY < tileMap.mapY && mouseX >= 0) {
+				if (isOnScreen (mouseX, mouseY)) {
 						
 						Tile targetTile = tileMap.getTile (mouseX, mouseY);
 
@@ -38,5 +37,19 @@ public class Controls : MonoBehaviour
 						}
 				}
 
+				if (Input.GetKeyDown (KeyCode.Space)) {
+						queue.getActiveCharacter ().endTurn ();
+						queue.nextCharacter ();
+				}
+
+		}
+
+		private bool isOnScreen (int mouseX, int mouseY)
+		{
+				if (mouseX < tileMap.mapX && mouseY >= 0 &&
+						mouseY < tileMap.mapY && mouseX >= 0) {
+						return true;
+				}
+				return false;
 		}
 }

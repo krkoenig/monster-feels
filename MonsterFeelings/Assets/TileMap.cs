@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 
+[ExecuteInEditMode]
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 
@@ -93,7 +94,7 @@ public class TileMap : MonoBehaviour
 				for (int y = 0; y < mapY; y++) {
 						string[] values = lines [mapY - 1 - y].Split (',');
 						for (int x = 0; x < mapX; x++) {
-								Vector3 pos = new Vector3 (x, y);
+								Vector3 pos = new Vector3 (x, y, -1.0f);
 								int terrain = Convert.ToInt32 (values [x]);
 								tiles [x, y] = new Tile (pos, terrain);
 						}
@@ -106,8 +107,8 @@ public class TileMap : MonoBehaviour
 				Character[] charObjects = FindObjectsOfType<Character> ();
 
 				for (int i = 0; i < charObjects.Length; i++) {
-						int x = Mathf.FloorToInt (charObjects [i].position.x);
-						int y = Mathf.FloorToInt (charObjects [i].position.y);
+						int x = Mathf.FloorToInt (charObjects [i].transform.position.x);
+						int y = Mathf.FloorToInt (charObjects [i].transform.position.y);
 					
 						tiles [x, y].setOccupant (charObjects [i]);
 				}
