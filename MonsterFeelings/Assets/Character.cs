@@ -36,7 +36,8 @@ public class Character : MonoBehaviour
 		//public Armor armor;
 		//public Weapon weapon;
 
-		//public List<Skill> skills;
+		public string acquiredSkills;
+		private SkillMap skillMap;
 	
 		public bool isAlly;
 
@@ -64,6 +65,8 @@ public class Character : MonoBehaviour
 				pastPos.Add (currentTile);
 
 				moveTracker = new List<GameObject> ();
+
+				skillMap = new SkillMap (acquiredSkills);
 		}
 	
 		// Update is called once per frame
