@@ -1,12 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Menu_GUI_1.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Character.cs">
     <Files>
-      <File FileName="..\..\..\..\Test_Game_Please\Test_Game_Please.sln" Line="1" Column="1" />
-      <File FileName="..\..\..\..\Test_Game_Please\Assets\GridMove.cs" Line="1" Column="1" />
+      <File FileName="Assets\Character.cs" Line="83" Column="2" />
       <File FileName="Assets\Menu_GUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Menu_GUI_2.cs" Line="6" Column="1" />
-      <File FileName="Assets\Menu_GUI_1.cs" Line="23" Column="5" />
+      <File FileName="Assets\Menu_GUI_2.cs" Line="1" Column="1" />
+      <File FileName="Assets\Menu_GUI_1.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -52,6 +52,9 @@
      <Compile Include="Assets\Menu_GUI_1.cs" />
      <Compile Include="Assets\Menu_GUI_2.cs" />
      <Compile Include="Assets\Queue.cs" />
+     <Compile Include="Assets\SkillMap.cs" />
+     <Compile Include="Assets\Skills\Skill.cs" />
+     <Compile Include="Assets\Skills\Slash.cs" />
      <Compile Include="Assets\Tile.cs" />
      <Compile Include="Assets\TileMap.cs" />
   </ItemGroup>
