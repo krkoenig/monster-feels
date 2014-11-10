@@ -12,12 +12,12 @@ public class Menu_GUI : MonoBehaviour
 
 				// Make the first button. If it is pressed, the first level will be loaded
 				if (GUI.Button (new Rect (20, 40, 200, 20), "One Character")) {
-						Application.LoadLevel ("singleCharTest");
+						Application.LoadLevel (1);
 				}
 		
 				// Make the second button.
 				if (GUI.Button (new Rect (20, 70, 200, 20), "Two Characters")) {
-						Application.LoadLevel ("twoCharTest");
+						Application.LoadLevel (2);
 				}
 		}
 }

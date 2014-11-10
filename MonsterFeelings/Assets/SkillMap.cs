@@ -20,8 +20,15 @@ public class SkillMap
 				string[] acquired = acquiredSkills.Split (',');
 				
 				for (int i = 0; i < acquired.Length; i++) {
-						int skillNum = Convert.ToInt32 (acquired [i]);
+						char[] currSkill = acquired [i].ToCharArray ();
+						int skillNum = int.Parse (currSkill [0].ToString ());
 						skills [skillNum].isAcquired = true;
+
+						foreach (char c in currSkill) {
+								if (c == '+') {
+										skills [skillNum].upgrade ();
+								}
+						}
 				}
 		}
 
