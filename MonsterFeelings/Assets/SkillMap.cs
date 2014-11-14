@@ -7,12 +7,12 @@ public class SkillMap
 		private List<Skill> skills;
 
 		// Given a string re
-		public SkillMap (string acquiredSkills)
+		public SkillMap (string acquiredSkills, Character user)
 		{
 				// Generate a list of all of the skills.
 				skills = new List<Skill> ()
 				{
-					new Slash()
+					new Slash(user)
 					//new PowerAttack(),
 					//new DefensiveStance()
 				};

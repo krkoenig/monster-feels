@@ -21,31 +21,40 @@ public class Controls : MonoBehaviour
 		{			
 				int[] mouse = getMouseLoc ();
 				
+				int skill = -1;
+
+				if (Input.GetKey (KeyCode.Alpha1)) {
+						skill = 0;
+				} else if (Input.GetKey (KeyCode.Alpha2)) {
+						skill = 1;
+				} else if (Input.GetKey (KeyCode.Alpha3)) {
+						skill = 2;
+				} else if (Input.GetKey (KeyCode.Alpha4)) {
+						skill = 3;
+				} else if (Input.GetKey (KeyCode.Alpha5)) {
+						skill = 4;
+				} else if (Input.GetKey (KeyCode.Alpha6)) {
+						skill = 5;
+				} else if (Input.GetKeyDown (KeyCode.Space)) {
+						queue.getActiveCharacter ().endTurn ();
+						queue.nextCharacter ();
+				}
+
+				if (skill != -1) {
+						queue.getActiveCharacter ().showSkill (skill);
+				}
+
+
 				if (isOnScreen (mouse [0], mouse [1])) {
 						
 						Tile targetTile = tileMap.getTile (mouse [0], mouse [1]);
 
 						if (Input.GetMouseButton (0)) {
 								queue.getActiveCharacter ().move (targetTile);
+						} else if (Input.GetMouseButton (1) && queue.getActiveCharacter ().isSkillShown () != -1) {
+								queue.getActiveCharacter ().useSkill (queue.getActiveCharacter ().isSkillShown (), targetTile);
 						}
-				}
-
-				if (Input.GetKeyDown (KeyCode.Alpha1)) {
-						queue.getActiveCharacter ().useSkill (0);
-				} else if (Input.GetKeyDown (KeyCode.Alpha2)) {
-						queue.getActiveCharacter ().useSkill (1);
-				} else if (Input.GetKeyDown (KeyCode.Alpha3)) {
-						queue.getActiveCharacter ().useSkill (2);
-				} else if (Input.GetKeyDown (KeyCode.Alpha4)) {
-						queue.getActiveCharacter ().useSkill (3);
-				} else if (Input.GetKeyDown (KeyCode.Alpha5)) {
-						queue.getActiveCharacter ().useSkill (4);
-				} else if (Input.GetKeyDown (KeyCode.Alpha6)) {
-						queue.getActiveCharacter ().useSkill (5);
-				} else if (Input.GetKeyDown (KeyCode.Space)) {
-						queue.getActiveCharacter ().endTurn ();
-						queue.nextCharacter ();
-				}
+				}			
 		}
 
 		public int[] getMouseLoc ()

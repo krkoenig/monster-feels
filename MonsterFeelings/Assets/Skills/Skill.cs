@@ -1,4 +1,5 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 abstract public class Skill
@@ -7,10 +8,16 @@ abstract public class Skill
 		protected List<int> path;
 		protected int id;
 		protected int skillPosition;
+		protected int range;
+		protected Character user;
 		public bool isAcquired;
-			
 
-		abstract public void use ();
+		abstract public void use (Tile targetTile);
+
+		public int getRange ()
+		{
+				return range;
+		}
 
 		public void upgrade ()
 		{

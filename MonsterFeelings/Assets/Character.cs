@@ -47,6 +47,8 @@ public class Character : MonoBehaviour
 		private static int TOT_MP = 5;
 
 		private List<GameObject> moveTracker;
+		private List<GameObject> rangeSquares;
+		private int skillShown;
 
 		// Use this for initialization
 		void Start ()
@@ -66,7 +68,11 @@ public class Character : MonoBehaviour
 
 				moveTracker = new List<GameObject> ();
 
-				skillMap = new SkillMap (acquiredSkills);
+				skillMap = new SkillMap (acquiredSkills, this);
+			
+				rangeSquares = new List<GameObject> ();
+
+				skillShown = -1;
 		}
 	
 		// Update is called once per frame
@@ -81,16 +87,19 @@ public class Character : MonoBehaviour
 				currMP = TOT_MP;
 				pastPos.Clear ();
 				pastPos.Add (currentTile);
-		
-				int numMoved = moveTracker.Count;
-				for (int i = 0; i < numMoved; i++) {
-						Destroy (moveTracker [0]);
-						moveTracker.RemoveAt (0);
+
+				foreach (GameObject square in moveTracker) {
+						Destroy (square);
 				}
+
+				moveTracker.Clear ();
+
+				hideAllSkills ();	
 		}
 
 		public void move (Tile targetTile)
-		{				
+		{
+				hideAllSkills ();
 				if ((Mathf.Abs (targetTile.getPosition ().x - transform.position.x) == 1 && Mathf.Abs (targetTile.getPosition ().y - transform.position.y) == 0) ||
 						(Mathf.Abs (targetTile.getPosition ().x - transform.position.x) == 0 && Mathf.Abs (targetTile.getPosition ().y - transform.position.y) == 1)) {
 
@@ -147,8 +156,71 @@ public class Character : MonoBehaviour
 				targetTile.setOccupant (this);
 		}
 
-		public void useSkill (int skillNum)
+		public void useSkill (int skillNum, Tile targetTile)
 		{	
-				skillMap.getAcquiredSkills () [skillNum].use ();
+				hideAllSkills ();
+				skillMap.getAcquiredSkills () [skillNum].use (targetTile);
+		}
+
+		public void showSkill (int skillNum)
+		{
+				if (skillShown != skillNum) {
+						hideAllSkills ();
+				} else {
+						return;
+				}
+
+				skillShown = skillNum;
+				int range = skillMap.getAcquiredSkills () [skillNum].getRange ();
+
+				switch (range) {
+				case 0:
+						rangeSquares.Add (createRangeSquare (0f, 0f));
+						break;
+				case 1:
+						rangeSquares.Add (createRangeSquare (1f, 0f));
+						rangeSquares.Add (createRangeSquare (-1f, 0f));
+						rangeSquares.Add (createRangeSquare (0f, -1f));
+						rangeSquares.Add (createRangeSquare (0f, 1f));
+						break;
+				case 2:
+						rangeSquares.Add (createRangeSquare (1f, 0f));
+						rangeSquares.Add (createRangeSquare (-1f, 0f));
+						rangeSquares.Add (createRangeSquare (0f, -1f));
+						rangeSquares.Add (createRangeSquare (0f, 1f));
+						rangeSquares.Add (createRangeSquare (2f, 0f));
+						rangeSquares.Add (createRangeSquare (-2f, 0f));
+						rangeSquares.Add (createRangeSquare (0f, 2f));
+						rangeSquares.Add (createRangeSquare (0f, -2f));
+						rangeSquares.Add (createRangeSquare (1f, 1f));
+						rangeSquares.Add (createRangeSquare (1f, -1f));
+						rangeSquares.Add (createRangeSquare (-1f, 1f));
+						rangeSquares.Add (createRangeSquare (-1f, -1f));
+						break;
+				}
+				
+		}
+
+		private GameObject createRangeSquare (float x, float y)
+		{
+				GameObject quad = GameObject.CreatePrimitive (PrimitiveType.Quad);
+				quad.renderer.material.color = Color.cyan;
+				quad.transform.localScale = new Vector3 (.25f, .25f, 1f);
+				quad.transform.position = new Vector3 (transform.position.x - x + .5f, transform.position.y - y + .5f, -2);
+				return quad;
+		}
+
+		private void hideAllSkills ()
+		{
+				skillShown = -1;
+				foreach (GameObject square in rangeSquares) {
+						Destroy (square);
+				}
+				rangeSquares.Clear ();
+		}
+
+		public int isSkillShown ()
+		{
+				return skillShown;
 		}
 }
