@@ -23,17 +23,17 @@ public class Controls : MonoBehaviour
 				
 				int skill = -1;
 
-				if (Input.GetKey (KeyCode.Alpha1)) {
+				if (Input.GetKeyDown (KeyCode.Alpha1)) {
 						skill = 0;
-				} else if (Input.GetKey (KeyCode.Alpha2)) {
+				} else if (Input.GetKeyDown (KeyCode.Alpha2)) {
 						skill = 1;
-				} else if (Input.GetKey (KeyCode.Alpha3)) {
+				} else if (Input.GetKeyDown (KeyCode.Alpha3)) {
 						skill = 2;
-				} else if (Input.GetKey (KeyCode.Alpha4)) {
+				} else if (Input.GetKeyDown (KeyCode.Alpha4)) {
 						skill = 3;
-				} else if (Input.GetKey (KeyCode.Alpha5)) {
+				} else if (Input.GetKeyDown (KeyCode.Alpha5)) {
 						skill = 4;
-				} else if (Input.GetKey (KeyCode.Alpha6)) {
+				} else if (Input.GetKeyDown (KeyCode.Alpha6)) {
 						skill = 5;
 				} else if (Input.GetKeyDown (KeyCode.Space)) {
 						queue.getActiveCharacter ().endTurn ();
@@ -51,8 +51,8 @@ public class Controls : MonoBehaviour
 
 						if (Input.GetMouseButton (0)) {
 								queue.getActiveCharacter ().move (targetTile);
-						} else if (Input.GetMouseButton (1) && queue.getActiveCharacter ().isSkillShown () != -1) {
-								queue.getActiveCharacter ().useSkill (queue.getActiveCharacter ().isSkillShown (), targetTile);
+						} else if (Input.GetMouseButton (1) && queue.getActiveCharacter ().getShownSkill () != -1) {
+								queue.getActiveCharacter ().useSkill (queue.getActiveCharacter ().getShownSkill (), targetTile);
 						}
 				}			
 		}

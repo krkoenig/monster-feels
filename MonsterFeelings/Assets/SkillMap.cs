@@ -12,15 +12,15 @@ public class SkillMap
 				// Generate a list of all of the skills.
 				skills = new List<Skill> ()
 				{
-					new Slash(user)
-					//new PowerAttack(),
-					//new DefensiveStance()
+					new Slash(user),
+					new PowerAttack(user),
+					new DefensiveStance(user),
 				};
 
 				string[] acquired = acquiredSkills.Split (',');
 				
-				for (int i = 0; i < acquired.Length; i++) {
-						char[] currSkill = acquired [i].ToCharArray ();
+				foreach (string s in acquired) {
+						char[] currSkill = s.ToCharArray ();
 						int skillNum = int.Parse (currSkill [0].ToString ());
 						skills [skillNum].isAcquired = true;
 

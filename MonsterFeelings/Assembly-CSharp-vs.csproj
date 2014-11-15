@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +53,8 @@
      <Compile Include="Assets\Menu_GUI_2.cs" />
      <Compile Include="Assets\Queue.cs" />
      <Compile Include="Assets\SkillMap.cs" />
+     <Compile Include="Assets\Skills\DefensiveStance.cs" />
+     <Compile Include="Assets\Skills\PowerAttack.cs" />
      <Compile Include="Assets\Skills\Skill.cs" />
      <Compile Include="Assets\Skills\Slash.cs" />
      <Compile Include="Assets\Tile.cs" />

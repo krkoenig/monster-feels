@@ -2,33 +2,34 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class Slash : Skill
+public class PowerAttack : Skill
 {
-		public Slash (Character user)
+		public PowerAttack (Character user)
 		{
 				timesUpgraded = 0;
-				path = new List<int> () {3};
-				id = 0;
-				skillPosition = 1;
+				path = new List<int> () {2};
+				id = 1;
+				skillPosition = 2;
 				range = 1;
-				isAcquired = false; 
+				isAcquired = false;
 				isShown = false;
 				this.user = user;
 				rangeSquares = new List<GameObject> ();
-		}
 
+		}
+	
 		public override void use (Tile targetTile)
 		{
 				float userX = user.transform.position.x;
 				float userY = user.transform.position.y;
 				float targetX = targetTile.getPosition ().x;
 				float targetY = targetTile.getPosition ().y;
-
+		
 				if (userX + range == targetX && userY == targetY ||
 						userY + range == targetY && userX == targetX ||
 						userX - range == targetX && userY == targetY ||
 						userY - range == targetY && userX == targetX) {
-						Debug.Log ("Slash " + timesUpgraded);
+						Debug.Log ("Power Attack " + timesUpgraded);
 				}
 		}
 
