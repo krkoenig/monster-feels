@@ -21,14 +21,23 @@ public class Slash : Skill
 		{
 				float userX = user.transform.position.x;
 				float userY = user.transform.position.y;
-				float targetX = targetTile.getPosition ().x;
-				float targetY = targetTile.getPosition ().y;
 
-				if (userX + range == targetX && userY == targetY ||
+				Character target = targetTile.getOccupant ();
+				float targetX = target.transform.position.x;
+				float targetY = target.transform.position.y;
+
+				if ((userX + range == targetX && userY == targetY ||
 						userY + range == targetY && userX == targetX ||
 						userX - range == targetX && userY == targetY ||
-						userY - range == targetY && userX == targetX) {
-						Debug.Log ("Slash " + timesUpgraded);
+						userY - range == targetY && userX == targetX) && (user.getAP () >= 2)) {
+											
+						int damage = 20 + user.getPAtk () - target.getPDef ();
+
+						target.changeHP (damage);
+						
+						target.checkDead ();
+
+						user.changeAP (2);
 				}
 		}
 

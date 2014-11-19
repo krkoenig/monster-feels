@@ -28,8 +28,10 @@ public class Character : MonoBehaviour
 		// Str, Dex, Con, Int, Wis
 		public List<int> abilitites;
 
-		// HP, Physical Attack, Physical Defense, Magical Attack, Magical Defense, Initiative	
+		// HP, Physical Attack, Physical Defense, Magical Attack, Magical Defense, Initiative, AP	
 		public List<int> stats;
+
+		private int currAP;
 	
 		//public Item[] inventory;
 		private static int INVENTORY_SIZE = 6;
@@ -62,6 +64,8 @@ public class Character : MonoBehaviour
 				// Set the character to have full MP.		
 				currMP = TOT_MP;
 
+				currAP = stats [6];
+
 				// Record it's starting position as a position it has been in.
 				pastPos = new List<Tile> ();
 				pastPos.Add (currentTile);
@@ -85,6 +89,7 @@ public class Character : MonoBehaviour
 				currMP = TOT_MP;
 				pastPos.Clear ();
 				pastPos.Add (currentTile);
+				currAP = stats [6];
 
 				foreach (GameObject square in moveTracker) {
 						Destroy (square);
@@ -182,5 +187,62 @@ public class Character : MonoBehaviour
 		public int getShownSkill ()
 		{
 				return shownSkill;
+		}
+
+		public void checkDead ()
+		{
+				Debug.Log (stats [0]);
+
+				if (stats [0] <= 0) {
+						Debug.Log ("DEAD!");
+						Destroy (this);
+
+				}
+				
+		}
+
+		public int getHP ()
+		{
+				return stats [0];
+		}
+
+		public void changeHP (int changeHP)
+		{
+				stats [0] -= changeHP;
+		}
+
+		public int getPAtk ()
+		{
+				return stats [1];
+		}
+
+		public int getMAtk ()
+		{
+				return stats [3];
+		}
+
+		public int getPDef ()
+		{
+				return stats [2];
+		}
+
+		public int getMDef ()
+		{
+				return stats [4];
+		}
+
+		public int getInit ()
+		{
+				return stats [5];
+		}
+
+		public int getAP ()
+		{
+				return currAP;
+		}
+
+		public void changeAP (int changeAP)
+		{
+				currAP -= changeAP;
 		}
 }
