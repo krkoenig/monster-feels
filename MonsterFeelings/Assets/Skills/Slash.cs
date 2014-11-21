@@ -4,49 +4,45 @@ using System.Collections.Generic;
 
 public class Slash : Skill
 {
+		// Create with all of the skill info.
 		public Slash (Character user)
 		{
 				timesUpgraded = 0;
 				path = new List<int> () {3};
 				id = 0;
-				skillPosition = 1;
 				range = 1;
 				isAcquired = false; 
 				isShown = false;
 				this.user = user;
 				rangeSquares = new List<GameObject> ();
+				apCost = 2;
 		}
 
+		// Use the skill
 		public override void use (Tile targetTile)
 		{
 				float userX = user.transform.position.x;
 				float userY = user.transform.position.y;
-
-				Character target = targetTile.getOccupant ();
-				float targetX = target.transform.position.x;
-				float targetY = target.transform.position.y;
+				
+				float targetX = targetTile.getPosition ().x;
+				float targetY = targetTile.getPosition ().y;
 
 				if ((userX + range == targetX && userY == targetY ||
 						userY + range == targetY && userX == targetX ||
 						userX - range == targetX && userY == targetY ||
-						userY - range == targetY && userX == targetX) && (user.getAP () >= 2)) {
-											
-						int damage = 20 + user.getPAtk () - target.getPDef ();
+						userY - range == targetY && userX == targetX) && 
+						user.getAP () >= apCost &&
+						targetTile.getOccupant () != null) {
 
-						target.changeHP (damage);
+						Character target = targetTile.getOccupant ();
+						if (user.isAlly != target.isAlly) {
 						
-						target.checkDead ();
+								int damage = 20 + user.getPAtk () - target.getPDef ();
+								target.changeHP (damage);
 
-						user.changeAP (2);
+								base.use (targetTile);
+						}
 				}
-		}
 
-		public override void showSkill ()
-		{
-				rangeSquares.Add (createRangeSquare (1f, 0f));
-				rangeSquares.Add (createRangeSquare (-1f, 0f));
-				rangeSquares.Add (createRangeSquare (0f, -1f));
-				rangeSquares.Add (createRangeSquare (0f, 1f));
-				isShown = true;
 		}
 }

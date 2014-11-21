@@ -4,20 +4,59 @@ using System.Collections.Generic;
 
 abstract public class Skill
 {
-		protected int timesUpgraded;
-		protected List<int> path;
+		// The number of times the skill was upgraded.
+		protected int timesUpgraded; 
+
+		// Used for graphing the skillmap.
+		protected List<int> path; 
 		protected int id;
-		protected int skillPosition;
-		protected int range;
+
+		// The user of this skill.
 		protected Character user;
+
+		// Whether or not this is an acquired skill.
 		public bool isAcquired;
+
+		// Whether or not the skill is currently being shown.
 		public bool isShown;
+
+		// The range of the skill and a list to show the range.
+		protected int range;
 		protected List<GameObject> rangeSquares;
 
-		abstract public void use (Tile targetTile);
+		// The ap cost of the skill.
+		protected int apCost;
 
-		abstract public void showSkill ();
+		// All skill must have a way to be used.
+		virtual public void use (Tile targetTile)
+		{
+				// Adjust your AP.
+				user.changeAP (apCost);
+		
+				// End the user's movement.
+				user.endMovement ();
+		}
 
+		// Shows the range of the skill.
+		public void showSkill ()
+		{
+				// Different amount of squares are created depending on the range.
+				switch (range) {
+				case 0:
+						rangeSquares.Add (createRangeSquare (0f, 0f));
+						break;
+				case 1:
+						rangeSquares.Add (createRangeSquare (1f, 0f));
+						rangeSquares.Add (createRangeSquare (-1f, 0f));
+						rangeSquares.Add (createRangeSquare (0f, -1f));
+						rangeSquares.Add (createRangeSquare (0f, 1f));
+						break;
+				}
+
+				isShown = true;
+		}
+
+		// Hides the range of the skill from being shown.
 		public void hideSkill ()
 		{		
 				isShown = false;
@@ -27,11 +66,7 @@ abstract public class Skill
 				rangeSquares.Clear ();
 		}
 
-		public int getRange ()
-		{
-				return range;
-		}
-
+		// Upgrades the skill if it is leveled up.
 		public void upgrade ()
 		{
 				if (timesUpgraded < 2) {
@@ -39,6 +74,9 @@ abstract public class Skill
 				}
 		}
 
+		// Creates the quads for showing the range.
+		// @ TODO
+		// Create a prefab for this.
 		protected GameObject createRangeSquare (float x, float y)
 		{
 				GameObject quad = GameObject.CreatePrimitive (PrimitiveType.Quad);

@@ -19,11 +19,13 @@ public class Queue
 				}
 		}
 
+		// Find out who's turn it is.
 		public Character getActiveCharacter ()
 		{
 				return characters.First.Value;
 		}
 
+		// Progress to the next character.
 		public void nextCharacter ()
 		{					
 				characters.AddLast (characters.First.Value);

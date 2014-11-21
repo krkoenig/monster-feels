@@ -33,6 +33,7 @@ public class SkillMap
 		}
 
 		// Returns all skills that the character has.
+		// Call whenever the character might get a new skill.
 		public List<Skill> getAcquiredSkills ()
 		{
 				List<Skill> acquired = new List<Skill> ();
