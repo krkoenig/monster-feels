@@ -39,15 +39,19 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Character.cs" />
      <Compile Include="Assets\Controls.cs" />
+     <Compile Include="Assets\Items\Consumable.cs" />
+     <Compile Include="Assets\Items\Equipment.cs" />
+     <Compile Include="Assets\Items\HealthPotion.cs" />
+     <Compile Include="Assets\Items\Item.cs" />
      <Compile Include="Assets\Menu_GUI.cs" />
      <Compile Include="Assets\Menu_GUI_1.cs" />
      <Compile Include="Assets\Menu_GUI_2.cs" />
