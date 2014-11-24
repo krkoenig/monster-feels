@@ -10,11 +10,32 @@
 using System;
 namespace AssemblyCSharp
 {
-		public class Consumable
+		abstract public class Consumable : Item 
 		{
-				public Consumable ()
-				{
+				public int APcost {
+						get;
+						set;
 				}
+
+				public int nbObjects {
+						get;
+						set;
+				}
+
+		public Consumable (): base ()
+		{
+			APcost = 0;
+			nbObjects = 0;
+		}
+
+		public Consumable(int _APcost, int _nb) :base(_des){
+			this.APcost = _APcost;
+			this.nbObjects = _nb;
+		}
+
+		public void useOneItem(){
+			this.nbObjects --;
+		}
 		}
 }
 

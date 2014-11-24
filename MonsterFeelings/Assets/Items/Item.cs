@@ -10,11 +10,21 @@
 using System;
 namespace AssemblyCSharp
 {
-		abstract public class Item
-		{
+	abstract public class Item
+	{
+			//Description of the item
+			public string description {
+				get;
+				set;				
+			}
 				public Item ()
 				{
+					this.description = "";
 				}
+		public Item (string _des)
+		{
+			this.description = _des;
 		}
+	}
 }
 
