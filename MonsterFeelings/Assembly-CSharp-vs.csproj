@@ -46,6 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Buffs\Buff.cs" />
+     <Compile Include="Assets\Buffs\PDefBuff.cs" />
      <Compile Include="Assets\Character.cs" />
      <Compile Include="Assets\Controls.cs" />
      <Compile Include="Assets\Items\Consumable.cs" />

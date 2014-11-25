@@ -28,9 +28,9 @@ public class DefensiveStance : Skill
 				float targetY = targetTile.getPosition ().y;
 		
 				if (userX == targetX && userY == targetY && 
-						user.getAP () >= apCost) {
+						user.ap () >= apCost) {
 						// Add buff later
-						//user.addBuff(new PDefBuff(1,3));
+						//user.addBuff(new PDefBuff(true,3));
 						
 						base.use (targetTile);
 				}

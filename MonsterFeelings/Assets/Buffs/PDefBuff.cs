@@ -8,35 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 namespace AssemblyCSharp
 {
-		abstract public class Consumable : Item
+		public class PDefBuff : Buff
 		{
-				public int APcost {
-						get;
-						set;
-				}
-
-				public int nbObjects {
-						get;
-						set;
-				}
-
-				public Consumable (): base ()
+				public PDefBuff (bool _isGood, int duration) : base (_isGood, duration)
 				{
-						APcost = 0;
-						nbObjects = 0;
+
 				}
 
-				public Consumable (int _APcost, int _nb) :base(_des)
+				public override void calculate ()
 				{
-						this.APcost = _APcost;
-						this.nbObjects = _nb;
-				}
-
-				public void useOneItem ()
-				{
-						this.nbObjects --;
+						if (isGood) {
+								user.pDef = user.pDef * 3 / 2;
+						} else {
+								if (user.pDef < 10) {
+										user.pDef = 0;
+								} else {
+										user.pDef -= 10;
+								}
+						}
 				}
 		}
 }

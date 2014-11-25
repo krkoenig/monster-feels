@@ -1,29 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Character.cs">
-    <Files>
-      <File FileName="MonsterFeelings.sln" Line="1" Column="1" />
-      <File FileName="Assets\Menu_GUI_1.cs" Line="1" Column="1" />
-      <File FileName="Assets\Character.cs" Line="303" Column="40" />
-      <File FileName="..\..\Monsters feels\Assets\Character.cs" Line="1" Column="1" />
-      <File FileName="..\..\Monsters feels\Assets\Skills\Skill.cs" Line="1" Column="1" />
-      <File FileName="..\..\Monsters feels\Assets\Skills\Slash.cs" Line="1" Column="1" />
-      <File FileName="..\..\Monsters feels\Assets\Skills\Attack.cs" Line="1" Column="1" />
-      <File FileName="..\..\Monsters feels\Assets\Skills\Healing.cs" Line="1" Column="1" />
-      <File FileName="..\..\Monsters feels\Assets\Skills\BuffSkill.cs" Line="1" Column="1" />
-      <File FileName="Assets\Items\Consumable.cs" Line="34" Column="3" />
-      <File FileName="Assets\Controls.cs" Line="1" Column="1" />
-      <File FileName="Assets\Skills\Skill.cs" Line="1" Column="1" />
-      <File FileName="Assets\Skills\PowerAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Items\Equipment.cs" Line="27" Column="32" />
-      <File FileName="Assets\Items\Item.cs" Line="25" Column="4" />
-      <File FileName="Assets\Items\HealthPotion.cs" Line="18" Column="6" />
-      <File FileName="Assets\Queue.cs" Line="1" Column="1" />
-      <File FileName="Assets\Tile.cs" Line="1" Column="1" />
-      <File FileName="Assets\SkillMap.cs" Line="1" Column="1" />
-      <File FileName="Assets\TileMap.cs" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -31,13 +31,13 @@ public class Slash : Skill
 						userY + range == targetY && userX == targetX ||
 						userX - range == targetX && userY == targetY ||
 						userY - range == targetY && userX == targetX) && 
-						user.getAP () >= apCost &&
+						user.ap >= apCost &&
 						targetTile.getOccupant () != null) {
 
 						Character target = targetTile.getOccupant ();
 						if (user.isAlly != target.isAlly) {
 						
-								int damage = 20 + user.getPAtk () - target.getPDef ();
+								int damage = 20 + user.pAtk - target.pDef;
 								target.changeHP (damage);
 
 								base.use (targetTile);
