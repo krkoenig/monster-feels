@@ -63,8 +63,8 @@ public class Controls : MonoBehaviour
 						// If the right mouse button is pressed and a skill is being shown.
 						if (Input.GetMouseButton (0)) {
 								queue.getActiveCharacter ().move (targetTile);
-						} else if (Input.GetMouseButton (1) && queue.getActiveCharacter ().getShownSkill () != -1) {
-								queue.getActiveCharacter ().useSkill (queue.getActiveCharacter ().getShownSkill (), targetTile);
+						} else if (Input.GetMouseButton (1) && queue.getActiveCharacter ().ShownSkill != -1) {
+								queue.getActiveCharacter ().useSkill (queue.getActiveCharacter ().ShownSkill, targetTile);
 						}
 				}			
 		}

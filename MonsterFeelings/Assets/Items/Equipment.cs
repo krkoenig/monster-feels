@@ -13,25 +13,27 @@ namespace AssemblyCSharp
 		abstract public class Equipment : Item
 		{
 				
-		// gives the amounts of enhancements which are brought by the equipment 
-		// in the orger : strength, constitution, intell, wisdom, dexterity, vitallity
-		public int[] enhancements {
+				// gives the amounts of enhancements which are brought by the equipment 
+				// in the orger : strength, constitution, intell, wisdom, dexterity, vitallity
+				public int[] enhancements {
 						get;
 						set;
-		}
+				}
 
-		public Equipment(): base (){
-			this.enhancements = new int[6]; 
-		}
+				public Equipment (): base ()
+				{
+						this.enhancements = new int[6]; 
+				}
 
-		public Equipment ( int[] _en) : base( _des)
-		{
-			this.enhancements = _en;
-		}
+				public Equipment (int[] _en, string _des) : base( _des)
+				{
+						this.enhancements = _en;
+				}
 
-		public Equipment(int st, int con, int intell, int wis, int dex, int vit): base( _des){
+				public Equipment (int st, int con, int intell, int wis, int dex, int vit, string _des): base( _des)
+				{
 
-			this.enhancements = new int[]{st,con,intell,wis,dex,vit};
+						this.enhancements = new int[]{st,con,intell,wis,dex,vit};
 				}
 
 		}

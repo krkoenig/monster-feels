@@ -29,6 +29,7 @@ public class Character : MonoBehaviour
 		public int constitution;
 		public int intelligence;
 		public int wisdom;
+		public int vitality;
 
 		//stats
 		public int hp;
@@ -37,7 +38,7 @@ public class Character : MonoBehaviour
 		public int mAtk;
 		public int mDef;
 		public int init;
-		public int ap;
+		private int ap;
 
 		// The current AP and MP of the character.
 		private int currAP;
@@ -63,6 +64,9 @@ public class Character : MonoBehaviour
 
 		// The position of the skill in the skillMap being shown. A value of -1 means no skill is shown.
 		private int shownSkill;
+		public int ShownSkill {
+				get { return shownSkill;}
+		}
 
 		// List of Buffs
 		private List<Buff> buffs;
@@ -79,6 +83,8 @@ public class Character : MonoBehaviour
 	
 				// Used for movement.
 				currentTile = tileMap.getTile (Mathf.FloorToInt (transform.position.x), Mathf.FloorToInt (transform.position.y));
+
+				calculateStats ();
 
 				// Set the character to have full MP and AP.		
 				currMP = TOT_MP;
@@ -121,8 +127,19 @@ public class Character : MonoBehaviour
 				// hide them.
 				hideAllSkills ();	
 
-				// @ TODO
-				// Handle Buffs
+				// Recalculate all stats
+				calculateStats ();
+		
+				// Decrement all buffs
+				// If a buff ends, make it inactive and delete it.
+				for (int i = buffs.Count - 1; i >= 0; i--) {
+						Buff b = buffs [i];
+						if (!b.decrement ()) {
+								buffs.RemoveAt (i);
+						} else {
+								b.calculate ();
+						}
+				}
 		}
 
 		// Call when a skill is used or the turn is over.
@@ -141,35 +158,19 @@ public class Character : MonoBehaviour
 						Destroy (square);
 				}
 				moveTracker.Clear ();
-
-				// Recalculate all stats
-				calculateStats ();
-
-				// Decrement all buffs
-				// If a buff ends, make it inactive and delete it.
-				foreach (Buff b in buffs) {
-						if (!b.decrement ()) {
-								Destroy (b);
-						} else {
-								b.calculate ();
-						}
-				}
 		}
 
 		// Calculates all the stats of the character.
 		private void calculateStats ()
 		{
-				//hp = 
-				//pAtk =
-				//pDef = 
-				//mAtk = 
-				//mDef = 
-				//init =
-				//ap = 
-
-				foreach (Buff b in buffs) {
-						b.calculate ();
-				}
+				hp = 5 * vitality;
+				pAtk = strength;
+				pDef = constitution;
+				mAtk = intelligence;
+				mDef = wisdom;
+				init = dexterity;
+				ap = 2 + (dexterity / 5);
+				Debug.Log (ap);
 		}
 
 		// Handle all movement.
@@ -295,18 +296,37 @@ public class Character : MonoBehaviour
 		}
 	
 		// Subtracts the cost of the skill.
-		public void changeAP (int changeAP)
+		public void loseAP (int changeAP)
 		{
 				currAP -= changeAP;
+		}
+		
+		// checks if there is enough AP for the action
+		public bool hasAP (int cost)
+		{
+				if (currAP >= cost) {
+						return true;
+				} else {
+						return false;
+				}
 		}
 
 		// Adds a buff to the buff list.
 		public void addBuff (Buff buff)
 		{
+				bool buffExists = false;
 				Type buffType = buff.GetType ();
 				foreach (Buff b in buffs) {
-						if (b is buffType) {
+						if (b.GetType () == buffType) {
+								b.addTime (buff);
+								buffExists = true;
 						}
+				}
+
+				if (!buffExists) {
+						buffs.Add (buff);
+						calculateStats ();
+						buff.calculate ();
 				}
 		}
 }

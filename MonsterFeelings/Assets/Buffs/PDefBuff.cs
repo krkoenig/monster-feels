@@ -9,27 +9,25 @@
 //------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-namespace AssemblyCSharp
+public class PDefBuff : Buff
 {
-		public class PDefBuff : Buff
+		public PDefBuff (bool isGood, int duration, Character user) : base (isGood, duration, user)
 		{
-				public PDefBuff (bool _isGood, int duration) : base (_isGood, duration)
-				{
 
-				}
+		}
 
-				public override void calculate ()
-				{
-						if (isGood) {
-								user.pDef = user.pDef * 3 / 2;
+		public override void calculate ()
+		{
+				if (isGood) {
+						user.pDef = user.pDef * 3 / 2;
+				} else {
+						if (user.pDef < 10) {
+								user.pDef = 0;
 						} else {
-								if (user.pDef < 10) {
-										user.pDef = 0;
-								} else {
-										user.pDef -= 10;
-								}
+								user.pDef -= 10;
 						}
 				}
 		}
 }
+
 

@@ -28,7 +28,7 @@ namespace AssemblyCSharp
 						nbObjects = 0;
 				}
 
-				public Consumable (int _APcost, int _nb) :base(_des)
+				public Consumable (int _APcost, int _nb, string _des) : base(_des)
 				{
 						this.APcost = _APcost;
 						this.nbObjects = _nb;

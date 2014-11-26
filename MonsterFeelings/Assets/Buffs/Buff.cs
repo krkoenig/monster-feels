@@ -5,25 +5,20 @@ using System.Collections.Generic;
 abstract public class Buff
 {
 		// The number of rounds left for the buff.
-		protected int activeTime {
-				get;
-				set;
-		}
+		protected int activeTime;
 
 		// true: is a buff
 		// false: is a debuff
-		protected bool isGood {
-				get;
-				set;
-		}
+		protected bool isGood;
 
 		// The owner of the buff.
 		protected Character user;
 	 
-		public Buff (bool isGood, int duration)
+		public Buff (bool isGood, int duration, Character user)
 		{
 				this.isGood = isGood;
 				activeTime = duration;
+				this.user = user;
 		}
 
 		// Decrements the buff. To be called at the end of each character turn.

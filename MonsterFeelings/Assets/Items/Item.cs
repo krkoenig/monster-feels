@@ -17,10 +17,12 @@ namespace AssemblyCSharp
 				get;
 				set;				
 			}
+
 				public Item ()
 				{
 					this.description = "";
-				}
+
+		}
 		public Item (string _des)
 		{
 			this.description = _des;

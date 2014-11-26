@@ -31,7 +31,7 @@ public class Slash : Skill
 						userY + range == targetY && userX == targetX ||
 						userX - range == targetX && userY == targetY ||
 						userY - range == targetY && userX == targetX) && 
-						user.ap >= apCost &&
+						user.hasAP (apCost) &&
 						targetTile.getOccupant () != null) {
 
 						Character target = targetTile.getOccupant ();

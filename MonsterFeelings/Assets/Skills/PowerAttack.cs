@@ -33,7 +33,7 @@ public class PowerAttack : Skill
 						userY + range == targetY && userX == targetX ||
 						userX - range == targetX && userY == targetY ||
 						userY - range == targetY && userX == targetX) && 
-						user.ap >= apCost &&
+						user.hasAP (apCost) &&
 						targetTile.getOccupant () != null) {
 						
 						Character target = targetTile.getOccupant ();
@@ -41,18 +41,14 @@ public class PowerAttack : Skill
 								// Based on the skill level, do different things.
 								switch (timesUpgraded) {
 								case 0:
-				// Later will add debuff.
-				//user.addBuff(new PDefBuff(false,1));
+										user.addBuff (new PDefBuff (false, 2, user));
 										break;
 								case 1:
-				// Later will add debuffs.
-				//user.addBuff(new PDefBuff(false,1));
-				//target.addBuff(new PDefBuff(false,1));
+										user.addBuff (new PDefBuff (false, 2, user));
+										target.addBuff (new PDefBuff (false, 2, user));
 										break;
 								case 2:
-
-				// Later will add debuff.
-				//target.addBuff(new PDefBuff(false,1));
+										target.addBuff (new PDefBuff (false, 2, user));
 										break;
 								}
 						
