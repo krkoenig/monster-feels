@@ -31,7 +31,7 @@ abstract public class Skill
 		virtual public void use (Tile targetTile)
 		{
 				// Adjust your AP.
-				user.changeAP (apCost);
+				user.loseAP (apCost);
 		
 				// End the user's movement.
 				user.endMovement ();

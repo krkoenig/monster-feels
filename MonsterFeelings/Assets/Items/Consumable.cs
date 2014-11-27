@@ -10,7 +10,7 @@
 using System;
 namespace AssemblyCSharp
 {
-		abstract public class Consumable : Item 
+		abstract public class Consumable : Item
 		{
 				public int APcost {
 						get;
@@ -21,6 +21,7 @@ namespace AssemblyCSharp
 						get;
 						set;
 				}
+
 
 				public int[] effect {
 						get;
@@ -43,6 +44,7 @@ namespace AssemblyCSharp
 			public void useOneItem(){
 				this.nbObjects --;
 			}
+
 
 
 		}

@@ -8,25 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
-namespace AssemblyCSharp
+using System.Collections.Generic;
+public class MDefBuff : Buff
 {
-	abstract public class Item
-	{
-			//Description of the item
-			public string description {
-				get;
-				set;				
-			}
-
-				public Item ()
-				{
-					this.description = "";
-
-		}
-		public Item (string _des)
+		public MDefBuff (bool isGood, int duration, Character user) : base (isGood, duration, user)
 		{
-			this.description = _des;
+
 		}
-	}
+
+		public override void calculate ()
+		{
+				if (isGood) {
+						user.mDef = user.mDef * 3 / 2;
+				} else {
+						if (user.mDef < 10) {
+								user.mDef = 0;
+						} else {
+								user.mDef -= 10;
+						}
+				}
+		}
 }
+
 

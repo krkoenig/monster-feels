@@ -23,11 +23,22 @@ public class Character : MonoBehaviour
 		// Spellsword, Cleric, Invoker, Spellthief
 		private string advanceClass;
 
-		// Str, Dex, Con, Int, Wis
-		public List<int> abilitites;
+		// abilities
+		public int strength;
+		public int dexterity;
+		public int constitution;
+		public int intelligence;
+		public int wisdom;
+		public int vitality;
 
-		// HP, Physical Attack, Physical Defense, Magical Attack, Magical Defense, Initiative, AP	
-		public List<int> stats;
+		//stats
+		public int hp;
+		public int pAtk;
+		public int pDef;
+		public int mAtk;
+		public int mDef;
+		public int init;
+		private int ap;
 
 		// The current AP and MP of the character.
 		private int currAP;
@@ -53,6 +64,12 @@ public class Character : MonoBehaviour
 
 		// The position of the skill in the skillMap being shown. A value of -1 means no skill is shown.
 		private int shownSkill;
+		public int ShownSkill {
+				get { return shownSkill;}
+		}
+
+		// List of Buffs
+		private List<Buff> buffs;
 
 		private TileMap tileMap;
 		private Tile currentTile;
@@ -67,9 +84,11 @@ public class Character : MonoBehaviour
 				// Used for movement.
 				currentTile = tileMap.getTile (Mathf.FloorToInt (transform.position.x), Mathf.FloorToInt (transform.position.y));
 
+				calculateStats ();
+
 				// Set the character to have full MP and AP.		
 				currMP = TOT_MP;
-				currAP = stats [6];
+				currAP = ap;
 
 				// Start the tracker for position the character has moved each turn.
 				pastPos = new List<Tile> ();
@@ -79,6 +98,9 @@ public class Character : MonoBehaviour
 				// Build the character's skillmap.
 				skillMap = new SkillMap (startSkills, this);
 				acquiredSkills = skillMap.getAcquiredSkills ();
+
+				// Create the Buff list.
+				buffs = new List<Buff> ();
 
 				// No skill is being shown at the start.
 				shownSkill = -1;
@@ -99,14 +121,25 @@ public class Character : MonoBehaviour
 
 				// Reset MP and AP.
 				currMP = TOT_MP;
-				currAP = stats [6];
+				currAP = ap;
 
 				// In case skills are being shown when the turn ends,
 				// hide them.
 				hideAllSkills ();	
 
-				// @ TODO
-				// Handle Buffs
+				// Recalculate all stats
+				calculateStats ();
+		
+				// Decrement all buffs
+				// If a buff ends, make it inactive and delete it.
+				for (int i = buffs.Count - 1; i >= 0; i--) {
+						Buff b = buffs [i];
+						if (!b.decrement ()) {
+								buffs.RemoveAt (i);
+						} else {
+								b.calculate ();
+						}
+				}
 		}
 
 		// Call when a skill is used or the turn is over.
@@ -125,6 +158,19 @@ public class Character : MonoBehaviour
 						Destroy (square);
 				}
 				moveTracker.Clear ();
+		}
+
+		// Calculates all the stats of the character.
+		private void calculateStats ()
+		{
+				hp = 5 * vitality;
+				pAtk = strength;
+				pDef = constitution;
+				mAtk = intelligence;
+				mDef = wisdom;
+				init = dexterity;
+				ap = 2 + (dexterity / 5);
+				Debug.Log (ap);
 		}
 
 		// Handle all movement.
@@ -233,7 +279,7 @@ public class Character : MonoBehaviour
 		// to make sure the character isn't dead.
 		public void changeHP (int changeHP)
 		{
-				stats [0] -= changeHP;
+				hp -= changeHP;
 				checkDead ();
 		}
 
@@ -241,60 +287,46 @@ public class Character : MonoBehaviour
 		// and handles all dieing information.
 		private void checkDead ()
 		{
-				Debug.Log (stats [0]);
+				Debug.Log (hp);
 		
-				if (stats [0] <= 0) {
+				if (hp <= 0) {
 						Debug.Log ("DEAD!");
 				}
 		
 		}
 	
 		// Subtracts the cost of the skill.
-		public void changeAP (int changeAP)
+		public void loseAP (int changeAP)
 		{
 				currAP -= changeAP;
 		}
-
-		// Getters
-
-		public int getShownSkill ()
+		
+		// checks if there is enough AP for the action
+		public bool hasAP (int cost)
 		{
-				return shownSkill;
-		}
-	
-		public int getHP ()
-		{
-				return stats [0];
+				if (currAP >= cost) {
+						return true;
+				} else {
+						return false;
+				}
 		}
 
-		public int getPAtk ()
+		// Adds a buff to the buff list.
+		public void addBuff (Buff buff)
 		{
-				return stats [1];
-		}
+				bool buffExists = false;
+				Type buffType = buff.GetType ();
+				foreach (Buff b in buffs) {
+						if (b.GetType () == buffType) {
+								b.addTime (buff);
+								buffExists = true;
+						}
+				}
 
-		public int getPDef ()
-		{
-				return stats [2];
+				if (!buffExists) {
+						buffs.Add (buff);
+						calculateStats ();
+						buff.calculate ();
+				}
 		}
-
-		public int getMAtk ()
-		{
-				return stats [3];
-		}
-
-		public int getMDef ()
-		{
-				return stats [4];
-		}
-
-		public int getInit ()
-		{
-				return stats [5];
-		}
-
-		public int getAP ()
-		{
-				return currAP;
-		}
-
 }

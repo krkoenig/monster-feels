@@ -8,25 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
-namespace AssemblyCSharp
+using System.Collections.Generic;
+public class PDefBuff : Buff
 {
-	abstract public class Item
-	{
-			//Description of the item
-			public string description {
-				get;
-				set;				
-			}
-
-				public Item ()
-				{
-					this.description = "";
-
-		}
-		public Item (string _des)
+		public PDefBuff (bool isGood, int duration, Character user) : base (isGood, duration, user)
 		{
-			this.description = _des;
+
 		}
-	}
+
+		public override void calculate ()
+		{
+				if (isGood) {
+						user.pDef = user.pDef * 3 / 2;
+				} else {
+						if (user.pDef < 10) {
+								user.pDef = 0;
+						} else {
+								user.pDef -= 10;
+						}
+				}
+		}
 }
+
 

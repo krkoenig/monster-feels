@@ -8,25 +8,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
-namespace AssemblyCSharp
+using System.Collections.Generic;
+public class MAtkBuff : Buff
 {
-	abstract public class Item
-	{
-			//Description of the item
-			public string description {
-				get;
-				set;				
-			}
-
-				public Item ()
-				{
-					this.description = "";
-
-		}
-		public Item (string _des)
+		public MAtkBuff (bool isGood, int duration, Character user) : base (isGood, duration, user)
 		{
-			this.description = _des;
+
 		}
-	}
+
+		public override void calculate ()
+		{
+				if (isGood) {
+						user.mAtk = user.mAtk * 3 / 2;
+				} else {
+						if (user.mAtk < 10) {
+								user.mAtk = 0;
+						} else {
+								user.mAtk -= 10;
+						}
+				}
+		}
 }
+
 
