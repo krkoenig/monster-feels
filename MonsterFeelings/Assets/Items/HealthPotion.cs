@@ -11,12 +11,16 @@ using System;
 namespace AssemblyCSharp
 {
 		public class HealthPotion : Consumable
-		{		
-				static public int PV_BACK = 100;
-				
-				public HealthPotion (): base ()
+		{								
+				public HealthPotion (): base()
 				{
 				}
-		}
+
+				public HealthPotion (): base (
+				{
+				}
+		
+		
+	}
 }
 

@@ -22,20 +22,29 @@ namespace AssemblyCSharp
 						set;
 				}
 
-		public Consumable (): base ()
-		{
-			APcost = 0;
-			nbObjects = 0;
+				public int[] effect {
+						get;
+						set;
 		}
 
-		public Consumable(int _APcost, int _nb) :base(_des){
-			this.APcost = _APcost;
-			this.nbObjects = _nb;
+			public Consumable (): base ()
+			{
+				APcost = 0;
+				nbObjects = 0;
+				this.effect = new int[] {0,0,0,0,0,0};
+			}
+
+			public Consumable(int _APcost, int _nb,int _str, int _con, int _intel, int _wis, int _dex, int _health) :base(_des){
+				this.APcost = _APcost;
+				this.nbObjects = _nb;
+				this.effect = new int[] {_str,_con,_intel,_wis,_dex,_health};
 		}
 
-		public void useOneItem(){
-			this.nbObjects --;
-		}
+			public void useOneItem(){
+				this.nbObjects --;
+			}
+
+
 		}
 }
 
