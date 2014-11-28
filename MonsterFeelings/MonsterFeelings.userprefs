@@ -1,4 +1,5 @@
 ﻿<Properties>
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Skills\Skill.cs">
     <Files>
@@ -8,6 +9,29 @@
       <File FileName="Assets\Skills\PowerAttack.cs" Line="50" Column="2" />
       <File FileName="Assets\Skills\DefensiveStance.cs" Line="15" Column="1" />
       <File FileName="Assets\Character.cs" Line="280" Column="37" />
+=======
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Items\HealthPotion.cs">
+    <Files>
+      <File FileName="..\..\Monsters feels\Assets\Character.cs" Line="183" Column="18" />
+      <File FileName="..\..\Monsters feels\Assets\Skills\Skill.cs" Line="1" Column="1" />
+      <File FileName="..\..\Monsters feels\Assets\Skills\Slash.cs" Line="1" Column="1" />
+      <File FileName="..\..\Monsters feels\Assets\Skills\Attack.cs" Line="1" Column="1" />
+      <File FileName="..\..\Monsters feels\Assets\Skills\Healing.cs" Line="1" Column="1" />
+      <File FileName="..\..\Monsters feels\Assets\Skills\BuffSkill.cs" Line="1" Column="1" />
+      <File FileName="Assets\Character.cs" Line="1" Column="1" />
+      <File FileName="Assets\Items\Consumable.cs" Line="1" Column="1" />
+      <File FileName="Assets\Controls.cs" Line="1" Column="1" />
+      <File FileName="Assets\Skills\Skill.cs" Line="1" Column="1" />
+      <File FileName="Assets\Skills\PowerAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Items\Equipment.cs" Line="1" Column="1" />
+      <File FileName="Assets\Items\Item.cs" Line="1" Column="1" />
+      <File FileName="Assets\Items\HealthPotion.cs" Line="19" Column="1" />
+      <File FileName="Assets\Queue.cs" Line="1" Column="1" />
+      <File FileName="Assets\Tile.cs" Line="1" Column="1" />
+      <File FileName="Assets\SkillMap.cs" Line="1" Column="1" />
+      <File FileName="Assets\TileMap.cs" Line="1" Column="1" />
+>>>>>>> origin/master
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
