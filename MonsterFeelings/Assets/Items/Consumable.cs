@@ -35,7 +35,7 @@ namespace AssemblyCSharp
 				this.effect = new int[] {0,0,0,0,0,0};
 			}
 
-			public Consumable(int _APcost, int _nb,int _str, int _con, int _intel, int _wis, int _dex, int _health) :base(_des){
+			public Consumable(int _APcost, int _nb,int _str, int _con, int _intel, int _wis, int _dex, int _health) :base(){
 				this.APcost = _APcost;
 				this.nbObjects = _nb;
 				this.effect = new int[] {_str,_con,_intel,_wis,_dex,_health};

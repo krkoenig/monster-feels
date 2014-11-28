@@ -16,11 +16,7 @@ namespace AssemblyCSharp
 				{
 				}
 
-				public HealthPotion (): base (
-				{
-				}
-		
-		
+						
 	}
 }
 
