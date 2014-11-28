@@ -277,9 +277,9 @@ public class Character : MonoBehaviour
 
 		// Changes the HP of the character and checks
 		// to make sure the character isn't dead.
-		public void changeHP (int changeHP)
+		public void dealDamage (int damage)
 		{
-				hp -= changeHP;
+				hp -= damage;
 				checkDead ();
 		}
 

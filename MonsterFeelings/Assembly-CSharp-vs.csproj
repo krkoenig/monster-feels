@@ -62,6 +62,7 @@
      <Compile Include="Assets\Menu_GUI_2.cs" />
      <Compile Include="Assets\Queue.cs" />
      <Compile Include="Assets\SkillMap.cs" />
+     <Compile Include="Assets\Skills\Assault.cs" />
      <Compile Include="Assets\Skills\DefensiveStance.cs" />
      <Compile Include="Assets\Skills\PowerAttack.cs" />
      <Compile Include="Assets\Skills\Skill.cs" />

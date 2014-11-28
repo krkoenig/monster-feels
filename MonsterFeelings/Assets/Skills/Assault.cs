@@ -2,20 +2,36 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class Slash : Skill
+public class Assault : Skill
 {
 		// Create with all of the skill info.
-		public Slash (Character user) : base(user)
+		public Assault (Character user) : base(user)
 		{
-				path = new List<int> () {3};
-				id = 0;
-				range = 1;
+				path = new List<int> () {3}; // do
+				id = 0; // do
+				range = updateRange ();
 				apCost = 2;
+		}
+		
+		// Updates the range to:
+		// Bow -> range 5
+		// Knife -> range 1
+		private int updateRange ()
+		{
+				return 1;
+		}
+		
+		public override void showSkill ()
+		{
+				updateRange ();
+				base.showSkill ();
 		}
 
 		// Use the skill
 		public override void use (Tile targetTile)
 		{
+				updateRange ();
+
 				if (inRange (range, targetTile.getPosition ().x, targetTile.getPosition ().y) && 
 						user.hasAP (apCost) &&
 						targetTile.getOccupant () != null) {
@@ -23,7 +39,7 @@ public class Slash : Skill
 						Character target = targetTile.getOccupant ();
 						if (user.isAlly != target.isAlly) {
 						
-								int damage = 20 + user.pAtk - target.pDef;
+								int damage = 25 + (user.pAtk / 2) - target.pDef;
 								target.dealDamage (damage);
 
 								base.use (targetTile);

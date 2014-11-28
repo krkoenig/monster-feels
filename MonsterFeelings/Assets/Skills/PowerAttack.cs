@@ -6,16 +6,11 @@ public class PowerAttack : Skill
 {
 
 		// Create with all of the skill info.
-		public PowerAttack (Character user)
+		public PowerAttack (Character user) : base (user)
 		{
-				timesUpgraded = 0;
 				path = new List<int> () {2};
 				id = 1;
 				range = 1;
-				isAcquired = false;
-				isShown = false;
-				this.user = user;
-				rangeSquares = new List<GameObject> ();
 				apCost = 4;
 
 		}
@@ -23,16 +18,8 @@ public class PowerAttack : Skill
 		// Use the skill
 		public override void use (Tile targetTile)
 		{
-				float userX = user.transform.position.x;
-				float userY = user.transform.position.y;
-				float targetX = targetTile.getPosition ().x;
-				float targetY = targetTile.getPosition ().y;
-
 				// Check if the click was in range.
-				if ((userX + range == targetX && userY == targetY ||
-						userY + range == targetY && userX == targetX ||
-						userX - range == targetX && userY == targetY ||
-						userY - range == targetY && userX == targetX) && 
+				if (inRange (range, targetTile.getPosition ().x, targetTile.getPosition ().y) && 
 						user.hasAP (apCost) &&
 						targetTile.getOccupant () != null) {
 						
@@ -54,7 +41,7 @@ public class PowerAttack : Skill
 						
 								// Calculate and deal damage.
 								int damage = 10 + (user.pAtk * 3) - target.pDef;
-								target.changeHP (damage);
+								target.dealDamage (damage);
 
 								base.use (targetTile);
 						}

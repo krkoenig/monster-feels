@@ -27,8 +27,17 @@ abstract public class Skill
 		// The ap cost of the skill.
 		protected int apCost;
 
+		public Skill (Character user)
+		{
+				timesUpgraded = 0;
+				isAcquired = false; 
+				isShown = false;
+				this.user = user;
+				rangeSquares = new List<GameObject> ();
+		}
+
 		// All skill must have a way to be used.
-		virtual public void use (Tile targetTile)
+		public virtual void use (Tile targetTile)
 		{
 				// Adjust your AP.
 				user.loseAP (apCost);
@@ -38,7 +47,7 @@ abstract public class Skill
 		}
 
 		// Shows the range of the skill.
-		public void showSkill ()
+		public virtual void showSkill ()
 		{
 				// Different amount of squares are created depending on the range.
 				switch (range) {
@@ -84,5 +93,17 @@ abstract public class Skill
 				quad.transform.localScale = new Vector3 (.25f, .25f, 1f);
 				quad.transform.position = new Vector3 (user.transform.position.x - x + .5f, user.transform.position.y - y + .5f, -2);
 				return quad;
+		}
+		
+		protected bool inRange (int r, float targetX, float targetY)
+		{
+				float userX = user.transform.position.x;
+				float userY = user.transform.position.y;
+				
+				if (Mathf.Abs (userX - targetX) + Mathf.Abs (userY - targetY) <= range) {
+						return true;
+				} else {
+						return false;
+				}	
 		}
 }
