@@ -72,7 +72,7 @@ public class Character : MonoBehaviour
 		private List<Buff> buffs;
 		
 		// Checking for whether the character ignores terrain
-		public bool ignoresTerrain;
+		public bool isStealthed;
 
 		private TileMap tileMap;
 		private Tile currentTile;
@@ -88,6 +88,7 @@ public class Character : MonoBehaviour
 				currentTile = tileMap.getTile (Mathf.FloorToInt (transform.position.x), Mathf.FloorToInt (transform.position.y));
 
 				calculateStats ();
+				hp = 5 * vitality;
 
 				// Set the character to have full MP and AP.		
 				currMP = TOT_MP;
@@ -109,7 +110,7 @@ public class Character : MonoBehaviour
 				shownSkill = -1;
 				
 				// No character starts ignoring terrain.
-				ignoresTerrain = false;
+				isStealthed = false;
 		}
 	
 		// Update is called once per frame
@@ -169,14 +170,13 @@ public class Character : MonoBehaviour
 		// Calculates all the stats of the character.
 		private void calculateStats ()
 		{
-				hp = 5 * vitality;
 				pAtk = strength;
 				pDef = constitution;
 				mAtk = intelligence;
 				mDef = wisdom;
 				init = dexterity;
 				ap = 2 + (dexterity / 5);
-				ignoresTerrain = false;
+				isStealthed = false;
 		}
 
 		// Handle all movement.
@@ -200,7 +200,7 @@ public class Character : MonoBehaviour
 								Destroy (moveTracker [0]);
 								moveTracker.RemoveAt (0);
 								
-								if (ignoresTerrain) {
+								if (isStealthed) {
 										currMP += 1;
 								} else {
 										// Adjust your MP cost.	
@@ -213,7 +213,7 @@ public class Character : MonoBehaviour
 								// else if the terrain is passable, there isn't an occupant, and you have enough MP...
 						} else if (targetTile.getMpCost () != 0 && 
 								targetTile.getOccupant () == null &&
-								((ignoresTerrain && currMP - 1 >= 0) || (!ignoresTerrain && currMP - targetTile.getMpCost () >= 0))) {
+								((isStealthed && currMP - 1 >= 0) || (!isStealthed && currMP - targetTile.getMpCost () >= 0))) {
 							
 								// Keep track of your last position.
 								pastPos.Insert (0, currentTile);
@@ -226,7 +226,7 @@ public class Character : MonoBehaviour
 								quad.transform.position = new Vector3 (transform.position.x + .5f, transform.position.y + .5f, -1);
 								moveTracker.Insert (0, quad);
 								
-								if (ignoresTerrain) {
+								if (isStealthed) {
 										currMP -= 1;
 								} else {
 										// Adjust your MP cost.	
@@ -293,26 +293,38 @@ public class Character : MonoBehaviour
 		// to make sure the character isn't dead.
 		public void dealDamage (int damage)
 		{
-				foreach (DmgBuff b in buffs) {
-						damage *= b.damageAdjustment ();
-				}		
+				foreach (Buff b in buffs) {
+						if (b is DmgBuff) {
+								DmgBuff d = (DmgBuff)b;
+								damage = d.damageAdjustment (damage);
+						}
+				}
 		
 				hp -= damage;
 				checkDead ();
 		}
 		
-		public void stealth ()
+		// Removes stealth from the user.
+		public void breakStealth ()
 		{
-				foreach (StealthBuff b in buffs) {
-						b.end ();
-				}	
+				calculateStats ();	
+		
+				// Recalculate all buffs, but remove stealth.
+				for (int i = buffs.Count - 1; i >= 0; i--) {
+						Buff b = buffs [i];
+						if (b is StealthBuff) {
+								buffs.RemoveAt (i);
+						} else {
+								b.calculate ();
+						}
+				}
 		}
 	
 		// Checks to see if the character has 0 or less life
 		// and handles all dieing information.
 		private void checkDead ()
 		{
-				Debug.Log (hp);
+				Debug.Log (hp + " HP");
 		
 				if (hp <= 0) {
 						Debug.Log ("DEAD!");
@@ -351,7 +363,9 @@ public class Character : MonoBehaviour
 				if (!buffExists) {
 						buffs.Add (buff);
 						calculateStats ();
-						buff.calculate ();
+						foreach (Buff b in buffs) {
+								b.calculate ();
+						}
 				}
 		}
 }

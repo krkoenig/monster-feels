@@ -19,7 +19,7 @@ public class PDefBuff : Buff
 		public override void calculate ()
 		{
 				if (isGood) {
-						owner.pDef = owner.pDef * 3 / 2;
+						owner.pDef += owner.pDef / 2;
 				} else {
 						if (owner.pDef < 10) {
 								owner.pDef = 0;

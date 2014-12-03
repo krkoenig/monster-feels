@@ -12,21 +12,13 @@ public class StealthBuff : Buff
 		public override void calculate ()
 		{
 				if (timesUpgraded == 2) {
-						owner.ignoresTerrain = true;
+						owner.isStealthed = true;
 				}
 				
-				if (timesUpgraded == 1) {
-						owner.pAtk *= 3 / 2;
-						owner.mAtk *= 3 / 2;
+				if (timesUpgraded >= 1) {
+						owner.pAtk += owner.pAtk / 2;
+						owner.mAtk += owner.mAtk / 2;
 				}
-		}
-		
-		public void end ()
-		{
-				activeTime = 0;
-				owner.ignoresTerrain = false;
-				owner.pAtk *= 2 / 3;
-				owner.mAtk *= 2 / 3;
 		}
 }
 

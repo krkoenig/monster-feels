@@ -126,8 +126,7 @@ abstract public class OffensiveSkill : Skill
 		public override void use (Tile targetTile)
 		{
 				base.use (targetTile);
-				user.stealth ();
-	
+				user.breakStealth ();
 		}	
 		
 		public override void showSkill ()

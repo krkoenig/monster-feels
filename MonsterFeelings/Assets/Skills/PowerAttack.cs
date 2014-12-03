@@ -25,6 +25,11 @@ public class PowerAttack : OffensiveSkill
 						
 						Character target = targetTile.getOccupant ();
 						if (user.isAlly != target.isAlly) {
+						
+								// Calculate and deal damage.
+								int damage = 10 + (user.pAtk * 3) - target.pDef;
+								target.dealDamage (damage);
+				
 								// Based on the skill level, do different things.
 								switch (timesUpgraded) {
 								case 0:
@@ -38,10 +43,6 @@ public class PowerAttack : OffensiveSkill
 										target.addBuff (new PDefBuff (false, 2, target));
 										break;
 								}
-						
-								// Calculate and deal damage.
-								int damage = 10 + (user.pAtk * 3) - target.pDef;
-								target.dealDamage (damage);
 
 								base.use (targetTile);
 						}

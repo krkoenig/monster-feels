@@ -16,7 +16,7 @@ public class SkillMap
 					new PowerAttack(user),
 					new DefensiveStance(user),
 					new Assault(user),
-					new Rogues_Mark(user),
+					new RoguesMark(user),
 					new Stealth(user),
 				};
 

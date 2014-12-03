@@ -47,10 +47,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Buffs\Buff.cs" />
+     <Compile Include="Assets\Buffs\DmgBuff.cs" />
      <Compile Include="Assets\Buffs\MAtkBuff.cs" />
      <Compile Include="Assets\Buffs\MDefBuff.cs" />
      <Compile Include="Assets\Buffs\PAtkBuff.cs" />
      <Compile Include="Assets\Buffs\PDefBuff.cs" />
+     <Compile Include="Assets\Buffs\StealthBuff.cs" />
      <Compile Include="Assets\Character.cs" />
      <Compile Include="Assets\Controls.cs" />
      <Compile Include="Assets\Items\Consumable.cs" />
@@ -60,13 +62,16 @@
      <Compile Include="Assets\Menu_GUI.cs" />
      <Compile Include="Assets\Menu_GUI_1.cs" />
      <Compile Include="Assets\Menu_GUI_2.cs" />
+     <Compile Include="Assets\Menus\MenuScript.cs" />
      <Compile Include="Assets\Queue.cs" />
      <Compile Include="Assets\SkillMap.cs" />
      <Compile Include="Assets\Skills\Assault.cs" />
      <Compile Include="Assets\Skills\DefensiveStance.cs" />
      <Compile Include="Assets\Skills\PowerAttack.cs" />
+     <Compile Include="Assets\Skills\RoguesMark.cs" />
      <Compile Include="Assets\Skills\Skill.cs" />
      <Compile Include="Assets\Skills\Slash.cs" />
+     <Compile Include="Assets\Skills\Stealth.cs" />
      <Compile Include="Assets\Tile.cs" />
      <Compile Include="Assets\TileMap.cs" />
   </ItemGroup>

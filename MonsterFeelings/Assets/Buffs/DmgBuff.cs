@@ -21,12 +21,12 @@ public class DmgBuff : Buff
 		
 		}
 		
-		public int damageAdjustment ()
+		public int damageAdjustment (int damage)
 		{
 				if (isGood) {
-						return 23 / 20;
+						return damage * 20 / 23;
 				} else {
-						return 20 / 23;
+						return damage * 23 / 20;
 				}
 		}
 }

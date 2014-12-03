@@ -2,10 +2,10 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class Rogues_Mark : Skill
+public class RoguesMark : Skill
 {
 		// Create with all of the skill info.
-		public Rogues_Mark (Character user) : base(user)
+		public RoguesMark (Character user) : base(user)
 		{
 				path = new List<int> () {3}; // do
 				id = 4; // do

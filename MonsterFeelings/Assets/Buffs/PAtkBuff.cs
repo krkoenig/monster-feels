@@ -19,7 +19,7 @@ public class PAtkBuff : Buff
 		public override void calculate ()
 		{
 				if (isGood) {
-						owner.pAtk = owner.pAtk * 3 / 2;
+						owner.pAtk += owner.pAtk / 2;
 				} else {
 						if (owner.pAtk < 10) {
 								owner.pAtk = 0;
