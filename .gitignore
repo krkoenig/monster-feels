@@ -12,6 +12,14 @@
 /*.userprefs
 /*.pidb
 /*.booproj
+/*.meta
 
 #Unity3D Generated File On Crash Reports
 sysinfo.txt
+*.meta
+*.meta
+*.sln
+*.sln
+*.userprefs
+*.csproj
+*.csproj

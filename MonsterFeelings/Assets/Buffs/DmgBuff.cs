@@ -9,25 +9,24 @@
 //------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-public class MDefBuff : Buff
+public class DmgBuff : Buff
 {
-		public MDefBuff (bool isGood, int duration, Character user) : base (isGood, duration, user)
+		public DmgBuff (bool isGood, int duration, Character user) : base (isGood, duration, user)
 		{
-
+		
 		}
-
+	
 		public override void calculate ()
 		{
+		
+		}
+		
+		public int damageAdjustment ()
+		{
 				if (isGood) {
-						owner.mDef = owner.mDef * 3 / 2;
+						return 23 / 20;
 				} else {
-						if (owner.mDef < 10) {
-								owner.mDef = 0;
-						} else {
-								owner.mDef -= 10;
-						}
+						return 20 / 23;
 				}
 		}
 }
-
-

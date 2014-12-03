@@ -15,6 +15,9 @@ public class SkillMap
 					new Slash(user),
 					new PowerAttack(user),
 					new DefensiveStance(user),
+					new Assault(user),
+					new Rogues_Mark(user),
+					new Stealth(user),
 				};
 
 				string[] acquired = acquiredSkills.Split (',');

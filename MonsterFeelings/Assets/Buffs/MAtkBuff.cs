@@ -19,12 +19,12 @@ public class MAtkBuff : Buff
 		public override void calculate ()
 		{
 				if (isGood) {
-						user.mAtk = user.mAtk * 3 / 2;
+						owner.mAtk = owner.mAtk * 3 / 2;
 				} else {
-						if (user.mAtk < 10) {
-								user.mAtk = 0;
+						if (owner.mAtk < 10) {
+								owner.mAtk = 0;
 						} else {
-								user.mAtk -= 10;
+								owner.mAtk -= 10;
 						}
 				}
 		}

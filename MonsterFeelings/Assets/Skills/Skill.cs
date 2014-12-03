@@ -60,8 +60,15 @@ abstract public class Skill
 						rangeSquares.Add (createRangeSquare (0f, -1f));
 						rangeSquares.Add (createRangeSquare (0f, 1f));
 						break;
+				default:
+						rangeSquares.Add (createRangeSquare (2f, 0f));
+						rangeSquares.Add (createRangeSquare (-2f, 0f));
+						rangeSquares.Add (createRangeSquare (0f, -2f));
+						rangeSquares.Add (createRangeSquare (0f, 2f));
+						break;
+			
 				}
-
+		
 				isShown = true;
 		}
 
@@ -106,4 +113,26 @@ abstract public class Skill
 						return false;
 				}	
 		}
+}
+
+abstract public class OffensiveSkill : Skill
+{
+
+		public OffensiveSkill (Character user) : base(user)
+		{
+
+		}
+
+		public override void use (Tile targetTile)
+		{
+				base.use (targetTile);
+				user.stealth ();
+	
+		}	
+		
+		public override void showSkill ()
+		{
+				base.showSkill ();
+		}
+
 }

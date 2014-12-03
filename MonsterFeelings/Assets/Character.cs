@@ -70,6 +70,9 @@ public class Character : MonoBehaviour
 
 		// List of Buffs
 		private List<Buff> buffs;
+		
+		// Checking for whether the character ignores terrain
+		public bool ignoresTerrain;
 
 		private TileMap tileMap;
 		private Tile currentTile;
@@ -104,6 +107,9 @@ public class Character : MonoBehaviour
 
 				// No skill is being shown at the start.
 				shownSkill = -1;
+				
+				// No character starts ignoring terrain.
+				ignoresTerrain = false;
 		}
 	
 		// Update is called once per frame
@@ -170,7 +176,7 @@ public class Character : MonoBehaviour
 				mDef = wisdom;
 				init = dexterity;
 				ap = 2 + (dexterity / 5);
-				Debug.Log (ap);
+				ignoresTerrain = false;
 		}
 
 		// Handle all movement.
@@ -194,8 +200,12 @@ public class Character : MonoBehaviour
 								Destroy (moveTracker [0]);
 								moveTracker.RemoveAt (0);
 								
-								// Adjust your MP cost.	
-								currMP += currentTile.getMpCost ();
+								if (ignoresTerrain) {
+										currMP += 1;
+								} else {
+										// Adjust your MP cost.	
+										currMP += currentTile.getMpCost ();
+								}
 							
 								// Make the movement.
 								makeMovement (targetTile);
@@ -203,7 +213,7 @@ public class Character : MonoBehaviour
 								// else if the terrain is passable, there isn't an occupant, and you have enough MP...
 						} else if (targetTile.getMpCost () != 0 && 
 								targetTile.getOccupant () == null &&
-								currMP - targetTile.getMpCost () >= 0) {
+								((ignoresTerrain && currMP - 1 >= 0) || (!ignoresTerrain && currMP - targetTile.getMpCost () >= 0))) {
 							
 								// Keep track of your last position.
 								pastPos.Insert (0, currentTile);
@@ -216,8 +226,12 @@ public class Character : MonoBehaviour
 								quad.transform.position = new Vector3 (transform.position.x + .5f, transform.position.y + .5f, -1);
 								moveTracker.Insert (0, quad);
 								
-								// Adjust your MP cost.	
-								currMP -= targetTile.getMpCost ();
+								if (ignoresTerrain) {
+										currMP -= 1;
+								} else {
+										// Adjust your MP cost.	
+										currMP -= targetTile.getMpCost ();
+								}
 
 								// Make the movement.
 								makeMovement (targetTile);
@@ -279,10 +293,21 @@ public class Character : MonoBehaviour
 		// to make sure the character isn't dead.
 		public void dealDamage (int damage)
 		{
+				foreach (DmgBuff b in buffs) {
+						damage *= b.damageAdjustment ();
+				}		
+		
 				hp -= damage;
 				checkDead ();
 		}
-
+		
+		public void stealth ()
+		{
+				foreach (StealthBuff b in buffs) {
+						b.end ();
+				}	
+		}
+	
 		// Checks to see if the character has 0 or less life
 		// and handles all dieing information.
 		private void checkDead ()

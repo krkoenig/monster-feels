@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class PowerAttack : Skill
+public class PowerAttack : OffensiveSkill
 {
 
 		// Create with all of the skill info.
@@ -32,10 +32,10 @@ public class PowerAttack : Skill
 										break;
 								case 1:
 										user.addBuff (new PDefBuff (false, 2, user));
-										target.addBuff (new PDefBuff (false, 2, user));
+										target.addBuff (new PDefBuff (false, 2, target));
 										break;
 								case 2:
-										target.addBuff (new PDefBuff (false, 2, user));
+										target.addBuff (new PDefBuff (false, 2, target));
 										break;
 								}
 						

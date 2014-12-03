@@ -2,49 +2,66 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class Assault : OffensiveSkill
+public class Rogues_Mark : Skill
 {
 		// Create with all of the skill info.
-		public Assault (Character user) : base(user)
+		public Rogues_Mark (Character user) : base(user)
 		{
 				path = new List<int> () {3}; // do
-				id = 3; // do
+				id = 4; // do
 				updateRange ();
-				apCost = 2;
+				updateAPCost ();
 		}
-		
+	
 		// Updates the range to:
-		// Bow -> range 5
-		// Knife -> range 1
+		// upgraded twice = 5
+		// otherwise 1
 		private void updateRange ()
 		{
-				range = 1;
+				if (timesUpgraded == 2) {
+						range = 5;
+				} else {
+						range = 1;
+				}
+
 		}
 		
+		//  Updates the AP to:
+		// upgraded once or twice = 1
+		// else 2
+		private void updateAPCost ()
+		{
+				if (timesUpgraded >= 1) {
+						apCost = 1;
+				} else {
+						apCost = 2;
+				}
+		}
+	
 		public override void showSkill ()
 		{
 				updateRange ();
 				base.showSkill ();
 		}
-
+	
 		// Use the skill
 		public override void use (Tile targetTile)
 		{
 				updateRange ();
-
+				updateAPCost ();
+		
 				if (inRange (range, targetTile.getPosition ().x, targetTile.getPosition ().y) && 
 						user.hasAP (apCost) &&
 						targetTile.getOccupant () != null) {
-
+			
 						Character target = targetTile.getOccupant ();
 						if (user.isAlly != target.isAlly) {
-						
-								int damage = 25 + (user.pAtk / 2) - target.pDef;
-								target.dealDamage (damage);
-
+				
+								target.addBuff (new DmgBuff (false, 2, target));
+				
 								base.use (targetTile);
 						}
 				}
-
+		
 		}
 }
