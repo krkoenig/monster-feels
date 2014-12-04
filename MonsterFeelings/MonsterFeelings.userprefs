@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Buffs\DmgBuff.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Level CSV\test.csv">
     <Files>
-      <File FileName="Assets\Character.cs" Line="300" Column="7" />
+      <File FileName="Assets\Level CSV\test.csv" Line="25" Column="50" />
+      <File FileName="Assets\Character.cs" Line="1" Column="1" />
       <File FileName="Assets\Skills\RoguesMark.cs" Line="1" Column="1" />
       <File FileName="Assets\Buffs\DmgBuff.cs" Line="1" Column="1" />
     </Files>
