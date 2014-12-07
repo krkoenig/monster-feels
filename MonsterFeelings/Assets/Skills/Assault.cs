@@ -2,23 +2,23 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class Assault : Skill
+public class Assault : OffensiveSkill
 {
 		// Create with all of the skill info.
 		public Assault (Character user) : base(user)
 		{
 				path = new List<int> () {3}; // do
-				id = 0; // do
-				range = updateRange ();
+				id = 3; // do
+				updateRange ();
 				apCost = 2;
 		}
 		
 		// Updates the range to:
 		// Bow -> range 5
 		// Knife -> range 1
-		private int updateRange ()
+		private void updateRange ()
 		{
-				return 1;
+				range = 1;
 		}
 		
 		public override void showSkill ()

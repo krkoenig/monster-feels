@@ -12,13 +12,13 @@ abstract public class Buff
 		protected bool isGood;
 
 		// The owner of the buff.
-		protected Character user;
+		protected Character owner;
 	 
-		public Buff (bool isGood, int duration, Character user)
+		public Buff (bool isGood, int duration, Character owner)
 		{
 				this.isGood = isGood;
 				activeTime = duration;
-				this.user = user;
+				this.owner = owner;
 		}
 
 		// Decrements the buff. To be called at the end of each character turn.

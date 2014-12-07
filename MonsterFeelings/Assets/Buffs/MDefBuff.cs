@@ -19,12 +19,12 @@ public class MDefBuff : Buff
 		public override void calculate ()
 		{
 				if (isGood) {
-						user.mDef = user.mDef * 3 / 2;
+						owner.mDef += owner.mDef / 2;
 				} else {
-						if (user.mDef < 10) {
-								user.mDef = 0;
+						if (owner.mDef < 10) {
+								owner.mDef = 0;
 						} else {
-								user.mDef -= 10;
+								owner.mDef -= 10;
 						}
 				}
 		}

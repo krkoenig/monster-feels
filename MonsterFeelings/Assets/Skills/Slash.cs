@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class Slash : Skill
+public class Slash : OffensiveSkill
 {
 		// Create with all of the skill info.
 		public Slash (Character user) : base(user)
