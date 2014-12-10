@@ -70,7 +70,7 @@ public class Controls : MonoBehaviour
 		}
 
 		// Grabs the location of the mouse.
-		private int[] getMouseLoc ()
+		public static int[] getMouseLoc ()
 		{
 				// Mouse location
 				// Convert the mouse's screen coordinates to world coordinates.

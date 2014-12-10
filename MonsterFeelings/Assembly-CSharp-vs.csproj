@@ -53,6 +53,7 @@
      <Compile Include="Assets\Buffs\PAtkBuff.cs" />
      <Compile Include="Assets\Buffs\PDefBuff.cs" />
      <Compile Include="Assets\Buffs\StealthBuff.cs" />
+     <Compile Include="Assets\CameraController.cs" />
      <Compile Include="Assets\Character.cs" />
      <Compile Include="Assets\Controls.cs" />
      <Compile Include="Assets\Items\Consumable.cs" />
