@@ -22,6 +22,9 @@ public class Tile
 				case 1:
 						mpCost = 2;
 						break;
+				case 2:
+						mpCost = 9999;
+						break;
 				default:
 						mpCost = 0;
 						break;

@@ -50,7 +50,6 @@ public class ArcaneBrilliance : OffensiveSkill
 				for (int i = 1; i <= 5; i++) {
 						for (int x = -i; x <= i; x++) {
 								int y = i - Math.Abs (x);
-								Debug.Log (y);
 								if (x + (int)pos.x >= 0 && x + (int)pos.x < tileMap.mapX) {
 
 										if (y + (int)pos.y < tileMap.mapY) {

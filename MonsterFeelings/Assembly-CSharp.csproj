@@ -79,6 +79,7 @@
      <Compile Include="Assets\Skills\Stealth.cs" />
      <Compile Include="Assets\Tile.cs" />
      <Compile Include="Assets\TileMap.cs" />
+     <None Include="Assets\Art\environment\Terrain Notes.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
