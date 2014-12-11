@@ -1,0 +1,4 @@
+red bricks=walls, impassable
+green tile, grey bricks= regular terrain
+brown tile= mud, difficult terrain
+blue tile=water
