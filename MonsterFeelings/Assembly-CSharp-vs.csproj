@@ -70,6 +70,7 @@
      <Compile Include="Assets\Skills\ArcaneBrilliance.cs" />
      <Compile Include="Assets\Skills\Assault.cs" />
      <Compile Include="Assets\Skills\DefensiveStance.cs" />
+     <Compile Include="Assets\Skills\MagicMissile.cs" />
      <Compile Include="Assets\Skills\ManaShield.cs" />
      <Compile Include="Assets\Skills\PowerAttack.cs" />
      <Compile Include="Assets\Skills\RoguesMark.cs" />
