@@ -15,6 +15,8 @@ public class Controls : MonoBehaviour
 				
 				// Create a queue to run the game with.
 				queue = new Queue ();
+				Camera.main.GetComponent<CameraController> ().moveToActive (queue.getActiveCharacter ().getPosition ());
+
 		}
 	
 		// Update is called once per frame
@@ -53,6 +55,7 @@ public class Controls : MonoBehaviour
 				} else if (Input.GetKeyDown (KeyCode.Space)) {
 						queue.getActiveCharacter ().endTurn ();
 						queue.nextCharacter ();
+						Camera.main.GetComponent<CameraController> ().moveToActive (queue.getActiveCharacter ().getPosition ());
 				}
 
 				if (isOnTileMap (mouse [0], mouse [1])) {

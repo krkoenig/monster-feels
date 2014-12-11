@@ -53,8 +53,17 @@ public class CameraController : MonoBehaviour
 						pos.x += moveSpeed;
 				}
 				
-				Debug.Log ("Mouse X,Y: " + Input.mousePosition.x + " , " + Input.mousePosition.y);
-				Debug.Log ("Screen X,Y: " + Screen.width + " , " + Screen.height);
+				pos.x = Mathf.Clamp (pos.x, leftBound, rightBound);
+				pos.y = Mathf.Clamp (pos.y, bottomBound, topBound);
+				transform.position = pos;
+		}
+
+		public void moveToActive (Vector3 pos)
+		{
+				calcBounds ();
+		
+				pos.z = transform.position.z;
+		
 				pos.x = Mathf.Clamp (pos.x, leftBound, rightBound);
 				pos.y = Mathf.Clamp (pos.y, bottomBound, topBound);
 				transform.position = pos;

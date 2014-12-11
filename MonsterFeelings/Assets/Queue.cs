@@ -16,7 +16,7 @@ public class Queue
 				characters = new LinkedList<Character> ();
 				foreach (Character data in charObjects) {
 						characters.AddLast (data.GetComponent<Character> ());			
-				}
+				}				
 		}
 
 		// Find out who's turn it is.

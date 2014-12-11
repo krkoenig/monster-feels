@@ -43,10 +43,10 @@ public class Character : MonoBehaviour
 		// The current AP and MP of the character.
 		private int currAP;
 		private int currMP;
-		private static int TOT_MP = 5;
+		private const int TOT_MP = 5;
 	
 		//public Item[] inventory;
-		private static int INVENTORY_SIZE = 6;
+		private const int INVENTORY_SIZE = 6;
 		//public Armor armor;
 		//public Weapon weapon;
 
@@ -367,5 +367,11 @@ public class Character : MonoBehaviour
 								b.calculate ();
 						}
 				}
+		}
+
+		// Returns the poisition of the character
+		public Vector3 getPosition ()
+		{
+				return currentTile.getPosition ();
 		}
 }
