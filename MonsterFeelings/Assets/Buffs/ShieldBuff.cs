@@ -9,25 +9,17 @@
 //------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-public class PDefBuff : Buff
+public class ShieldBuff : Buff
 {
-		public PDefBuff (bool isGood, int duration, Character owner) : base (isGood, duration, owner)
+		private Character caster;
+
+		public ShieldBuff (bool isGood, int duration, Character owner, Character caster) : base (isGood, duration, owner)
 		{
-
+				this.caster = caster;
 		}
-
+	
 		public override void calculate ()
 		{
-				if (isGood) {
-						owner.pDef += owner.pDef / 2;
-				} else {
-						if (owner.pDef < 10) {
-								owner.pDef = 0;
-						} else {
-								owner.pDef -= 10;
-						}
-				}
+				owner.shield = caster.mAtk * 3 / 10 + 15;
 		}
 }
-
-

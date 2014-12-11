@@ -18,6 +18,9 @@ public class SkillMap
 					new Assault(user),
 					new RoguesMark(user),
 					new Stealth(user),
+					new MagicMissile(user),
+					new ArcaneBrilliance(user),
+					new ManaShield(user),
 				};
 
 				string[] acquired = acquiredSkills.Split (',');

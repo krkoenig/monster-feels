@@ -4,7 +4,7 @@ public class StealthBuff : Buff
 {
 		private int timesUpgraded;
 		
-		public StealthBuff (bool isGood, int duration, Character user, int timesUpgraded) : base (isGood, duration, user)
+		public StealthBuff (bool isGood, int duration, Character owner, int timesUpgraded) : base (isGood, duration, owner)
 		{
 				this.timesUpgraded = timesUpgraded;
 		}

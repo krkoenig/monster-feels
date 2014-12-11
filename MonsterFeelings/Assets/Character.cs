@@ -42,6 +42,7 @@ public class Character : MonoBehaviour
 
 		// The current AP and MP of the character.
 		private int currAP;
+		public int extraAP;
 		private int currMP;
 		private const int TOT_MP = 5;
 	
@@ -74,6 +75,9 @@ public class Character : MonoBehaviour
 		// Checking for whether the character ignores terrain
 		public bool isStealthed;
 
+		// The shield value of the character.
+		public int shield;
+
 		private TileMap tileMap;
 		private Tile currentTile;
 
@@ -93,6 +97,7 @@ public class Character : MonoBehaviour
 				// Set the character to have full MP and AP.		
 				currMP = TOT_MP;
 				currAP = ap;
+				extraAP = 0;
 
 				// Start the tracker for position the character has moved each turn.
 				pastPos = new List<Tile> ();
@@ -129,6 +134,8 @@ public class Character : MonoBehaviour
 				// Reset MP and AP.
 				currMP = TOT_MP;
 				currAP = ap;
+				currAP += extraAP;
+				extraAP = 0;
 
 				// In case skills are being shown when the turn ends,
 				// hide them.
@@ -177,6 +184,7 @@ public class Character : MonoBehaviour
 				init = dexterity;
 				ap = 2 + (dexterity / 5);
 				isStealthed = false;
+				shield = 0;
 		}
 
 		// Handle all movement.
@@ -221,7 +229,7 @@ public class Character : MonoBehaviour
 								// Create and setup the movement tracking.
 								// TODO: Have arrows that face a direction.
 								GameObject quad = GameObject.CreatePrimitive (PrimitiveType.Quad);
-								quad.renderer.material.color = Color.cyan;
+								quad.renderer.material.color = Color.red;
 								quad.transform.localScale = new Vector3 (.5f, .5f, 1f);
 								quad.transform.position = new Vector3 (transform.position.x + .5f, transform.position.y + .5f, -1);
 								moveTracker.Insert (0, quad);
@@ -299,6 +307,23 @@ public class Character : MonoBehaviour
 								damage = d.damageAdjustment (damage);
 						}
 				}
+			
+				if (shield >= damage) {
+						shield -= damage;
+				} else {
+						damage -= shield;
+						shield = 0;
+						// Recalculate all buffs, but remove shield.
+						for (int i = buffs.Count - 1; i >= 0; i--) {
+								Buff b = buffs [i];
+								if (b is ShieldBuff) {
+										buffs.RemoveAt (i);
+								} else {
+										b.calculate ();
+								}
+						}
+				}
+
 		
 				hp -= damage;
 				checkDead ();

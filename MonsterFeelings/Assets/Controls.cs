@@ -25,31 +25,22 @@ public class Controls : MonoBehaviour
 				// Used to find where the mouse is.
 				int[] mouse = getMouseLoc ();
 
-				// Used to see if a skill is currently active.
-				bool isSkillActive = false;
-
 				// Check for any keyboard keys being pressed.
 				// 1-6 are skills
 				// Space ends the turn.
 				if (Input.GetKeyDown (KeyCode.Alpha1)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (0);
 				} else if (Input.GetKeyDown (KeyCode.Alpha2)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (1);
 				} else if (Input.GetKeyDown (KeyCode.Alpha3)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (2);
 				} else if (Input.GetKeyDown (KeyCode.Alpha4)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (3);
 
 				} else if (Input.GetKeyDown (KeyCode.Alpha5)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (4);
 
 				} else if (Input.GetKeyDown (KeyCode.Alpha6)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (5);
 
 				} else if (Input.GetKeyDown (KeyCode.Space)) {

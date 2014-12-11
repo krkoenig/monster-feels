@@ -2,36 +2,25 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class Assault : OffensiveSkill
+public class MagicMissile : OffensiveSkill
 {
 		// Create with all of the skill info.
-		public Assault (Character user) : base(user)
+		public MagicMissile (Character user) : base(user)
 		{
 				path = new List<int> () {3}; // do
 				id = 3; // do
-				updateRange ();
-				apCost = 2;
-		}
-		
-		// Updates the range to:
-		// Bow -> range 5
-		// Knife -> range 1
-		private void updateRange ()
-		{
 				range = 5;
+				apCost = 2;
 		}
 		
 		public override void showSkill ()
 		{
-				updateRange ();
 				base.showSkill ();
 		}
 
 		// Use the skill
 		public override void use (Tile targetTile)
 		{
-				updateRange ();
-
 				if (inRange (range, targetTile.getPosition ().x, targetTile.getPosition ().y) && 
 						user.hasAP (apCost) &&
 						targetTile.getOccupant () != null) {
@@ -39,7 +28,7 @@ public class Assault : OffensiveSkill
 						Character target = targetTile.getOccupant ();
 						if (user.isAlly != target.isAlly) {
 						
-								int damage = 25 + (user.pAtk / 2) - target.pDef;
+								int damage = 20 + (user.mAtk * 3 / 4) - target.mDef;
 								target.dealDamage (damage);
 
 								base.use (targetTile);
