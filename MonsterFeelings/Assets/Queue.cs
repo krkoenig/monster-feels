@@ -25,6 +25,13 @@ public class Queue
 				return characters.First.Value;
 		}
 
+		public Character[] listAll ()
+		{
+				Character[] temp = new Character[characters.Count];
+				characters.CopyTo (temp, 0);
+				return temp;
+		}
+
 		// Progress to the next character.
 		public void nextCharacter ()
 		{					
