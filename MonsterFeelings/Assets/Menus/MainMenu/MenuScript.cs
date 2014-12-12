@@ -16,7 +16,7 @@ public class MenuScript : MonoBehaviour {
 
 		// Make the first button. If it is pressed, the first level will be loaded
 		if (GUI.Button (new Rect (Screen.width / 2 - (buttonWidth / 2), (2 * Screen.height / 3) - (buttonHeight / 2)-50, buttonWidth, buttonHeight), "New Game")) {
-			Application.LoadLevel (1);
+			Application.LoadLevel ("StoryIntroduction");
 		}
 
 		// Make the second button.
@@ -29,7 +29,7 @@ public class MenuScript : MonoBehaviour {
 		}
 		// Make the second button.
 		if (GUI.Button (new Rect (Screen.width / 2 - (buttonWidth / 2), (2 * Screen.height / 3) - (buttonHeight / 2)+100, buttonWidth, buttonHeight), "Close Game")) {
-			Application.LoadLevel (2);
+			Application.Quit();
 		}
 	}
 }

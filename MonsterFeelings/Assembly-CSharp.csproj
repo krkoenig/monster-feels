@@ -77,6 +77,7 @@
      <Compile Include="Assets\Skills\Skill.cs" />
      <Compile Include="Assets\Skills\Slash.cs" />
      <Compile Include="Assets\Skills\Stealth.cs" />
+     <Compile Include="Assets\StoryIntroduction.cs" />
      <Compile Include="Assets\Tile.cs" />
      <Compile Include="Assets\TileMap.cs" />
      <None Include="Assets\Art\environment\Terrain Notes.txt" />

@@ -1,11 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Queue.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Menus\MainMenu\MenuScript.cs">
     <Files>
-      <File FileName="Assets\Controls.cs" Line="62" Column="1" />
-      <File FileName="Assets\Tile.cs" Line="59" Column="1" />
-      <File FileName="Assets\Character.cs" Line="234" Column="108" />
-      <File FileName="Assets\Queue.cs" Line="56" Column="2" />
+      <File FileName="Assets\Controls.cs" Line="76" Column="1" />
+      <File FileName="Assets\Character.cs" Line="1" Column="1" />
+      <File FileName="Assets\Queue.cs" Line="1" Column="1" />
+      <File FileName="Assets\TileMap.cs" Line="1" Column="1" />
+      <File FileName="Assets\Menus\MainMenu\MenuScript.cs" Line="28" Column="30" />
+      <File FileName="Assets\Menu_GUI_1.cs" Line="1" Column="1" />
+      <File FileName="Assets\Menu_GUI_2.cs" Line="1" Column="1" />
+      <File FileName="Assets\Menu_GUI.cs" Line="1" Column="1" />
+      <File FileName="Assets\StoryIntroduction.cs" Line="17" Column="32" />
+      <File FileName="Assets\CameraController.cs" Line="70" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
