@@ -7,6 +7,7 @@ public class Controls : MonoBehaviour
 		private Queue queue;
 		private TileMap tileMap;
 
+
 		// Use this for initialization
 		void Start ()
 		{
@@ -22,6 +23,7 @@ public class Controls : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{			
+			queue.moveActiveTile ();
 				// Used to find where the mouse is.
 				int[] mouse = getMouseLoc ();
 
