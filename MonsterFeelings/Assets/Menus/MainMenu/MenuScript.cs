@@ -27,7 +27,7 @@ public class MenuScript : MonoBehaviour {
 		if (GUI.Button (new Rect (Screen.width / 2 - (buttonWidth / 2), (2 * Screen.height / 3) - (buttonHeight / 2)+50, buttonWidth, buttonHeight), "Settings")) {
 			Application.LoadLevel (2);
 		}
-		// Make the second button.
+		// Make the forth button.
 		if (GUI.Button (new Rect (Screen.width / 2 - (buttonWidth / 2), (2 * Screen.height / 3) - (buttonHeight / 2)+100, buttonWidth, buttonHeight), "Close Game")) {
 			Application.LoadLevel (2);
 		}

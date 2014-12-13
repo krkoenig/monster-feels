@@ -1,11 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Level CSV\test.csv">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Menus\CreateMenu\CreateScript.cs">
     <Files>
-      <File FileName="Assets\Level CSV\test.csv" Line="25" Column="50" />
-      <File FileName="Assets\Character.cs" Line="1" Column="1" />
-      <File FileName="Assets\Skills\RoguesMark.cs" Line="1" Column="1" />
-      <File FileName="Assets\Buffs\DmgBuff.cs" Line="1" Column="1" />
+      <File FileName="Assets\Menus\CreateMenu\CreateScript.cs" Line="18" Column="3" />
+      <File FileName="Assets\ComboBox.cs" Line="22" Column="4" />
+      <File FileName="Assets\Menus\MainMenu\MenuScript.cs" Line="14" Column="130" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
