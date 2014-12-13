@@ -38,14 +38,20 @@ public class CreateScript : MonoBehaviour {
 		//Create the button to open the list
 		this.comboClassControl = new ComboBox(new Rect(50, 130, 120, 20), new GUIContent (""), comboBoxClass, "button", "box", listStyle);
 
+
+
+
 	}
 	
 	// Update is called once per frame
 	void OnGUI () {
-		GUI.Box (new Rect (20,50, 200, Screen.height-100), "");
+		GUI.Box (new Rect (32,20, 185, Screen.height-40), "");
 		//Add the Race button
 		comboRaceControl.Show ();
 		//Add the Class button
 		comboClassControl.Show ();
+		//Add field to write the name of the character
+
+
 	}
 }

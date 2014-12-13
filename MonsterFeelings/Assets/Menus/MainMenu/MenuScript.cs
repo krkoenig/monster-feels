@@ -11,7 +11,7 @@ public class MenuScript : MonoBehaviour {
 
 		GUI.backgroundColor = Color.black;
 		GUI.contentColor = Color.white;
-		GUI.Box (new Rect (Screen.width / 2 - (buttonWidth / 2)-10, (2 * Screen.height / 3)-50 - (buttonHeight / 2)-10, 220, 210), "");
+		GUI.Box (new Rect (Screen.width / 2 - (buttonWidth / 2)-10, (2 * Screen.height / 3)-50 - (buttonHeight / 2)-10, 220, 160), "");
 		//(x pos, y pos, x width, y width)
 
 		// Make the first button. If it is pressed, the first level will be loaded
@@ -24,11 +24,7 @@ public class MenuScript : MonoBehaviour {
 			Application.LoadLevel (2);
 		}
 		// Make the third button.
-		if (GUI.Button (new Rect (Screen.width / 2 - (buttonWidth / 2), (2 * Screen.height / 3) - (buttonHeight / 2)+50, buttonWidth, buttonHeight), "Settings")) {
-			Application.LoadLevel (2);
-		}
-		// Make the forth button.
-		if (GUI.Button (new Rect (Screen.width / 2 - (buttonWidth / 2), (2 * Screen.height / 3) - (buttonHeight / 2)+100, buttonWidth, buttonHeight), "Close Game")) {
+		if (GUI.Button (new Rect (Screen.width / 2 - (buttonWidth / 2), (2 * Screen.height / 3) - (buttonHeight / 2)+50, buttonWidth, buttonHeight), "Close Game")) {
 			Application.Quit();
 		}
 	}
