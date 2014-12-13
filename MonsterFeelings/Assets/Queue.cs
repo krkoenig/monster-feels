@@ -65,9 +65,20 @@ public class Queue
 				foreach (Character c in toSort) {
 						characters.AddFirst (c);
 				}
+		}
 		
+		public void updateQueue ()
+		{
+				Character[] charObjects = (Character[])Object.FindObjectsOfType<Character> ();
+				List<Character> sortChar = new List<Character> ();
+				foreach (Character data in charObjects) {
+						sortChar.Add (data.GetComponent<Character> ());
+				}		
 				
-		
+				if (sortChar.Count != characters.Count) {
+						characters.Clear ();
+						sortQueue (sortChar);
+				}
 		}
 
 }

@@ -23,7 +23,7 @@ public class Controls : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{			
-			queue.moveActiveTile ();
+				queue.moveActiveTile ();
 				// Used to find where the mouse is.
 				int[] mouse = getMouseLoc ();
 
@@ -64,7 +64,7 @@ public class Controls : MonoBehaviour
 						}
 				}	
 
-
+				queue.updateQueue ();
 		}
 
 

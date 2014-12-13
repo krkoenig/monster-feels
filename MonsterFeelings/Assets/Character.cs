@@ -121,6 +121,8 @@ public class Character : MonoBehaviour
 				
 				// No character starts ignoring terrain.
 				isStealthed = false;
+				
+				setClass ();
 		}
 	
 		// Update is called once per frame
@@ -369,11 +371,11 @@ public class Character : MonoBehaviour
 		// Checks to see if the character has 0 or less life
 		// and handles all dieing information.
 		private void checkDead ()
-		{
-				Debug.Log (hp + " HP");
-		
+		{		
 				if (hp <= 0) {
-						Debug.Log ("DEAD!");
+						currentTile.setOccupant (null);
+						Destroy (damageSquare);
+						Destroy (gameObject);
 				}
 		
 		}
@@ -412,6 +414,21 @@ public class Character : MonoBehaviour
 						foreach (Buff b in buffs) {
 								b.calculate ();
 						}
+				}
+		}
+		
+		private void setClass ()
+		{
+				switch (charClass) {
+				case "rogue":
+						skillMap.acquireSkill (3);
+						break;
+				case "fighter":
+						skillMap.acquireSkill (0);
+						break;
+				case "mage":
+						skillMap.acquireSkill (6);
+						break;
 				}
 		}
 
