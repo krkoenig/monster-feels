@@ -15,10 +15,13 @@ public class Queue
 				// TODO: Sort using Intitiative.
 				Character[] charObjects = (Character[])Object.FindObjectsOfType<Character> ();
 				characters = new LinkedList<Character> ();
+				List<Character> sortChar = new List<Character> ();
 				foreach (Character data in charObjects) {
-						characters.AddLast (data.GetComponent<Character> ());			
-				}				
-		createActiveTile ();
+						sortChar.Add (data.GetComponent<Character> ());
+				}		
+				
+				sortQueue (sortChar);	
+				createActiveTile ();
 		}
 
 		// Find out who's turn it is.
@@ -26,11 +29,6 @@ public class Queue
 		{
 				return characters.First.Value;
 		}
-
-//		public ActiveTile getActiveTile()
-//		{
-//		return activeTile;
-//		}
 
 		public Character[] listAll ()
 		{
@@ -46,18 +44,30 @@ public class Queue
 				characters.RemoveFirst ();
 		}
 
-		private void createActiveTile()
+		private void createActiveTile ()
 		{
-		activeTile = GameObject.CreatePrimitive (PrimitiveType.Quad);
-		activeTile.renderer.material.color = new Color(255,252,0,.25f);
-		activeTile.renderer.material.shader = Shader.Find( "Transparent/Diffuse" );
-		activeTile.transform.localScale = new Vector3 (1f, 1f, 1f);
-		activeTile.transform.position = new Vector3 (characters.First.Value.getPosition().x + .5f, characters.First.Value.getPosition().y + .5f, -1);
+				activeTile = GameObject.CreatePrimitive (PrimitiveType.Quad);
+				activeTile.renderer.material.color = new Color (255, 252, 0, .25f);
+				activeTile.renderer.material.shader = Shader.Find ("Transparent/Diffuse");
+				activeTile.transform.localScale = new Vector3 (1f, 1f, 1f);
+				activeTile.transform.position = new Vector3 (characters.First.Value.getPosition ().x + .5f, characters.First.Value.getPosition ().y + .5f, -1);
 		}
 
-		public void moveActiveTile()
+		public void moveActiveTile ()
 		{
-		activeTile.transform.position = new Vector3 (characters.First.Value.getPosition().x + .5f, characters.First.Value.getPosition().y + .5f, -1);
+				activeTile.transform.position = new Vector3 (characters.First.Value.getPosition ().x + .5f, characters.First.Value.getPosition ().y + .5f, -1);
+		}
+		
+		private void sortQueue (List<Character> toSort)
+		{
+				toSort.Sort ((s1, s2) => s1.dexterity.CompareTo (s2.dexterity));
+				
+				foreach (Character c in toSort) {
+						characters.AddFirst (c);
+				}
+		
+				
+		
 		}
 
 }
