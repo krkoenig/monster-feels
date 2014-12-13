@@ -80,6 +80,9 @@ public class Character : MonoBehaviour
 
 		private TileMap tileMap;
 		private Tile currentTile;
+		
+		private DateTime damageInstance;
+		private GameObject damageSquare;
 
 		// Use this for initialization
 		void Start ()
@@ -93,6 +96,8 @@ public class Character : MonoBehaviour
 
 				calculateStats ();
 				hp = 5 * vitality;
+				
+				
 
 				// Set the character to have full MP and AP.		
 				currMP = TOT_MP;
@@ -121,8 +126,11 @@ public class Character : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-				// @ TODO
-				// Check for levelup.
+				if (damageInstance != null) {
+						if (DateTime.Now.Subtract (damageInstance).Milliseconds > 500 && damageSquare != null) {
+								Destroy (damageSquare);
+						}
+				}
 		}
 
 		// Call whenever the turn is ending.
@@ -326,7 +334,20 @@ public class Character : MonoBehaviour
 
 		
 				hp -= damage;
+				showDamage ();
 				checkDead ();
+				
+		}
+		
+		private void showDamage ()
+		{
+				damageInstance = DateTime.Now;
+				damageSquare = GameObject.CreatePrimitive (PrimitiveType.Quad);
+				damageSquare.renderer.material.color = new Color (255, 0, 0, .25f);
+				damageSquare.renderer.material.shader = Shader.Find ("Transparent/Diffuse");
+				damageSquare.transform.localScale = new Vector3 (1f, 1f, 1f);
+				damageSquare.transform.position = new Vector3 (transform.position.x + .5f, transform.position.y + .5f, -1);
+		
 		}
 		
 		// Removes stealth from the user.
