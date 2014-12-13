@@ -52,7 +52,9 @@
      <Compile Include="Assets\Buffs\MDefBuff.cs" />
      <Compile Include="Assets\Buffs\PAtkBuff.cs" />
      <Compile Include="Assets\Buffs\PDefBuff.cs" />
+     <Compile Include="Assets\Buffs\ShieldBuff.cs" />
      <Compile Include="Assets\Buffs\StealthBuff.cs" />
+     <Compile Include="Assets\CameraController.cs" />
      <Compile Include="Assets\Character.cs" />
      <Compile Include="Assets\ComboBox.cs" />
      <Compile Include="Assets\Controls.cs" />
@@ -67,15 +69,20 @@
      <Compile Include="Assets\Menus\MainMenu\MenuScript.cs" />
      <Compile Include="Assets\Queue.cs" />
      <Compile Include="Assets\SkillMap.cs" />
+     <Compile Include="Assets\Skills\ArcaneBrilliance.cs" />
      <Compile Include="Assets\Skills\Assault.cs" />
      <Compile Include="Assets\Skills\DefensiveStance.cs" />
+     <Compile Include="Assets\Skills\MagicMissile.cs" />
+     <Compile Include="Assets\Skills\ManaShield.cs" />
      <Compile Include="Assets\Skills\PowerAttack.cs" />
      <Compile Include="Assets\Skills\RoguesMark.cs" />
      <Compile Include="Assets\Skills\Skill.cs" />
      <Compile Include="Assets\Skills\Slash.cs" />
      <Compile Include="Assets\Skills\Stealth.cs" />
+     <Compile Include="Assets\StoryIntroduction.cs" />
      <Compile Include="Assets\Tile.cs" />
      <Compile Include="Assets\TileMap.cs" />
+     <None Include="Assets\Art\environment\Terrain Notes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

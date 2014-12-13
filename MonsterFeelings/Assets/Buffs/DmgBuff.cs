@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 public class DmgBuff : Buff
 {
-		public DmgBuff (bool isGood, int duration, Character user) : base (isGood, duration, user)
+		public DmgBuff (bool isGood, int duration, Character owner) : base (isGood, duration, owner)
 		{
 		
 		}

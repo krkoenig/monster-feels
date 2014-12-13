@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 public class MAtkBuff : Buff
 {
-		public MAtkBuff (bool isGood, int duration, Character user) : base (isGood, duration, user)
+		public MAtkBuff (bool isGood, int duration, Character owner) : base (isGood, duration, owner)
 		{
 
 		}

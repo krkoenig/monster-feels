@@ -7,6 +7,7 @@ public class Controls : MonoBehaviour
 		private Queue queue;
 		private TileMap tileMap;
 
+
 		// Use this for initialization
 		void Start ()
 		{
@@ -15,44 +16,39 @@ public class Controls : MonoBehaviour
 				
 				// Create a queue to run the game with.
 				queue = new Queue ();
+				Camera.main.GetComponent<CameraController> ().moveToActive (queue.getActiveCharacter ().getPosition ());
+
 		}
 	
 		// Update is called once per frame
 		void Update ()
 		{			
+			queue.moveActiveTile ();
 				// Used to find where the mouse is.
 				int[] mouse = getMouseLoc ();
-
-				// Used to see if a skill is currently active.
-				bool isSkillActive = false;
 
 				// Check for any keyboard keys being pressed.
 				// 1-6 are skills
 				// Space ends the turn.
 				if (Input.GetKeyDown (KeyCode.Alpha1)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (0);
 				} else if (Input.GetKeyDown (KeyCode.Alpha2)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (1);
 				} else if (Input.GetKeyDown (KeyCode.Alpha3)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (2);
 				} else if (Input.GetKeyDown (KeyCode.Alpha4)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (3);
 
 				} else if (Input.GetKeyDown (KeyCode.Alpha5)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (4);
 
 				} else if (Input.GetKeyDown (KeyCode.Alpha6)) {
-						isSkillActive = true;
 						queue.getActiveCharacter ().showSkill (5);
 
 				} else if (Input.GetKeyDown (KeyCode.Space)) {
 						queue.getActiveCharacter ().endTurn ();
 						queue.nextCharacter ();
+						Camera.main.GetComponent<CameraController> ().moveToActive (queue.getActiveCharacter ().getPosition ());
 				}
 
 				if (isOnTileMap (mouse [0], mouse [1])) {
@@ -66,11 +62,28 @@ public class Controls : MonoBehaviour
 						} else if (Input.GetMouseButton (1) && queue.getActiveCharacter ().ShownSkill != -1) {
 								queue.getActiveCharacter ().useSkill (queue.getActiveCharacter ().ShownSkill, targetTile);
 						}
-				}			
+				}	
+
+
+		}
+
+
+		void OnGUI ()
+		{
+				// Make a background box
+				GUI.Box (new Rect (0, 0, Screen.width, 64), "");
+
+				Character[] chars = queue.listAll ();
+				for (int i = 0; i < chars.Length; i++) {
+						if (i * 64 <= Screen.width) {
+								Texture t = chars [i].GetComponent<SpriteRenderer> ().sprite.texture;
+								GUI.DrawTexture (new Rect (i * 64, 0, 64, 64), t);
+						}
+				}
 		}
 
 		// Grabs the location of the mouse.
-		private int[] getMouseLoc ()
+		public static int[] getMouseLoc ()
 		{
 				// Mouse location
 				// Convert the mouse's screen coordinates to world coordinates.

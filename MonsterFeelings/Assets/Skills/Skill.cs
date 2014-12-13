@@ -49,27 +49,39 @@ abstract public class Skill
 		// Shows the range of the skill.
 		public virtual void showSkill ()
 		{
-				// Different amount of squares are created depending on the range.
-				switch (range) {
-				case 0:
-						rangeSquares.Add (createRangeSquare (0f, 0f));
-						break;
-				case 1:
-						rangeSquares.Add (createRangeSquare (1f, 0f));
-						rangeSquares.Add (createRangeSquare (-1f, 0f));
-						rangeSquares.Add (createRangeSquare (0f, -1f));
-						rangeSquares.Add (createRangeSquare (0f, 1f));
-						break;
-				default:
-						rangeSquares.Add (createRangeSquare (2f, 0f));
-						rangeSquares.Add (createRangeSquare (-2f, 0f));
-						rangeSquares.Add (createRangeSquare (0f, -2f));
-						rangeSquares.Add (createRangeSquare (0f, 2f));
-						break;
-			
+				if (user.hasAP (apCost)) {
+						// Different amount of squares are created depending on the range.
+						switch (range) {
+						case 0:
+								rangeSquares.Add (createRangeSquare (0f, 0f));
+								break;
+						default:
+								for (float x = 0f; x <= range; x++) {
+										for (float y = 0f; y <= range; y++) {
+												if (x + y <= range) {
+														if (x + y == 0) {
+																rangeSquares.Add (createRangeSquare (x, y));
+														} else if (x == 0) {
+																rangeSquares.Add (createRangeSquare (x, y));
+																rangeSquares.Add (createRangeSquare (x, -y));
+														} else if (y == 0) {
+																rangeSquares.Add (createRangeSquare (x, y));
+																rangeSquares.Add (createRangeSquare (-x, y));
+														} else {
+																rangeSquares.Add (createRangeSquare (x, y));
+																rangeSquares.Add (createRangeSquare (x, -y));
+																rangeSquares.Add (createRangeSquare (-x, y));
+																rangeSquares.Add (createRangeSquare (-x, -y));
+														}
+							
+												}
+										}
+								}
+								break;
+						}
+						
+						isShown = true;
 				}
-		
-				isShown = true;
 		}
 
 		// Hides the range of the skill from being shown.

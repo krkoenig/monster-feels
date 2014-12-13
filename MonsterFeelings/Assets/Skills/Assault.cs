@@ -18,7 +18,7 @@ public class Assault : OffensiveSkill
 		// Knife -> range 1
 		private void updateRange ()
 		{
-				range = 1;
+				range = 5;
 		}
 		
 		public override void showSkill ()
