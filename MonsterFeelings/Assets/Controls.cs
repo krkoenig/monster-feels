@@ -7,6 +7,7 @@ public class Controls : MonoBehaviour
 		private Queue queue;
 		private TileMap tileMap;
 
+
 		// Use this for initialization
 		void Start ()
 		{
@@ -22,6 +23,7 @@ public class Controls : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{			
+			queue.moveActiveTile ();
 				// Used to find where the mouse is.
 				int[] mouse = getMouseLoc ();
 
@@ -60,7 +62,24 @@ public class Controls : MonoBehaviour
 						} else if (Input.GetMouseButton (1) && queue.getActiveCharacter ().ShownSkill != -1) {
 								queue.getActiveCharacter ().useSkill (queue.getActiveCharacter ().ShownSkill, targetTile);
 						}
-				}			
+				}	
+
+
+		}
+
+
+		void OnGUI ()
+		{
+				// Make a background box
+				GUI.Box (new Rect (0, 0, Screen.width, 64), "");
+
+				Character[] chars = queue.listAll ();
+				for (int i = 0; i < chars.Length; i++) {
+						if (i * 64 <= Screen.width) {
+								Texture t = chars [i].GetComponent<SpriteRenderer> ().sprite.texture;
+								GUI.DrawTexture (new Rect (i * 64, 0, 64, 64), t);
+						}
+				}
 		}
 
 		// Grabs the location of the mouse.
