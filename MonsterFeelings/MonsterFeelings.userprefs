@@ -2,10 +2,12 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Character.cs">
     <Files>
-      <File FileName="Assets\Character.cs" Line="198" Column="98" />
+      <File FileName="Assets\Character.cs" Line="168" Column="24" />
       <File FileName="Assets\Queue.cs" Line="64" Column="4" />
       <File FileName="Assets\Controls.cs" Line="117" Column="6" />
-      <File FileName="Assets\Buffs\Buff.cs" Line="6" Column="2" />
+      <File FileName="Assets\Buffs\Buff.cs" Line="51" Column="4" />
+      <File FileName="Assets\Buffs\ShieldBuff.cs" Line="19" Column="21" />
+      <File FileName="Assets\Skills\Stealth.cs" Line="29" Column="69" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
