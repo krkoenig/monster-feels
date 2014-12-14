@@ -83,6 +83,8 @@ public class Character : MonoBehaviour
 		
 		private DateTime damageInstance;
 		private GameObject damageSquare;
+		
+		private GameObject hpText;
 
 		// Use this for initialization
 		void Start ()
@@ -123,6 +125,16 @@ public class Character : MonoBehaviour
 				isStealthed = false;
 				
 				setClass ();
+				
+				hpText = new GameObject ();
+				hpText.AddComponent<TextMesh> ();
+				hpText.GetComponent<TextMesh> ().text = hp.ToString ();
+				hpText.GetComponent<TextMesh> ().anchor = TextAnchor.LowerLeft;
+				hpText.GetComponent<TextMesh> ().font = Resources.Load<Font> ("Arial");
+				hpText.GetComponent<TextMesh> ().color = Color.white;
+				hpText.GetComponent<MeshRenderer> ().material = Resources.Load<Font> ("Arial").material;
+				hpText.transform.position = new Vector3 (transform.position.x + 0.3f, transform.position.y, -2);
+				hpText.transform.localScale = new Vector3 (0.25f, 0.25f, 0.1f);
 		}
 	
 		// Update is called once per frame
@@ -132,7 +144,13 @@ public class Character : MonoBehaviour
 						if (DateTime.Now.Subtract (damageInstance).Milliseconds > 500 && damageSquare != null) {
 								Destroy (damageSquare);
 						}
-				}
+				}	
+
+				hpText.GetComponent<TextMesh> ().text = hp.ToString ();	
+				hpText.transform.position = new Vector3 (transform.position.x + 0.3f, transform.position.y, -2);
+		
+		
+		
 		}
 
 		// Call whenever the turn is ending.
@@ -344,6 +362,9 @@ public class Character : MonoBehaviour
 		private void showDamage ()
 		{
 				damageInstance = DateTime.Now;
+				if (damageSquare != null) {
+						Destroy (damageSquare);
+				}
 				damageSquare = GameObject.CreatePrimitive (PrimitiveType.Quad);
 				damageSquare.renderer.material.color = new Color (255, 0, 0, .25f);
 				damageSquare.renderer.material.shader = Shader.Find ("Transparent/Diffuse");
@@ -375,6 +396,7 @@ public class Character : MonoBehaviour
 				if (hp <= 0) {
 						currentTile.setOccupant (null);
 						Destroy (damageSquare);
+						Destroy (hpText);
 						Destroy (gameObject);
 				}
 		

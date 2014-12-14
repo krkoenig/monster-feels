@@ -64,7 +64,8 @@ public class Controls : MonoBehaviour
 						}
 				}	
 
-				queue.updateQueue ();
+				queue.removeDead ();
+				victoryDefeat ();
 		}
 
 
@@ -106,5 +107,22 @@ public class Controls : MonoBehaviour
 						return true;
 				}
 				return false;
+		}
+		
+		private void victoryDefeat ()
+		{
+				int counter = 0;
+				Character[] chars = queue.listAll ();
+				for (int i = 0; i < chars.Length; i++) {
+						if (chars [i].isAlly) {
+								counter++;
+						}
+				}
+				
+				if (counter == 0) {
+						Application.LoadLevel (0);
+				} else if (counter == chars.Length) {
+						Application.LoadLevel (0);
+				}
 		}
 }

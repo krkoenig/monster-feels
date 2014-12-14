@@ -67,17 +67,12 @@ public class Queue
 				}
 		}
 		
-		public void updateQueue ()
+		public void removeDead ()
 		{
-				Character[] charObjects = (Character[])Object.FindObjectsOfType<Character> ();
-				List<Character> sortChar = new List<Character> ();
-				foreach (Character data in charObjects) {
-						sortChar.Add (data.GetComponent<Character> ());
-				}		
-				
-				if (sortChar.Count != characters.Count) {
-						characters.Clear ();
-						sortQueue (sortChar);
+				foreach (Character c in characters) {
+						if (c == null) {
+								characters.Remove (c);
+						}
 				}
 		}
 
