@@ -27,7 +27,7 @@ abstract public class Skill
 		// The ap cost of the skill.
 		protected int apCost;
 
-	protected Texture2D icon;
+		protected Texture2D icon;
 
 		public Skill (Character user)
 		{
@@ -110,8 +110,9 @@ abstract public class Skill
 		protected GameObject createRangeSquare (float x, float y)
 		{
 				GameObject quad = GameObject.CreatePrimitive (PrimitiveType.Quad);
-				quad.renderer.material.color = Color.cyan;
-				quad.transform.localScale = new Vector3 (.25f, .25f, 1f);
+				quad.renderer.material.color = new Color (255, 0, 0, 0.25f);
+				quad.renderer.material.shader = Shader.Find ("Transparent/Diffuse");
+				quad.transform.localScale = new Vector3 (1f, 1f, 1f);
 				quad.transform.position = new Vector3 (user.transform.position.x - x + .5f, user.transform.position.y - y + .5f, -2);
 				return quad;
 		}
@@ -128,9 +129,10 @@ abstract public class Skill
 				}	
 		}
 
-	public Texture2D getIcon(){
-		return icon;
-	}
+		public Texture2D getIcon ()
+		{
+				return icon;
+		}
 }
 
 abstract public class OffensiveSkill : Skill

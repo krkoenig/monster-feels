@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Controls : MonoBehaviour
 {
 		
 		private Queue queue;
 		private TileMap tileMap;
-	public  GUISkin  newSkin;
+		public  GUISkin  newSkin;
 	
 
 		// Use this for initialization
@@ -72,53 +73,52 @@ public class Controls : MonoBehaviour
 
 		void OnGUI ()
 		{
-		GUI.skin = newSkin;
-		// Make a background box
+				queue.removeDead ();
+
+				GUI.skin = newSkin;
+				// Make a background box
 				GUI.Box (new Rect (0, 0, Screen.width, 64), "");
 
-				Character[] chars = queue.listAll ();
-				for (int i = 0; i < chars.Length; i++) {
+				List<Character> chars = queue.listAll ();
+				for (int i = 0; i < chars.Count; i++) {
 						if (i * 64 <= Screen.width) {
 								Texture t = chars [i].GetComponent<SpriteRenderer> ().sprite.texture;
 								GUI.DrawTexture (new Rect (i * 64, 0, 64, 64), t);
 						}
 				}
 
-		int difference = 5 - chars [0].getSkills ().Count;
-		Texture2D tex;
-		string charClass = chars [0].getClass();
+				int difference = 5 - chars [0].getSkills ().Count;
+				Texture2D tex;
+				string charClass = chars [0].getClass ();
 		
-		//make initiative queue of next 5 people
-		for (int i = 0; i < 5; i++) 
-		{
-			if (i * 64 <= Screen.width) 
-			{	
-				if(i<chars.Length){
-					Texture t = chars [i].GetComponent<SpriteRenderer> ().sprite.texture;
-					GUI.DrawTexture (new Rect (i * 64, 0, 64, 64), t);
+				//make initiative queue of next 5 people
+				for (int i = 0; i < 5; i++) {
+						if (i * 64 <= Screen.width) {	
+								if (i < chars.Count) {
+										Texture t = chars [i].GetComponent<SpriteRenderer> ().sprite.texture;
+										GUI.DrawTexture (new Rect (i * 64, 0, 64, 64), t);
+								}
+						}
 				}
-			}
+				//list active character's skills if it's not an enemy
+				if (chars [0].isAlly == true) {
+						for (int i = 0; i < 7; i++) {
+								if (i < chars [0].getSkills ().Count) {
+										tex = chars [0].getSkills () [i].getIcon ();
+										GUI.DrawTexture (new Rect ((i + 8) * 64, 0, 64, 64), tex);
+								}
+								//list AP and MP
+								if (i == 5) {
+										int ap = chars [0].getCurrentAP ();
+										int mp = chars [0].getCurrentMP ();
+										GUI.TextArea (new Rect ((i + 8) * 64, 0, 64, 64), "AP: " + ap + " MP: " + mp);
+								}
+						}
+				}
 		}
-		//list active character's skills if it's not an enemy
-		if (chars [0].isAlly == true) {
-			for (int i = 0; i < 7; i++) {
-				if(i<chars [0].getSkills().Count){
-					tex = chars [0].getSkills()[i].getIcon();
-					GUI.DrawTexture (new Rect ((i+8) * 64, 0, 64, 64), tex);
-				}
-				//list AP and MP
-				if(i==5)
-				{
-					int ap = chars [0].getCurrentAP();
-					int mp = chars [0].getCurrentMP();
-					GUI.TextArea(new Rect((i+8) * 64,0,64,64),"AP: " + ap+ " MP: " + mp);
-				}
-			}
-		}
-	}
 	
-	// Grabs the location of the mouse.
-	public static int[] getMouseLoc ()
+		// Grabs the location of the mouse.
+		public static int[] getMouseLoc ()
 		{
 				// Mouse location
 				// Convert the mouse's screen coordinates to world coordinates.
@@ -146,8 +146,8 @@ public class Controls : MonoBehaviour
 		private void victoryDefeat ()
 		{
 				int counter = 0;
-				Character[] chars = queue.listAll ();
-				for (int i = 0; i < chars.Length; i++) {
+				List<Character> chars = queue.listAll ();
+				for (int i = 0; i < chars.Count; i++) {
 						if (chars [i].isAlly) {
 								counter++;
 						}
@@ -155,7 +155,7 @@ public class Controls : MonoBehaviour
 				
 				if (counter == 0) {
 						Application.LoadLevel (0);
-				} else if (counter == chars.Length) {
+				} else if (counter == chars.Count) {
 						Application.LoadLevel (0);
 				}
 		}

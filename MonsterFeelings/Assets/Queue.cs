@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Queue
 {
 		// The queue.
-		private LinkedList<Character> characters;
+		private List<Character> characters;
 		private GameObject activeTile;
 
 		// Use this for initialization
@@ -13,35 +13,32 @@ public class Queue
 		{
 				// Grab all Characters from the scene and move them into the queue.
 				// TODO: Sort using Intitiative.
-				Character[] charObjects = (Character[])Object.FindObjectsOfType<Character> ();
-				characters = new LinkedList<Character> ();
-				List<Character> sortChar = new List<Character> ();
-				foreach (Character data in charObjects) {
-						sortChar.Add (data.GetComponent<Character> ());
+				Character[] charObj = (Character[])Object.FindObjectsOfType<Character> ();
+				characters = new List<Character> ();
+				foreach (Character data in charObj) {
+						characters.Add (data.GetComponent<Character> ());
 				}		
 				
-				sortQueue (sortChar);	
+				sortQueue ();	
 				createActiveTile ();
 		}
 
 		// Find out who's turn it is.
 		public Character getActiveCharacter ()
 		{
-				return characters.First.Value;
+				return characters [0];
 		}
 
-		public Character[] listAll ()
+		public List<Character> listAll ()
 		{
-				Character[] temp = new Character[characters.Count];
-				characters.CopyTo (temp, 0);
-				return temp;
+				return characters;
 		}
 
 		// Progress to the next character.
 		public void nextCharacter ()
 		{					
-				characters.AddLast (characters.First.Value);
-				characters.RemoveFirst ();
+				characters.Add (characters [0]);
+				characters.RemoveAt (0);
 		}
 
 		private void createActiveTile ()
@@ -50,28 +47,24 @@ public class Queue
 				activeTile.renderer.material.color = new Color (255, 252, 0, .25f);
 				activeTile.renderer.material.shader = Shader.Find ("Transparent/Diffuse");
 				activeTile.transform.localScale = new Vector3 (1f, 1f, 1f);
-				activeTile.transform.position = new Vector3 (characters.First.Value.getPosition ().x + .5f, characters.First.Value.getPosition ().y + .5f, -1);
+				activeTile.transform.position = new Vector3 (characters [0].getPosition ().x + .5f, characters [0].getPosition ().y + .5f, -1);
 		}
 
 		public void moveActiveTile ()
 		{
-				activeTile.transform.position = new Vector3 (characters.First.Value.getPosition ().x + .5f, characters.First.Value.getPosition ().y + .5f, -1);
+				activeTile.transform.position = new Vector3 (characters [0].getPosition ().x + .5f, characters [0].getPosition ().y + .5f, -1);
 		}
 		
-		private void sortQueue (List<Character> toSort)
+		private void sortQueue ()
 		{
-				toSort.Sort ((s1, s2) => s1.dexterity.CompareTo (s2.dexterity));
-				
-				foreach (Character c in toSort) {
-						characters.AddFirst (c);
-				}
+				characters.Sort ((s2, s1) => s1.dexterity.CompareTo (s2.dexterity));
 		}
 		
 		public void removeDead ()
 		{
-				foreach (Character c in characters) {
-						if (c == null) {
-								characters.Remove (c);
+				for (int i = characters.Count - 1; i >=0; i--) {
+						if (characters [i] == null) {
+								characters.RemoveAt (i);
 						}
 				}
 		}

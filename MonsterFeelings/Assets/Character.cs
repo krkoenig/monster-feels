@@ -113,6 +113,8 @@ public class Character : MonoBehaviour
 
 				// Build the character's skillmap.
 				skillMap = new SkillMap (startSkills, this);
+				setClass ();
+
 				acquiredSkills = skillMap.getAcquiredSkills ();
 
 				// Create the Buff list.
@@ -124,7 +126,6 @@ public class Character : MonoBehaviour
 				// No character starts ignoring terrain.
 				isStealthed = false;
 				
-				setClass ();
 				
 				hpText = new GameObject ();
 				hpText.AddComponent<TextMesh> ();
@@ -461,19 +462,23 @@ public class Character : MonoBehaviour
 		}
 
 	
-	public String getClass(){
-		return charClass;
-	}
+		public String getClass ()
+		{
+				return charClass;
+		}
 	
-	public List<Skill> getSkills(){
-		return acquiredSkills;
-	}
+		public List<Skill> getSkills ()
+		{
+				return acquiredSkills;
+		}
 	
-	public int getCurrentAP(){
-		return currAP;
-	}
+		public int getCurrentAP ()
+		{
+				return currAP;
+		}
 	
-	public int getCurrentMP(){
-		return currMP;
-	}
+		public int getCurrentMP ()
+		{
+				return currMP;
+		}
 }
