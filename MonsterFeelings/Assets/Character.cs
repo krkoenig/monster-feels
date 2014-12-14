@@ -130,9 +130,9 @@ public class Character : MonoBehaviour
 				hpText.AddComponent<TextMesh> ();
 				hpText.GetComponent<TextMesh> ().text = hp.ToString ();
 				hpText.GetComponent<TextMesh> ().anchor = TextAnchor.LowerLeft;
-				hpText.GetComponent<TextMesh> ().font = Resources.Load<Font> ("Arial");
+				hpText.GetComponent<TextMesh> ().font = Resources.Load<Font> ("Fonts/Arial");
 				hpText.GetComponent<TextMesh> ().color = Color.white;
-				hpText.GetComponent<MeshRenderer> ().material = Resources.Load<Font> ("Arial").material;
+				hpText.GetComponent<MeshRenderer> ().material = Resources.Load<Font> ("Fonts/Arial").material;
 				hpText.transform.position = new Vector3 (transform.position.x + 0.3f, transform.position.y, -2);
 				hpText.transform.localScale = new Vector3 (0.25f, 0.25f, 0.1f);
 		}
