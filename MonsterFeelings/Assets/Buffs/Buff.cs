@@ -5,11 +5,13 @@ using System.Collections.Generic;
 abstract public class Buff
 {
 		// The number of rounds left for the buff.
-		protected int activeTime;
+		public int activeTime;
 
 		// true: is a buff
 		// false: is a debuff
 		protected bool isGood;
+
+		protected string name;
 
 		// The owner of the buff.
 		protected Character owner;
@@ -43,6 +45,18 @@ abstract public class Buff
 								isGood = !isGood;
 						}
 				}
+		}
+
+		public string getPath ()
+		{
+				string path = "Icons/16x16/";
+				if (isGood) {
+						path += "Buff/";
+				} else {
+						path += "Debuff/";
+				}
+				path += name;
+				return path;
 		}
 
 		abstract public void calculate ();

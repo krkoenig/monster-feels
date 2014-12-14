@@ -16,6 +16,7 @@ public class ShieldBuff : Buff
 		public ShieldBuff (bool isGood, int duration, Character owner, Character caster) : base (isGood, duration, owner)
 		{
 				this.caster = caster;
+				name = "shield";
 		}
 	
 		public override void calculate ()

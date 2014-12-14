@@ -13,7 +13,7 @@ public class PDefBuff : Buff
 {
 		public PDefBuff (bool isGood, int duration, Character owner) : base (isGood, duration, owner)
 		{
-
+				name = "pDef";
 		}
 
 		public override void calculate ()

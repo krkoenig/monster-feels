@@ -13,7 +13,7 @@ public class DmgBuff : Buff
 {
 		public DmgBuff (bool isGood, int duration, Character owner) : base (isGood, duration, owner)
 		{
-		
+				name = "dmg";
 		}
 	
 		public override void calculate ()

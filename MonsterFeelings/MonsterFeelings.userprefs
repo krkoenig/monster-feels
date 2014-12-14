@@ -1,9 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Skills\Skill.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Character.cs">
     <Files>
-      <File FileName="Assets\Skills\Skill.cs" Line="136" Column="1" />
-      <File FileName="Assets\Queue.cs" Line="79" Column="2" />
+      <File FileName="Assets\Character.cs" Line="198" Column="98" />
+      <File FileName="Assets\Queue.cs" Line="64" Column="4" />
+      <File FileName="Assets\Controls.cs" Line="117" Column="6" />
+      <File FileName="Assets\Buffs\Buff.cs" Line="6" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

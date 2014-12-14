@@ -7,6 +7,7 @@ public class StealthBuff : Buff
 		public StealthBuff (bool isGood, int duration, Character owner, int timesUpgraded) : base (isGood, duration, owner)
 		{
 				this.timesUpgraded = timesUpgraded;
+				name = "stealth";
 		}
 	
 		public override void calculate ()

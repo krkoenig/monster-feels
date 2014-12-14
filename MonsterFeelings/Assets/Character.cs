@@ -85,6 +85,7 @@ public class Character : MonoBehaviour
 		private GameObject damageSquare;
 		
 		private GameObject hpText;
+		private List<GameObject> buffIcons;
 
 		// Use this for initialization
 		void Start ()
@@ -136,6 +137,8 @@ public class Character : MonoBehaviour
 				hpText.GetComponent<MeshRenderer> ().material = Resources.Load<Font> ("Fonts/Arial").material;
 				hpText.transform.position = new Vector3 (transform.position.x + 0.3f, transform.position.y, -2);
 				hpText.transform.localScale = new Vector3 (0.25f, 0.25f, 0.1f);
+
+				buffIcons = new List<GameObject> ();
 		}
 	
 		// Update is called once per frame
@@ -150,7 +153,9 @@ public class Character : MonoBehaviour
 				hpText.GetComponent<TextMesh> ().text = hp.ToString ();	
 				hpText.transform.position = new Vector3 (transform.position.x + 0.3f, transform.position.y, -2);
 		
-		
+				for (float i = 0; i < buffIcons.Count; i++) {
+						buffIcons [(int)i].transform.position = new Vector3 (transform.position.x + (i * 0.25f), transform.position.y + 0.75f, -2);
+				}
 		
 		}
 
@@ -183,8 +188,11 @@ public class Character : MonoBehaviour
 								b.calculate ();
 						}
 				}
-		}
 
+				buffDraw ();
+
+		}
+	
 		// Call when a skill is used or the turn is over.
 		public void endMovement ()
 		{
@@ -422,6 +430,12 @@ public class Character : MonoBehaviour
 		// Adds a buff to the buff list.
 		public void addBuff (Buff buff)
 		{
+				foreach (GameObject g in buffIcons) {
+						Destroy (g);
+				}
+				buffIcons.Clear ();
+
+
 				bool buffExists = false;
 				Type buffType = buff.GetType ();
 				foreach (Buff b in buffs) {
@@ -429,8 +443,9 @@ public class Character : MonoBehaviour
 								b.addTime (buff);
 								buffExists = true;
 						}
+		
 				}
-
+		
 				if (!buffExists) {
 						buffs.Add (buff);
 						calculateStats ();
@@ -438,8 +453,29 @@ public class Character : MonoBehaviour
 								b.calculate ();
 						}
 				}
+
+				buffDraw ();
 		}
+
+		private void buffDraw ()
+		{
+				foreach (GameObject g in buffIcons) {
+						Destroy (g);
+				}
+				buffIcons.Clear ();
 		
+		
+				foreach (Buff b in buffs) {
+						buffIcons.Add (new GameObject ());
+						buffIcons [buffIcons.Count - 1].AddComponent<SpriteRenderer> ();
+						buffIcons [buffIcons.Count - 1].GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> (b.getPath ());
+				}
+
+				for (float i = 0; i < buffIcons.Count; i++) {
+						buffIcons [(int)i].transform.position = new Vector3 (transform.position.x + (i * 0.25f), transform.position.y + 0.75f, -2);
+				}
+		}
+	
 		private void setClass ()
 		{
 				switch (charClass) {

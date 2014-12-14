@@ -13,7 +13,7 @@ public class PAtkBuff : Buff
 {
 		public PAtkBuff (bool isGood, int duration, Character owner) : base (isGood, duration, owner)
 		{
-
+				name = "pAtk";
 		}
 
 		public override void calculate ()
