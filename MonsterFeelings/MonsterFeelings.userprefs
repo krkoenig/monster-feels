@@ -1,15 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Character.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Skills\Assault.cs">
     <Files>
-      <File FileName="Assets\TileMap.cs" Line="126" Column="1" />
-      <File FileName="Assets\Tile.cs" Line="59" Column="1" />
-      <File FileName="Assets\Queue.cs" Line="73" Column="12" />
-      <File FileName="Assets\Controls.cs" Line="1" Column="1" />
-      <File FileName="Assets\Character.cs" Line="124" Column="45" />
-      <File FileName="Assets\Skills\Skill.cs" Line="149" Column="2" />
-      <File FileName="Assets\Skills\Slash.cs" Line="34" Column="2" />
-      <File FileName="Assets\Menu_GUI_1.cs" Line="23" Column="35" />
+      <File FileName="Assets\Skills\ArcaneBrilliance.cs" Line="14" Column="72" />
+      <File FileName="Assets\Skills\Assault.cs" Line="14" Column="63" />
+      <File FileName="Assets\Skills\DefensiveStance.cs" Line="14" Column="64" />
+      <File FileName="Assets\Skills\MagicMissile.cs" Line="14" Column="66" />
+      <File FileName="Assets\Skills\ManaShield.cs" Line="14" Column="66" />
+      <File FileName="Assets\Skills\PowerAttack.cs" Line="15" Column="70" />
+      <File FileName="Assets\Skills\RoguesMark.cs" Line="14" Column="64" />
+      <File FileName="Assets\Skills\Slash.cs" Line="14" Column="63" />
+      <File FileName="Assets\Skills\Stealth.cs" Line="7" Column="39" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

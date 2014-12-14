@@ -459,4 +459,21 @@ public class Character : MonoBehaviour
 		{
 				return currentTile.getPosition ();
 		}
+
+	
+	public String getClass(){
+		return charClass;
+	}
+	
+	public List<Skill> getSkills(){
+		return acquiredSkills;
+	}
+	
+	public int getCurrentAP(){
+		return currAP;
+	}
+	
+	public int getCurrentMP(){
+		return currMP;
+	}
 }
