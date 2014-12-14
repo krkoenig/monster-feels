@@ -52,6 +52,11 @@ public class SkillMap
 
 				return acquired;
 		}
+		
+		public void acquireSkill (int i)
+		{
+				skills [i] .isAcquired = true;
+		}
 }
 
 

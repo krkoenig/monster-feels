@@ -65,9 +65,15 @@ public class Queue
 				foreach (Character c in toSort) {
 						characters.AddFirst (c);
 				}
+		}
 		
-				
-		
+		public void removeDead ()
+		{
+				foreach (Character c in characters) {
+						if (c == null) {
+								characters.Remove (c);
+						}
+				}
 		}
 
 }

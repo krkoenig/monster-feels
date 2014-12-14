@@ -11,6 +11,7 @@ public class ManaShield : Skill
 				id = 4; // do
 				apCost = 3;
 				updateRange ();
+		icon = (Texture2D)Resources.Load ("Icons/Skill/mage/mana-shield");
 		}
 	
 		// Updates the range to:

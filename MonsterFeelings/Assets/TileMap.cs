@@ -117,7 +117,7 @@ public class TileMap : MonoBehaviour
 		// Used when asking for data of a single tile.
 		public Tile getTile (int x, int y)
 		{
-			return tiles [x, y];
+				return tiles [x, y];
 		}		
 }
 

@@ -27,6 +27,8 @@ abstract public class Skill
 		// The ap cost of the skill.
 		protected int apCost;
 
+	protected Texture2D icon;
+
 		public Skill (Character user)
 		{
 				timesUpgraded = 0;
@@ -125,6 +127,10 @@ abstract public class Skill
 						return false;
 				}	
 		}
+
+	public Texture2D getIcon(){
+		return icon;
+	}
 }
 
 abstract public class OffensiveSkill : Skill
