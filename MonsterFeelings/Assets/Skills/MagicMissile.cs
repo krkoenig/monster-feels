@@ -11,6 +11,7 @@ public class MagicMissile : OffensiveSkill
 				id = 3; // do
 				range = 5;
 				apCost = 2;
+		icon = (Texture2D)Resources.Load("Icons/Skill/mage/Magic-Missile");
 		}
 		
 		public override void showSkill ()

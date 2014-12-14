@@ -80,11 +80,6 @@ public class Character : MonoBehaviour
 
 		private TileMap tileMap;
 		private Tile currentTile;
-		
-		private DateTime damageInstance;
-		private GameObject damageSquare;
-		
-		private GameObject hpText;
 
 		// Use this for initialization
 		void Start ()
@@ -98,8 +93,6 @@ public class Character : MonoBehaviour
 
 				calculateStats ();
 				hp = 5 * vitality;
-				
-				
 
 				// Set the character to have full MP and AP.		
 				currMP = TOT_MP;
@@ -123,34 +116,13 @@ public class Character : MonoBehaviour
 				
 				// No character starts ignoring terrain.
 				isStealthed = false;
-				
-				setClass ();
-				
-				hpText = new GameObject ();
-				hpText.AddComponent<TextMesh> ();
-				hpText.GetComponent<TextMesh> ().text = hp.ToString ();
-				hpText.GetComponent<TextMesh> ().anchor = TextAnchor.LowerLeft;
-				hpText.GetComponent<TextMesh> ().font = Resources.Load<Font> ("Fonts/Arial");
-				hpText.GetComponent<TextMesh> ().color = Color.white;
-				hpText.GetComponent<MeshRenderer> ().material = Resources.Load<Font> ("Fonts/Arial").material;
-				hpText.transform.position = new Vector3 (transform.position.x + 0.3f, transform.position.y, -2);
-				hpText.transform.localScale = new Vector3 (0.25f, 0.25f, 0.1f);
 		}
 	
 		// Update is called once per frame
 		void Update ()
 		{
-				if (damageInstance != null) {
-						if (DateTime.Now.Subtract (damageInstance).Milliseconds > 500 && damageSquare != null) {
-								Destroy (damageSquare);
-						}
-				}	
-
-				hpText.GetComponent<TextMesh> ().text = hp.ToString ();	
-				hpText.transform.position = new Vector3 (transform.position.x + 0.3f, transform.position.y, -2);
-		
-		
-		
+				// @ TODO
+				// Check for levelup.
 		}
 
 		// Call whenever the turn is ending.
@@ -354,23 +326,7 @@ public class Character : MonoBehaviour
 
 		
 				hp -= damage;
-				showDamage ();
 				checkDead ();
-				
-		}
-		
-		private void showDamage ()
-		{
-				damageInstance = DateTime.Now;
-				if (damageSquare != null) {
-						Destroy (damageSquare);
-				}
-				damageSquare = GameObject.CreatePrimitive (PrimitiveType.Quad);
-				damageSquare.renderer.material.color = new Color (255, 0, 0, .25f);
-				damageSquare.renderer.material.shader = Shader.Find ("Transparent/Diffuse");
-				damageSquare.transform.localScale = new Vector3 (1f, 1f, 1f);
-				damageSquare.transform.position = new Vector3 (transform.position.x + .5f, transform.position.y + .5f, -1);
-		
 		}
 		
 		// Removes stealth from the user.
@@ -392,12 +348,11 @@ public class Character : MonoBehaviour
 		// Checks to see if the character has 0 or less life
 		// and handles all dieing information.
 		private void checkDead ()
-		{		
+		{
+				Debug.Log (hp + " HP");
+		
 				if (hp <= 0) {
-						currentTile.setOccupant (null);
-						Destroy (damageSquare);
-						Destroy (hpText);
-						Destroy (gameObject);
+						Debug.Log ("DEAD!");
 				}
 		
 		}
@@ -438,25 +393,26 @@ public class Character : MonoBehaviour
 						}
 				}
 		}
-		
-		private void setClass ()
-		{
-				switch (charClass) {
-				case "rogue":
-						skillMap.acquireSkill (3);
-						break;
-				case "fighter":
-						skillMap.acquireSkill (0);
-						break;
-				case "mage":
-						skillMap.acquireSkill (6);
-						break;
-				}
-		}
 
 		// Returns the poisition of the character
 		public Vector3 getPosition ()
 		{
 				return currentTile.getPosition ();
+		}
+
+		public String getClass(){
+			return charClass;
+		}
+
+		public List<Skill> getSkills(){
+			return acquiredSkills;
+		}
+
+		public int getCurrentAP(){
+			return currAP;
+		}
+
+		public int getCurrentMP(){
+			return currMP;
 		}
 }

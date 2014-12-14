@@ -11,6 +11,7 @@ public class DefensiveStance : Skill
 				id = 2;
 				range = 0;
 				apCost = 4;
+		icon = (Texture2D)Resources.Load("Icons/Skill/fighter/Defensive-stance");
 		}
 
 		// Use the skill

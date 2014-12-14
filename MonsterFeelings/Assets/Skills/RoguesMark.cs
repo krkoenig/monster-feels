@@ -11,6 +11,7 @@ public class RoguesMark : Skill
 				id = 4; // do
 				updateRange ();
 				updateAPCost ();
+		icon = (Texture2D)Resources.Load ("Icons/Skill/rogue/Rogue's-Mark");
 		}
 	
 		// Updates the range to:

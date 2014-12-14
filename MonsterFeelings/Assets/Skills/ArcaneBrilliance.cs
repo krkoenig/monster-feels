@@ -11,6 +11,7 @@ public class ArcaneBrilliance : OffensiveSkill
 				id = 4; // do
 				apCost = 4;
 				range = 0;
+				icon = (Texture2D)Resources.Load ("Icons/Skill/mage/Arcane-Brilliance");
 		}
 	
 		// Use the skill
