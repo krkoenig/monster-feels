@@ -1,16 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Controls.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Character.cs">
     <Files>
-      <File FileName="Assets\Menus\CreateMenu\CreateScript.cs" Line="54" Column="3" />
-      <File FileName="MonsterFeelings.sln" Line="1" Column="1" />
-      <File FileName="Assets\ComboBox.cs" Line="1" Column="1" />
-      <File FileName="Assets\Menus\MainMenu\MenuScript.cs" Line="14" Column="122" />
-      <File FileName="Assets\Queue.cs" Line="46" Column="33" />
-      <File FileName="Assets\Character.cs" Line="404" Column="4" />
-      <File FileName="Assets\Controls.cs" Line="92" Column="20" />
-      <File FileName="Assets\Skills\Skill.cs" Line="155" Column="2" />
-      <File FileName="Assets\Skills\Stealth.cs" Line="20" Column="3" />
+      <File FileName="Assets\TileMap.cs" Line="126" Column="1" />
+      <File FileName="Assets\Tile.cs" Line="59" Column="1" />
+      <File FileName="Assets\Queue.cs" Line="73" Column="12" />
+      <File FileName="Assets\Controls.cs" Line="1" Column="1" />
+      <File FileName="Assets\Character.cs" Line="124" Column="45" />
+      <File FileName="Assets\Skills\Skill.cs" Line="149" Column="2" />
+      <File FileName="Assets\Skills\Slash.cs" Line="34" Column="2" />
+      <File FileName="Assets\Menu_GUI_1.cs" Line="23" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

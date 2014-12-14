@@ -11,7 +11,6 @@ public class Stealth : Skill
 		id = 5; // do
 		range = 0;
 		apCost = 4;
-		icon = (Texture2D)Resources.Load ("Icons/Skill/rogue/Stealth");
 	}
 	
 	public override void showSkill ()

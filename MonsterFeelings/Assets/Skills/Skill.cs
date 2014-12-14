@@ -27,8 +27,6 @@ abstract public class Skill
 		// The ap cost of the skill.
 		protected int apCost;
 
-		public Texture2D icon;
-
 		public Skill (Character user)
 		{
 				timesUpgraded = 0;
@@ -102,10 +100,6 @@ abstract public class Skill
 				if (timesUpgraded < 2) {
 						timesUpgraded++;
 				}
-		}
-
-		public Texture2D getIcon(){
-		return icon;
 		}
 
 		// Creates the quads for showing the range.

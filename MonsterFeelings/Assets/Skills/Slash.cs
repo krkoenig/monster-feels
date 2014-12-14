@@ -11,7 +11,6 @@ public class Slash : OffensiveSkill
 				id = 0;
 				range = 1;
 				apCost = 2;
-				icon = (Texture2D)Resources.Load ("Icons/Skill/fighter/Slash");
 		}
 
 		// Use the skill

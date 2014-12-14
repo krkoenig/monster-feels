@@ -12,7 +12,7 @@ public class PowerAttack : OffensiveSkill
 				id = 1;
 				range = 1;
 				apCost = 4;
-		icon = (Texture2D)Resources.Load ("Icons/Skill/fighter/Power-Attack");
+
 		}
 
 		// Use the skill

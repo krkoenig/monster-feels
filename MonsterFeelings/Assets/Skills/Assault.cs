@@ -11,7 +11,6 @@ public class Assault : OffensiveSkill
 				id = 3; // do
 				updateRange ();
 				apCost = 2;
-				icon = (Texture2D)Resources.Load ("Icons/Skill/rogue/Assault");
 		}
 		
 		// Updates the range to:

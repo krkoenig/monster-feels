@@ -10,7 +10,6 @@ public class ManaShield : Skill
 				path = new List<int> () {3}; // do
 				id = 4; // do
 				apCost = 3;
-		icon = (Texture2D)Resources.Load ("Icons/Skill/mage/Mana-Shield");
 				updateRange ();
 		}
 	
