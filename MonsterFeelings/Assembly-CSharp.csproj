@@ -56,6 +56,7 @@
      <Compile Include="Assets\Buffs\StealthBuff.cs" />
      <Compile Include="Assets\CameraController.cs" />
      <Compile Include="Assets\Character.cs" />
+     <Compile Include="Assets\ComboBox.cs" />
      <Compile Include="Assets\Controls.cs" />
      <Compile Include="Assets\Items\Consumable.cs" />
      <Compile Include="Assets\Items\Equipment.cs" />
@@ -64,6 +65,7 @@
      <Compile Include="Assets\Menu_GUI.cs" />
      <Compile Include="Assets\Menu_GUI_1.cs" />
      <Compile Include="Assets\Menu_GUI_2.cs" />
+     <Compile Include="Assets\Menus\CreateMenu\CreateScript.cs" />
      <Compile Include="Assets\Menus\MainMenu\MenuScript.cs" />
      <Compile Include="Assets\Pathfinding.cs" />
      <Compile Include="Assets\Queue.cs" />
@@ -78,6 +80,7 @@
      <Compile Include="Assets\Skills\Skill.cs" />
      <Compile Include="Assets\Skills\Slash.cs" />
      <Compile Include="Assets\Skills\Stealth.cs" />
+     <Compile Include="Assets\StoryIntroduction.cs" />
      <Compile Include="Assets\Tile.cs" />
      <Compile Include="Assets\TileMap.cs" />
      <None Include="Assets\Art\environment\Terrain Notes.txt" />
