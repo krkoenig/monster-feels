@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Controls : MonoBehaviour
+public class Controls : MonoBehavior
 {
 		
 		public Queue queue;
@@ -91,33 +91,31 @@ public class Controls : MonoBehaviour
 						}
 				}
 				//list active character's skills if it's not an enemy
-				if (chars [0].isAlly == true) {
-						for (int i = 0; i < 9; i++) {
-								if (i < chars [0].getSkills ().Count) {
-										tex = chars [0].getSkills () [i].getIcon ();
-										GUI.DrawTexture (new Rect ((i + 6) * 64, 0, 64, 64), tex);
-								}
-								//list AP and MP
-								if (i == 5) {
-										int ap = chars [0].getCurrentAP ();
-										int mp = chars [0].getCurrentMP ();
-										GUI.TextArea (new Rect ((i + 6) * 64, 0, 64, 64), "AP: " + ap + " MP: " + mp);
-								}
-								if (i == 6) {
-										int physAtk = chars [0].pAtk;
-										int physDef = chars [0].pDef;
-										GUI.TextArea (new Rect ((i + 6) * 64, 0, 64, 64), "PhysAtk: " + physAtk + " PhysDef: " + physDef);
-								}
-								if (i == 7) {
-										int magAtk = chars [0].mAtk;
-										int magDef = chars [0].mDef;
-										GUI.TextArea (new Rect ((i + 6) * 64, 0, 64, 64), "MagAtk: " + magAtk + " MagDef: " + magDef);
-								}
-								if (i == 8) {
-										int shield = chars [0].shield;
-										if (shield > 0) {
-												GUI.TextArea (new Rect ((i + 6) * 64, 0, 64, 64), "Shield: " + shield);
-										}
+				for (int i = 0; i < 9; i++) {
+						if (i < chars [0].getSkills ().Count) {
+								tex = chars [0].getSkills () [i].getIcon ();
+								GUI.DrawTexture (new Rect ((i + 6) * 64, 0, 64, 64), tex);
+						}
+						//list AP and MP
+						if (i == 5) {
+								int ap = chars [0].getCurrentAP ();
+								int mp = chars [0].getCurrentMP ();
+								GUI.TextArea (new Rect ((i + 6) * 64, 0, 64, 64), "AP: " + ap + " MP: " + mp);
+						}
+						if (i == 6) {
+								int physAtk = chars [0].pAtk;
+								int physDef = chars [0].pDef;
+								GUI.TextArea (new Rect ((i + 6) * 64, 0, 64, 64), "PhysAtk: " + physAtk + " PhysDef: " + physDef);
+						}
+						if (i == 7) {
+								int magAtk = chars [0].mAtk;
+								int magDef = chars [0].mDef;
+								GUI.TextArea (new Rect ((i + 6) * 64, 0, 64, 64), "MagAtk: " + magAtk + " MagDef: " + magDef);
+						}
+						if (i == 8) {
+								int shield = chars [0].shield;
+								if (shield > 0) {
+										GUI.TextArea (new Rect ((i + 6) * 64, 0, 64, 64), "Shield: " + shield);
 								}
 						}
 				}
