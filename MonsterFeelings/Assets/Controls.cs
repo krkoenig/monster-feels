@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Controls : MonoBehaviour
 {
 		
-		private Queue queue;
+		public Queue queue;
 		private TileMap tileMap;
 		public  GUISkin  newSkin;
 	
