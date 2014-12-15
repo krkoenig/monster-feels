@@ -407,6 +407,10 @@ public class Character : MonoBehaviour
 						currentTile.setOccupant (null);
 						Destroy (damageSquare);
 						Destroy (hpText);
+						foreach (GameObject g in buffIcons) {
+								Destroy (g);
+						}
+						buffIcons.Clear ();
 						Destroy (gameObject);
 				}
 		
@@ -431,31 +435,33 @@ public class Character : MonoBehaviour
 		// Adds a buff to the buff list.
 		public void addBuff (Buff buff)
 		{
-				foreach (GameObject g in buffIcons) {
-						Destroy (g);
-				}
-				buffIcons.Clear ();
-
-
-				bool buffExists = false;
-				Type buffType = buff.GetType ();
-				foreach (Buff b in buffs) {
-						if (b.GetType () == buffType) {
-								b.addTime (buff);
-								buffExists = true;
+				if (hp > 0) {
+						foreach (GameObject g in buffIcons) {
+								Destroy (g);
 						}
-		
-				}
-		
-				if (!buffExists) {
-						buffs.Add (buff);
-						calculateStats ();
+						buffIcons.Clear ();
+
+
+						bool buffExists = false;
+						Type buffType = buff.GetType ();
 						foreach (Buff b in buffs) {
-								b.calculate ();
+								if (b.GetType () == buffType) {
+										b.addTime (buff);
+										buffExists = true;
+								}
+		
 						}
-				}
+		
+						if (!buffExists) {
+								buffs.Add (buff);
+								calculateStats ();
+								foreach (Buff b in buffs) {
+										b.calculate ();
+								}
+						}
 
-				buffDraw ();
+						buffDraw ();
+				}
 		}
 
 		private void buffDraw ()

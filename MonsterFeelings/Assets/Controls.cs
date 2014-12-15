@@ -75,22 +75,14 @@ public class Controls : MonoBehaviour
 		{
 				queue.removeDead ();
 
-				GUI.skin = newSkin;
+				GUI.skin.box.normal.background = Resources.Load<Texture2D> ("GUISkin/GUISkin");	
 				// Make a background box
 				GUI.Box (new Rect (0, 0, Screen.width, 64), "");
 
 				List<Character> chars = queue.listAll ();
-				for (int i = 0; i < chars.Count; i++) {
-						if (i * 64 <= Screen.width) {
-								Texture t = chars [i].GetComponent<SpriteRenderer> ().sprite.texture;
-								GUI.DrawTexture (new Rect (i * 64, 0, 64, 64), t);
-						}
-				}
 
-				int difference = 5 - chars [0].getSkills ().Count;
 				Texture2D tex;
-				string charClass = chars [0].getClass ();
-		
+
 				//make initiative queue of next 5 people
 				for (int i = 0; i < 5; i++) {
 						if (i * 64 <= Screen.width) {	
