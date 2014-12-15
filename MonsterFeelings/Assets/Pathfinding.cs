@@ -27,11 +27,11 @@ public class Pathfinding : MonoBehaviour {
 		Tile right = tiley.getTile (xcoord + 1, ycoord); //to the right
 		Tile bot = tiley.getTile (xcoord, ycoord - 1); //underneath
 		Tile left = tiley.getTile (xcoord - 1, ycoord); //to the left
-
-		Tile target = origin; //its where the nearest enemy is.  by default its the tile the character starts on
+		Character blank = new Character ();
+		//Tile target = origin; //its where the nearest enemy is.  by default its the tile the character starts on
 		Tile iter; //an iterator tile to reference
 		bool found = false;
-		LinkedList<Tile> listy;
+		LinkedList<Tile> listy = new LinkedList<Tile>();
 		//i need to search in a diamond pattern in a growing radius around the origin
 		for (int i = 0; i < MP + 1; i++) 
 		{ 	//for all the tiles in a radius 'i' around the origin
@@ -43,7 +43,7 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x + k, (int)iter.getPosition().y + k);
 
-					if (iter.getOccupant() != null && found == false)
+					if (iter.getOccupant() != blank && found == false)
 					{
 						if (iter.getOccupant().isAlly == false)
 						{
@@ -59,7 +59,7 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x - k, (int)iter.getPosition().y + k);
 					
-					if (iter.getOccupant() != null && found == false)
+					if (iter.getOccupant() != blank && found == false)
 					{
 						if (iter.getOccupant().isAlly == false)
 						{
@@ -112,10 +112,11 @@ public class Pathfinding : MonoBehaviour {
 		Tile right = tiley.getTile (xcoord + 1, ycoord); //to the right
 		Tile bot = tiley.getTile (xcoord, ycoord - 1); //underneath
 		Tile left = tiley.getTile (xcoord - 1, ycoord); //to the left
-		LinkedList<Tile> listy;
-		Tile target = origin; //its where the nearest enemy is.  by default its the tile the character starts on
+		LinkedList<Tile> listy = new LinkedList<Tile>();
+		//Tile target = origin; //its where the nearest enemy is.  by default its the tile the character starts on
 		Tile iter; //an iterator tile to reference
 		bool found = false;
+		Character blank = new Character ();
 		//i need to search in a diamond pattern in a growing radius around the origin
 		int i = MP;
 		while (found == false) 
@@ -127,7 +128,7 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x + k, (int)iter.getPosition().y + k);
 					
-					if (iter.getOccupant() != null && found == false)
+					if (iter.getOccupant() != blank && found == false)
 					{
 						if (iter.getOccupant().isAlly == false)
 						{
@@ -144,7 +145,7 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x - k, (int)iter.getPosition().y + k);
 					
-					if (iter.getOccupant() != null && found == false)
+					if (iter.getOccupant() != blank && found == false)
 					{
 						if (iter.getOccupant().isAlly == false)
 						{
@@ -160,7 +161,7 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x - k, (int)iter.getPosition().y + k);
 					
-					if (iter.getOccupant() != null && found == false)
+					if (iter.getOccupant() != blank && found == false)
 					{
 						if (iter.getOccupant().isAlly == false)
 						{
@@ -176,7 +177,7 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x - k, (int)iter.getPosition().y + k);
 					
-					if (iter.getOccupant() != null && found == false)
+					if (iter.getOccupant() != blank && found == false)
 					{
 						if (iter.getOccupant().isAlly == false)
 						{
@@ -189,115 +190,153 @@ public class Pathfinding : MonoBehaviour {
 		return listy;
 	}
 
-	private struct Path
+	public struct Path
 	{
-		private LinkedList<Tile> route;
-		private int cost;
+		public LinkedList<Tile> route;
+		public int cost;
+
+		public Path(LinkedList<Tile> rout, int cos)
+		{
+			route = rout;
+			cost = cos;
+		}
+		public void addition(Tile til)
+		{
+			route.AddLast (til);
+		}
+		public void addcost(int co)
+		{
+			cost = cost + co;
+		}
 	}
 
-	void pathfind(Tile origin, LinkedList<Tile> listy, int MP)
+	ArrayList pathfind(Tile origin, LinkedList<Tile> listy, int MP)
 	{
-		int xcoord = (int)origin.getPosition ().x;
-		int ycoord = (int)origin.getPosition ().y;
-		Tile up = tiley.getTile (xcoord, ycoord + 1);//TileMap.getTile(xcoord, ycoord); // = origin.getPosition ();
-		Tile right = tiley.getTile (xcoord + 1, ycoord); //to the right
-		Tile bot = tiley.getTile (xcoord, ycoord - 1); //underneath
-		Tile left = tiley.getTile (xcoord - 1, ycoord); //to the left
-		//LinkedList<Path> Paths; //this will hold all the paths, from closest to farthest kinda
-		Path pathss = new Path();
-
+//		int xcoord = (int)origin.getPosition ().x;
+//		int ycoord = (int)origin.getPosition ().y;
+//		Tile up = tiley.getTile (xcoord, ycoord + 1);//TileMap.getTile(xcoord, ycoord); // = origin.getPosition ();
+//		Tile right = tiley.getTile (xcoord + 1, ycoord); //to the right
+//		Tile bot = tiley.getTile (xcoord, ycoord - 1); //underneath
+//		Tile left = tiley.getTile (xcoord - 1, ycoord); //to the left
+		//LinkedList<Path> Paths = new LinkedList<Path>(); //this will hold all the paths, from closest to farthest kinda
+		ArrayList Paths = new ArrayList();
+		Character blank = new Character ();
 
 		foreach(Tile tyler in listy)
 		{
-			//int newx = Math.Abs(tyler.getPosition().x - origin.getPosition().x);
-			//int newy = Math.Abs(tyler.getPosition().y - origin.getPosition().y);
-			int[][] costs = tiley.getTileGrid();
-			//2d arraylist
-			//sort put these into their spots
-			//then do a for loop trying different combinations, save the best combination
-			/*
-			for (int i = 0; i < abs(tyler.getPosition().x - origin.getPosition().x) + 1; i++)
+			Tile iter = origin;
+			Path poth = new Path();
+			//each tile has a g value and an h value.
+			//the g value is the cost of moving to that square.
+			//the h value is the theoretical cost of moving to the goal
+			//add those together to get the f value, which is used to find the shortest path
+			for (int i = 0; i < MP; i++)
 			{
-				for (int j = 0; j < abs(tyler.getPosition().y - origin.getPosition().y) + 1; j++)
+				for (int j = 0; j < 4; j++)
 				{
-					iter = tiley.getTile(origin.getPosition().x + i, origin.getPosition().y + j);
-					costs[i][j] = iter.getMpCost;
-				}
-			} */
-			while (MP > 0)
-			{
-				Tile iter = origin;
-				//each tile has a g value and an h value.
-				//the g value is the cost of moving to that square.
-				//the h value is the theoretical cost of moving to the goal
-				//add those together to get the f value, which is used to find the shortest path
-				for (int i = 0; i < MP; i++)
-				{
-					for (int j = 0; j < 4; j++)
-					{
-						int g;
-						int h;
-						int f;
-						Tile temp;
+					int g = 0;
+					int h = 0;
+					int f = 0;
+					Tile temp = origin; //this'll get overwritten quickly, but temp has to be assigned something
 
-						if (j == 0)
+					if (j == 0)
+					{
+						iter = tiley.getTile((int)iter.getPosition().x, (int)iter.getPosition().y + 1);
+						if (iter.getOccupant() != blank)
 						{
-							iter = tiley.getTile(iter.getPosition().x, iter.getPosition.y + 1);
+							g = 9999;
+						}
+						else
+						{
 							g = iter.getMpCost();
-							h = Math.Abs (iter.getPosition().x - tyler.getPosition().x) + Math.Abs(iter.getPosition().y - tyler.getPosition().y);
-							f = g + h;
+						}
+						h = Math.Abs ((int)iter.getPosition().x - (int)tyler.getPosition().x) + Math.Abs((int)iter.getPosition().y - (int)tyler.getPosition().y);
+						f = g + h;
+						temp = iter;
+					}
+					else if (j == 1)
+					{
+						iter = tiley.getTile((int)iter.getPosition().x + 1, (int)iter.getPosition().y - 1);
+						int gtemp;
+						if (iter.getOccupant() != blank)
+						{
+							gtemp = 9999;
+						}
+						else
+						{
+							gtemp = iter.getMpCost();
+						}
+						int htemp = Math.Abs ((int)iter.getPosition().x - (int)tyler.getPosition().x) + Math.Abs((int)iter.getPosition().y - (int)tyler.getPosition().y);
+						int ftemp = gtemp + htemp;
+						if (ftemp < f)
+						{
+							g = gtemp;
+							h = htemp;
+							f = ftemp;
 							temp = iter;
 						}
-						else if (j == 1)
-						{
-							iter = tiley.getTile(iter.getPosition().x + 1, iter.getPosition.y - 1);
-							int gtemp = iter.getMpCost();
-							int htemp = Math.Abs (iter.getPosition().x - tyler.getPosition().x) + Math.Abs(iter.getPosition().y - tyler.getPosition().y);
-							int ftemp = gtemp + htemp;
-							if (ftemp < f)
-							{
-								g = gtemp;
-								h = htemp;
-								f = ftemp;
-								temp = iter;
-							}
-						}
-						else if (j == 2)
-						{
-							iter = tiley.getTile(iter.getPosition().x - 1, iter.getPosition.y - 1);
-							int gtemp = iter.getMpCost();
-							int htemp = Math.Abs (iter.getPosition().x - tyler.getPosition().x) + Math.Abs(iter.getPosition().y - tyler.getPosition().y);
-							int ftemp = gtemp + htemp;
-							if (ftemp < f)
-							{
-								g = gtemp;
-								h = htemp;
-								f = ftemp;
-								temp = iter;
-							}
-						}
-						else if (j == 3)
-						{
-							iter = tiley.getTile(iter.getPosition().x - 1, iter.getPosition.y + 1);
-							int gtemp = iter.getMpCost();
-							int htemp = Math.Abs (iter.getPosition().x - tyler.getPosition().x) + Math.Abs(iter.getPosition().y - tyler.getPosition().y);
-							int ftemp = gtemp + htemp;
-							if (ftemp < f)
-							{
-								g = gtemp;
-								h = htemp;
-								f = ftemp;
-								temp = iter;
-							}
-						}
-						//add the tile to the list (in the proper place in the arraylist), with its cost
-						//choose the path with the lowest cost
-						//pass that into the fighter ai
 					}
+					else if (j == 2)
+					{
+						iter = tiley.getTile((int)iter.getPosition().x - 1, (int)iter.getPosition().y - 1);
+						int gtemp;
+						if (iter.getOccupant() != blank)
+						{
+							gtemp = 9999;
+						}
+						else
+						{
+							gtemp = iter.getMpCost();
+						}
+						int htemp = Math.Abs ((int)iter.getPosition().x - (int)tyler.getPosition().x) + Math.Abs((int)iter.getPosition().y - (int)tyler.getPosition().y);
+						int ftemp = gtemp + htemp;
+						if (ftemp < f)
+						{
+							g = gtemp;
+							h = htemp;
+							f = ftemp;
+							temp = iter;
+						}
+					}
+					else if (j == 3)
+					{
+						iter = tiley.getTile((int)iter.getPosition().x - 1, (int)iter.getPosition().y + 1);
+						int gtemp;
+						if (iter.getOccupant() != blank)
+						{
+							gtemp = 9999;
+						}
+						else
+						{
+							gtemp = iter.getMpCost();
+						}							
+						int htemp = Math.Abs ((int)iter.getPosition().x - (int)tyler.getPosition().x) + Math.Abs((int)iter.getPosition().y - (int)tyler.getPosition().y);
+						int ftemp = gtemp + htemp;
+						if (ftemp < f)
+						{
+							g = gtemp;
+							h = htemp;
+							f = ftemp;
+							temp = iter;
+						}
+						poth.addition(temp);
+						poth.addcost(g);
+						iter = temp;
+						if (g == 2)
+						{
+							i++;
+						}
+					}
+
+					//add the tile to the list (in the proper place in the arraylist), with its cost
+					//choose the path with the lowest cost
+					//pass that into the fighter ai
 				}
+				Paths.Add(poth);
 			}
 
 		}
+		return Paths;
 	}
 
 
