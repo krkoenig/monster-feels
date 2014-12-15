@@ -7,12 +7,15 @@ public class FighterAI : MonoBehaviour
 {
 		//LinkedList<Tile> targets;
 		Pathfinding thing;
-		public Character me;
+		Character me;
 		Tile currentTile;
 		int AP;
+		int MP;
 		Tile targ;
 		Queue que;
-		TileMap tiley;
+		TileMap tiley; 
+		LinkedList<Path> paths;
+		LinkedList<Tile> theone;
 
 		void Start ()
 		{
@@ -23,41 +26,42 @@ public class FighterAI : MonoBehaviour
 		tiley = obj.GetComponent<TileMap> ();
 
 		//targets = new LinkedList<Tile> ();
-		thing = new Pathfinding ();
-		//me = new Character ();
-		currentTile = new Tile(tiley.getTile ((int)me.getPosition ().x, (int)me.getPosition().y).getPosition(), tiley.getTile((int)me.getPosition().x, (int)me.getPosition().y).getTerrain());
+		//thing = new Pathfinding ();  actually need something here
+		//thing = Pathfinding.Instantiate; this is promising
+		//me = me.getSelf ();
+		me = GetComponent <Character>();
+		thing = GetComponent<Pathfinding>();
+		currentTile = new Tile(tiley.getTile((int)me.getPosition().x, (int)me.getPosition().y).getPosition(), tiley.getTile((int)me.getPosition().x, (int)me.getPosition().y).getTerrain());
 		//tiley.getTile ((int)me.getPosition ().x, (int)me.getPosition().y)		
-		AP = me.getCurrentAP ();
-				
+		AP = me.getCurrentAP();
+		MP = me.getCurrentMP();
+		paths = new LinkedList<Path>();
+		theone = new LinkedList<Tile>();
 		}
 
 		void Update ()
 		{
 				//if its my turn
-				if (que.getActiveCharacter () == me) {
-						//Debug.Log ("My Turn!");
+				if (que.getActiveCharacter() == me) 
+				{
+					Debug.Log ("My Turn!");
 						LinkedList<Tile> options = new LinkedList<Tile> ();
 						LinkedList<Tile> blank = new LinkedList<Tile> ();
-						options = thing.close_search (currentTile, me.getCurrentMP ());
-						if (options.Equals (blank)) {
-								options = thing.far_search (currentTile, me.getCurrentMP ());
-						}
-						Movement (BestPath (thing.pathfind (currentTile, options, me.getCurrentMP ())));
+					//Debug.Log(currentTile.getPosition());
+						options = thing.far_search (currentTile, MP);  //just going to far search straight away
+						paths = thing.pathfind(currentTile, options, MP);
+						theone = BestPath (paths);
+						Movement (theone);
 						targ = wasd (currentTile);
+			Debug.Log(targ.getPosition() + " is the target");
 						if (targ != currentTile) { //finds the target; if there isn't one don't attack
 								Attack (AP, targ);
 						}
-						me.endTurn ();
+					//
+					que.nextCharacter ();	
+					que.getActiveCharacter ().endTurn ();
+			//Debug.Log("NOT ENDING");
 				}
-				//run close search
-				//if close search is blank, run far search
-				//feed the list of tiles to pathfind
-
-				//for each path in the list
-				//save the one with the lowest cost
-
-				//move the path with the lowest cost
-				//do the attack
 		}
 
 		void Attack (int AP, Tile target)
@@ -97,20 +101,25 @@ public class FighterAI : MonoBehaviour
 		void Movement (LinkedList<Tile> path)
 		{
 				foreach (Tile tyler in path) {
+			Debug.Log("walk");
 						me.move (tyler);
 						//WaitForSeconds(.5);
 				}
 		}
 
-		LinkedList<Tile> BestPath (ArrayList options)
+		LinkedList<Tile> BestPath (LinkedList<Path> options)
 		{
-				int cost = 9999;
+				int newcost = 9999;
 				LinkedList<Tile> best = new LinkedList<Tile> ();
-				foreach (Path poth in options) {
-						if (poth.cost < cost) {
-								cost = poth.cost;
-								best = poth.route;
-						}
+				foreach (Path poth in options) 
+				{
+			//Debug.Log("bleeep");
+					if (poth.cost < newcost) 
+					{
+						newcost = poth.cost;
+						best = poth.route;
+				Debug.Log(newcost + " " + best.Last.Value.getPosition());
+					}
 				}
 				return best;
 		}

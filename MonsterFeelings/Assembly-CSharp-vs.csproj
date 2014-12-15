@@ -87,6 +87,7 @@
      <Compile Include="Assets\TileMap.cs" />
      <Compile Include="Assets\Victory.cs" />
      <None Include="Assets\Resources\environment\Terrain Notes.txt" />
+     <None Include="Assets\Levels\level2\level2.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

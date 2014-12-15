@@ -524,4 +524,8 @@ public class Character : MonoBehaviour
 		{
 				return currMP;
 		}
+		public Character getSelf()
+		{
+			return this;
+		}
 }
