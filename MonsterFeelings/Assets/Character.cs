@@ -356,6 +356,7 @@ public class Character : MonoBehaviour
 								if (b is ShieldBuff) {
 										buffs.RemoveAt (i);
 								} else {
+										calculateStats ();	
 										b.calculate ();
 								}
 						}
