@@ -49,17 +49,18 @@ public class FighterAI : MonoBehaviour
 						LinkedList<Tile> blank = new LinkedList<Tile> ();
 					//Debug.Log(currentTile.getPosition());
 						options = thing.far_search (currentTile, MP);  //just going to far search straight away
-						paths = thing.pathfind(currentTile, options, MP);
+						paths = thing.finder(currentTile, options, MP);
 						theone = BestPath (paths);
 						Movement (theone);
 						targ = wasd (currentTile);
-			Debug.Log(targ.getPosition() + " is the target");
+			//Debug.Log(targ.getPosition() + " is the target");
 						if (targ != currentTile) { //finds the target; if there isn't one don't attack
 								Attack (AP, targ);
 						}
 					//
-					que.nextCharacter ();	
-					que.getActiveCharacter ().endTurn ();
+			que.getActiveCharacter ().endTurn ();
+			que.nextCharacter ();	
+
 			//Debug.Log("NOT ENDING");
 				}
 		}
@@ -100,8 +101,9 @@ public class FighterAI : MonoBehaviour
 
 		void Movement (LinkedList<Tile> path)
 		{
-				foreach (Tile tyler in path) {
-			Debug.Log("walk");
+				foreach (Tile tyler in path) 
+				{
+					//Debug.Log("walk");
 						me.move (tyler);
 						//WaitForSeconds(.5);
 				}
@@ -111,16 +113,20 @@ public class FighterAI : MonoBehaviour
 		{
 				int newcost = 9999;
 				LinkedList<Tile> best = new LinkedList<Tile> ();
+				int i = 0;
 				foreach (Path poth in options) 
 				{
-			//Debug.Log("bleeep");
+			i++;
+			Debug.Log(i + " + " + poth.cost);
+			//Debug.Log(poth.cost);
 					if (poth.cost < newcost) 
 					{
 						newcost = poth.cost;
 						best = poth.route;
-				Debug.Log(newcost + " " + best.Last.Value.getPosition());
+				//Debug.Log(newcost + " " + best.Last.Value.getPosition());
 					}
 				}
+		Debug.Log (newcost);
 				return best;
 		}
 

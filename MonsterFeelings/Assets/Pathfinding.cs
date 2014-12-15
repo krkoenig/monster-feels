@@ -89,145 +89,218 @@ public class Pathfinding : MonoBehaviour
 		return listy;
 	}
 
-	public LinkedList<Path> pathfind (Tile origin, LinkedList<Tile> listy, int MP)
+	public LinkedList<Path> finder (Tile origin, LinkedList<Tile> listy, int MP)
 	{
 		int xcoord = (int)origin.getPosition ().x;
 		int ycoord = (int)origin.getPosition ().y;
+		LinkedList<Path> Paths = new LinkedList<Path>();
 
-			LinkedList<Path> Paths = new LinkedList<Path>();
-			foreach (Tile tyler in listy) 
+
+		foreach (Tile tyler in listy)
+		{
+			Tile iter = new Tile(tiley.getTile(xcoord, ycoord).getPosition(), tiley.getTile(xcoord, ycoord).getTerrain());
+			Tile hold = new Tile(tiley.getTile(xcoord, ycoord).getPosition(), tiley.getTile(xcoord, ycoord).getTerrain());
+			Path way = new Path (3);
+			for (int i = 0; i < MP; i++)
 			{
-				Tile iter = new Tile(tiley.getTile(xcoord, ycoord).getPosition(), tiley.getTile(xcoord, ycoord).getTerrain());
-				//iter = origin;
-				Path poth = new Path (5); //it needs an integer, which doesn't do anything
-				//each tile has a g value and an h value.
-				//the g value is the cost of moving to that square.
-				//the h value is the theoretical cost of moving to the goal
-				//add those together to get the f value, which is used to find the shortest path
-				for (int i = 0; i < MP; i++) 
+				int g = 10000;
+				int h = 10000;
+				int f = 10000;
+				int gg = 0;
+				int hh = 0; 
+				int ff = 0;
+				iter = new Tile(iter.getPosition() + new Vector3(0,1,0), iter.getTerrain());
+				gg = iter.getMpCost();
+				hh = Math.Abs((int)iter.getPosition().x - (int)tyler.getPosition().x) + Math.Abs((int)iter.getPosition().y - (int)tyler.getPosition().y);
+				ff = gg + hh;
+				if (ff < f)
 				{
-				int g = 0;
-				int h = 0;
-				int f = 0;
-				Tile temp = new Tile(tiley.getTile(xcoord, ycoord).getPosition(), tiley.getTile(xcoord, ycoord).getTerrain());	
-
-				for (int j = 0; j < 4; j++) 
-					{
-//						int g = 0;
-//						int h = 0;
-//						int f = 0;
-						//Tile temp = new Tile(origin.getPosition(), origin.getTerrain());//origin; //this'll get overwritten quickly, but temp has to be assigned something
-						if (j == 0) 
-						{
-						//	Debug.Log("AAAAA");
-							//Debug.Log("j = " + j + " i = " + i + " tile = " + tyler.getPosition());
-							//iter = tiley.getTile ((int)iter.getPosition ().x, (int)iter.getPosition ().y + 1);
-						iter = new Tile(iter.getPosition() + new Vector3(0,1,0), iter.getTerrain());
-							//Debug.Log("iter position 1: " + iter.getPosition());
-							if (iter.getOccupant () != null) 
-							{
-								g = 9999;
-							} 
-							else 
-							{
-								g = iter.getMpCost ();
-							}
-							h = Math.Abs ((int)iter.getPosition ().x - (int)tyler.getPosition ().x) + Math.Abs ((int)iter.getPosition ().y - (int)tyler.getPosition ().y);
-							f = g + h;
-							temp = new Tile(iter.getPosition(), iter.getTerrain());
-						//Debug.Log("temp = " + temp.getPosition());
-						//Debug.Log("     " + g + " " + h + " " + f);
-						} 
-						else if (j == 1) 
-						{
-						iter = new Tile(iter.getPosition() + new Vector3(1,-1,0), iter.getTerrain());
-						//Debug.Log("iter position 2: " + iter.getPosition());
-							int gtemp;
-							if (iter.getOccupant () != null) 
-							{
-								gtemp = 9999;
-							} 
-							else 
-							{
-								gtemp = iter.getMpCost ();
-							}
-							int htemp = Math.Abs ((int)iter.getPosition ().x - (int)tyler.getPosition ().x) + Math.Abs ((int)iter.getPosition ().y - (int)tyler.getPosition ().y);
-							int ftemp = gtemp + htemp;
-							if (ftemp < f) 
-							{
-								g = gtemp;
-								h = htemp;
-								f = ftemp;
-								temp = new Tile(iter.getPosition(), iter.getTerrain());
-							}
-						//Debug.Log("temp = " + temp.getPosition());
-						//Debug.Log("     " + gtemp + " " + htemp + " " + ftemp);
-						} 
-						else if (j == 2) 
-						{
-						iter = new Tile(iter.getPosition() + new Vector3(-1,-1,0), iter.getTerrain());
-						//Debug.Log("iter position 3: " + iter.getPosition());
-							int gtemp;
-							if (iter.getOccupant () != null) 
-							{
-								gtemp = 9999;
-							} 
-							else 
-							{
-								gtemp = iter.getMpCost ();
-							}
-							int htemp = Math.Abs ((int)iter.getPosition ().x - (int)tyler.getPosition ().x) + Math.Abs ((int)iter.getPosition ().y - (int)tyler.getPosition ().y);
-							int ftemp = gtemp + htemp;
-							if (ftemp < f) 
-							{
-								g = gtemp;
-								h = htemp;
-								f = ftemp;
-								temp = new Tile(iter.getPosition(), iter.getTerrain());
-							}
-						//Debug.Log("temp = " + temp.getPosition());
-						//Debug.Log("     " + gtemp + " " + htemp + " " + ftemp);
-						} 
-						else if (j == 3) 
-						{
-						iter = new Tile(iter.getPosition() + new Vector3(-1,1,0), iter.getTerrain());
-						//Debug.Log("iter position 4: " + iter.getPosition());
-							int gtemp;
-							if (iter.getOccupant () != null) {
-									gtemp = 9999;
-							} else {
-									gtemp = iter.getMpCost ();
-							}							
-							int htemp = Math.Abs ((int)iter.getPosition ().x - (int)tyler.getPosition ().x) + Math.Abs ((int)iter.getPosition ().y - (int)tyler.getPosition ().y);
-							int ftemp = gtemp + htemp;
-							if (ftemp < f) 
-							{
-								g = gtemp;
-								h = htemp;
-								f = ftemp;
-								temp = new Tile(iter.getPosition(), iter.getTerrain());
-							}
-							poth.route.AddLast (temp);
-							poth.addcost (g);
-						Debug.Log(g);
-							iter = new Tile(temp.getPosition(), temp.getTerrain());
-							if (g == 2) 
-							{
-								i++;
-							}
-						//Debug.Log("     " + gtemp + " " + htemp + " " + ftemp);
-						//Debug.Log(" the winner is    " + g + " " + h + " " + f);
-						//Debug.Log("temp = " + temp.getPosition());
-						}
-
-					}
-						Paths.AddLast(poth);
-				//Debug.Log(Paths.Last.Value.cost);
+					g = gg;
+					h = hh;
+					f = ff;
+					hold = iter;
 				}
-
+				iter = new Tile(iter.getPosition() + new Vector3(1,-1,0), iter.getTerrain());
+				gg = iter.getMpCost();
+				hh = Math.Abs((int)iter.getPosition().x - (int)tyler.getPosition().x) + Math.Abs((int)iter.getPosition().y - (int)tyler.getPosition().y);
+				ff = gg + hh;
+				if (ff < f)
+				{
+					g = gg;
+					h = hh;
+					f = ff;
+					hold = iter;
+				}
+				iter = new Tile(iter.getPosition() + new Vector3(-1,-1,0), iter.getTerrain());
+				gg = iter.getMpCost();
+				hh = Math.Abs((int)iter.getPosition().x - (int)tyler.getPosition().x) + Math.Abs((int)iter.getPosition().y - (int)tyler.getPosition().y);
+				ff = gg + hh;
+				if (ff < f)
+				{
+					g = gg;
+					h = hh;
+					f = ff;
+					hold = iter;
+				}
+				iter = new Tile(iter.getPosition() + new Vector3(-1,1,0), iter.getTerrain());
+				gg = iter.getMpCost();
+				hh = Math.Abs((int)iter.getPosition().x - (int)tyler.getPosition().x) + Math.Abs((int)iter.getPosition().y - (int)tyler.getPosition().y);
+				ff = gg + hh;
+				if (ff < f)
+				{
+					g = gg;
+					h = hh;
+					f = ff;
+					hold = iter;
+				}
+				way.cost = way.cost + f;
+				way.route.AddLast(hold);
+			}
+			Paths.AddLast(way);
 		}
 		return Paths;
 	}
+
+//	public LinkedList<Path> pathfind (Tile origin, LinkedList<Tile> listy, int MP)
+//	{
+//		int xcoord = (int)origin.getPosition ().x;
+//		int ycoord = (int)origin.getPosition ().y;
+//
+//			LinkedList<Path> Paths = new LinkedList<Path>();
+//			foreach (Tile tyler in listy) 
+//			{
+//				Tile iter = new Tile(tiley.getTile(xcoord, ycoord).getPosition(), tiley.getTile(xcoord, ycoord).getTerrain());
+//				Path poth = new Path (5); //it needs an integer, which doesn't do anything
+//
+//				//iter = origin;
+//				//each tile has a g value and an h value.
+//				//the g value is the cost of moving to that square.
+//				//the h value is the theoretical cost of moving to the goal
+//				//add those together to get the f value, which is used to find the shortest path
+//				for (int i = 0; i < MP; i++) 
+//				{
+//				int g = 0;
+//				int h = 0;
+//				int f = 0;
+//				Tile temp = new Tile(tiley.getTile(xcoord, ycoord).getPosition(), tiley.getTile(xcoord, ycoord).getTerrain());	
+//
+//				for (int j = 0; j < 4; j++) 
+//					{
+////						int g = 0;
+////						int h = 0;
+////						int f = 0;
+//						//Tile temp = new Tile(origin.getPosition(), origin.getTerrain());//origin; //this'll get overwritten quickly, but temp has to be assigned something
+//						if (j == 0) 
+//						{
+//						//	Debug.Log("AAAAA");
+//							//Debug.Log("j = " + j + " i = " + i + " tile = " + tyler.getPosition());
+//							//iter = tiley.getTile ((int)iter.getPosition ().x, (int)iter.getPosition ().y + 1);
+//						iter = new Tile(iter.getPosition() + new Vector3(0,1,0), iter.getTerrain());
+//							//Debug.Log("iter position 1: " + iter.getPosition());
+//							if (iter.getOccupant () != null) 
+//							{
+//								g = 9999;
+//							} 
+//							else 
+//							{
+//								g = iter.getMpCost ();
+//							}
+//							h = Math.Abs ((int)iter.getPosition ().x - (int)tyler.getPosition ().x) + Math.Abs ((int)iter.getPosition ().y - (int)tyler.getPosition ().y);
+//							f = g + h;
+//							temp = new Tile(iter.getPosition(), iter.getTerrain());
+//						//Debug.Log("temp = " + temp.getPosition());
+//						//Debug.Log("     " + g + " " + h + " " + f);
+//						} 
+//						else if (j == 1) 
+//						{
+//						iter = new Tile(iter.getPosition() + new Vector3(1,-1,0), iter.getTerrain());
+//						//Debug.Log("iter position 2: " + iter.getPosition());
+//							int gtemp;
+//							if (iter.getOccupant () != null) 
+//							{
+//								gtemp = 9999;
+//							} 
+//							else 
+//							{
+//								gtemp = iter.getMpCost ();
+//							}
+//							int htemp = Math.Abs ((int)iter.getPosition ().x - (int)tyler.getPosition ().x) + Math.Abs ((int)iter.getPosition ().y - (int)tyler.getPosition ().y);
+//							int ftemp = gtemp + htemp;
+//							if (ftemp < f) 
+//							{
+//								g = gtemp;
+//								h = htemp;
+//								f = ftemp;
+//								temp = new Tile(iter.getPosition(), iter.getTerrain());
+//							}
+//						//Debug.Log("temp = " + temp.getPosition());
+//						//Debug.Log("     " + gtemp + " " + htemp + " " + ftemp);
+//						} 
+//						else if (j == 2) 
+//						{
+//						iter = new Tile(iter.getPosition() + new Vector3(-1,-1,0), iter.getTerrain());
+//						//Debug.Log("iter position 3: " + iter.getPosition());
+//							int gtemp;
+//							if (iter.getOccupant () != null) 
+//							{
+//								gtemp = 9999;
+//							} 
+//							else 
+//							{
+//								gtemp = iter.getMpCost ();
+//							}
+//							int htemp = Math.Abs ((int)iter.getPosition ().x - (int)tyler.getPosition ().x) + Math.Abs ((int)iter.getPosition ().y - (int)tyler.getPosition ().y);
+//							int ftemp = gtemp + htemp;
+//							if (ftemp < f) 
+//							{
+//								g = gtemp;
+//								h = htemp;
+//								f = ftemp;
+//								temp = new Tile(iter.getPosition(), iter.getTerrain());
+//							}
+//						//Debug.Log("temp = " + temp.getPosition());
+//						//Debug.Log("     " + gtemp + " " + htemp + " " + ftemp);
+//						} 
+//						else if (j == 3) 
+//						{
+//						iter = new Tile(iter.getPosition() + new Vector3(-1,1,0), iter.getTerrain());
+//						//Debug.Log("iter position 4: " + iter.getPosition());
+//							int gtemp;
+//							if (iter.getOccupant () != null) {
+//									gtemp = 9999;
+//							} else {
+//									gtemp = iter.getMpCost ();
+//							}							
+//							int htemp = Math.Abs ((int)iter.getPosition ().x - (int)tyler.getPosition ().x) + Math.Abs ((int)iter.getPosition ().y - (int)tyler.getPosition ().y);
+//							int ftemp = gtemp + htemp;
+//							if (ftemp < f) 
+//							{
+//								g = gtemp;
+//								h = htemp;
+//								f = ftemp;
+//								temp = new Tile(iter.getPosition(), iter.getTerrain());
+//							}
+//							poth.route.AddLast (temp);
+//							poth.addcost (g);
+//						//Debug.Log(temp.getPosition());
+//							iter = new Tile(temp.getPosition(), temp.getTerrain());
+//							if (g == 2) 
+//							{
+//								i++;
+//							}
+//						//Debug.Log("     " + gtemp + " " + htemp + " " + ftemp);
+//						//Debug.Log(" the winner is    " + g + " " + h + " " + f);
+//						//Debug.Log("temp = " + temp.getPosition());
+//						}
+//
+//					}
+//						Paths.AddLast(poth);
+//
+//				}
+//			Debug.Log(Paths.Last.Value.cost);
+//		}
+//		return Paths;
+//	}
 
 
 }
