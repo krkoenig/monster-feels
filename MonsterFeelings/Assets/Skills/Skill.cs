@@ -113,7 +113,7 @@ abstract public class Skill
 				quad.renderer.material.color = new Color (255, 0, 0, 0.25f);
 				quad.renderer.material.shader = Shader.Find ("Transparent/Diffuse");
 				quad.transform.localScale = new Vector3 (1f, 1f, 1f);
-				quad.transform.position = new Vector3 (user.transform.position.x - x + .5f, user.transform.position.y - y + .5f, -2);
+				quad.transform.position = new Vector3 (user.transform.position.x - x + .5f, user.transform.position.y - y + .5f, -1);
 				return quad;
 		}
 		

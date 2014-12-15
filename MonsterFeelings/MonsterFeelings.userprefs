@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Controls.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Skills\Skill.cs">
     <Files>
-      <File FileName="Assets\Controls.cs" Line="95" Column="1" />
+      <File FileName="Assets\Skills\Skill.cs" Line="103" Column="23" />
+      <File FileName="Assets\Controls.cs" Line="99" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

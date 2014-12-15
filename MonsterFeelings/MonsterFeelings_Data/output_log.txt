@@ -1,0 +1,32 @@
+Initialize engine version: 4.6.1f1 (d1db7a1b5196)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 770 (ID=0x1184)
+    Vendor:   NVIDIA
+    VRAM:     1990 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\monster-feels\MonsterFeelings\MonsterFeelings_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\monster-feels\MonsterFeelings\MonsterFeelings_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\monster-feels\MonsterFeelings\MonsterFeelings_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\monster-feels\MonsterFeelings\MonsterFeelings_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\monster-feels\MonsterFeelings\MonsterFeelings_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\monster-feels\MonsterFeelings\MonsterFeelings_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.051 seconds
+desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: D:\monster-feels\MonsterFeelings\MonsterFeelings_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\monster-feels\MonsterFeelings\MonsterFeelings_Data\Managed\System.dll (this message is harmless)
+UnloadTime: 0.670456 ms
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 164.
+Total: 1.366573 ms (FindLiveObjects: 0.032602 ms CreateObjectMapping: 0.022942 ms MarkObjects: 0.245723 ms  DeleteObjects: 0.027168 ms)
+
+UnloadTime: 0.350774 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 279.
+Total: 1.228013 ms (FindLiveObjects: 0.019319 ms CreateObjectMapping: 0.014791 ms MarkObjects: 0.202555 ms  DeleteObjects: 0.022036 ms)
+
