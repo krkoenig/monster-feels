@@ -75,7 +75,7 @@ public class Controls : MonoBehaviour
 		{
 				queue.removeDead ();
 
-				GUI.skin = newSkin;
+                GUI.skin.box.normal.background = Resources.Load<Texture2D>("GUISkin/GUISkin");	
 				// Make a background box
 				GUI.Box (new Rect (0, 0, Screen.width, 64), "");
 
