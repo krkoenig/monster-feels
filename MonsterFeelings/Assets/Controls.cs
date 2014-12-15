@@ -170,9 +170,9 @@ public class Controls : MonoBehaviour
 				}
 				
 				if (counter == 0) {
-						Application.LoadLevel (0);
+						Application.LoadLevel ("Defeat");
 				} else if (counter == chars.Count) {
-						Application.LoadLevel (0);
+						Application.LoadLevel ("victory");
 				}
 		}
 }
