@@ -18,7 +18,7 @@ public class Victory : MonoBehaviour {
 //		}
 
 		if (GUI.Button (new Rect (Screen.width / 2 - (buttonWidth / 2), (Screen.height/2 - buttonHeight)+100, buttonWidth, buttonHeight), "Next Level")) {
-			Application.LoadLevel ("MainMenu");
+			Application.LoadLevel ("Level2");
 		}
 
 		if (GUI.Button (new Rect (Screen.width / 2 - (buttonWidth / 2), (Screen.height/2 - buttonHeight)+150, buttonWidth, buttonHeight), "Main Menu")) {
