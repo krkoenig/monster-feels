@@ -17,16 +17,17 @@ public class FighterAI : MonoBehaviour
 		void Start ()
 		{
 
-				GameObject obj = GameObject.Find ("TileMap");
-				Controls controller = obj.GetComponent<Controls> ();
-				que = controller.queue;
-				tiley = obj.GetComponent<TileMap> ();
+		GameObject obj = GameObject.Find ("TileMap");
+		Controls controller = obj.GetComponent<Controls> ();
+		que = controller.queue;
+		tiley = obj.GetComponent<TileMap> ();
 
-				//targets = new LinkedList<Tile> ();
-				thing = new Pathfinding ();
-				//me = new Character ();
-				currentTile = tiley.getTile ((int)me.getPosition ().x, (int)me.getPosition ().y);
-				AP = me.getCurrentAP ();
+		//targets = new LinkedList<Tile> ();
+		thing = new Pathfinding ();
+		//me = new Character ();
+		currentTile = new Tile(tiley.getTile ((int)me.getPosition ().x, (int)me.getPosition().y).getPosition(), tiley.getTile((int)me.getPosition().x, (int)me.getPosition().y).getTerrain());
+		//tiley.getTile ((int)me.getPosition ().x, (int)me.getPosition().y)		
+		AP = me.getCurrentAP ();
 				
 		}
 
@@ -34,7 +35,7 @@ public class FighterAI : MonoBehaviour
 		{
 				//if its my turn
 				if (que.getActiveCharacter () == me) {
-						Debug.Log ("My Turn!");
+						//Debug.Log ("My Turn!");
 						LinkedList<Tile> options = new LinkedList<Tile> ();
 						LinkedList<Tile> blank = new LinkedList<Tile> ();
 						options = thing.close_search (currentTile, me.getCurrentMP ());
