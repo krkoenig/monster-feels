@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Controls : MonoBehavior
+public class Controls : MonoBehaviour
 {
 		
 		public Queue queue;
