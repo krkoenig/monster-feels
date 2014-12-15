@@ -7,8 +7,6 @@ public class Controls : MonoBehaviour
 		
 		public Queue queue;
 		private TileMap tileMap;
-		public  GUISkin  newSkin;
-	
 
 		// Use this for initialization
 		void Start ()

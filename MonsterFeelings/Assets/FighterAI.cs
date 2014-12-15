@@ -14,23 +14,27 @@ public class FighterAI : MonoBehaviour
 		Queue que;
 		TileMap tiley;
 
-		void start ()
+		void Start ()
 		{
+
+				GameObject obj = GameObject.Find ("TileMap");
+				Controls controller = obj.GetComponent<Controls> ();
+				que = controller.queue;
+				tiley = obj.GetComponent<TileMap> ();
+
 				//targets = new LinkedList<Tile> ();
 				thing = new Pathfinding ();
 				//me = new Character ();
 				currentTile = tiley.getTile ((int)me.getPosition ().x, (int)me.getPosition ().y);
 				AP = me.getCurrentAP ();
-				GameObject obj = GameObject.Find ("TileMap");
-				Controls controller = obj.GetComponent<Controls> ();
-				que = controller.queue;
-				tiley = obj.GetComponent<TileMap> ();
+				
 		}
 
-		void update ()
+		void Update ()
 		{
 				//if its my turn
 				if (que.getActiveCharacter () == me) {
+						Debug.Log ("My Turn!");
 						LinkedList<Tile> options = new LinkedList<Tile> ();
 						LinkedList<Tile> blank = new LinkedList<Tile> ();
 						options = thing.close_search (currentTile, me.getCurrentMP ());
