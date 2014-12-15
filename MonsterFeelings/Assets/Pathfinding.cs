@@ -12,14 +12,14 @@ public class Pathfinding : MonoBehaviour {
 
 
 	// Update is called once per frame
-	void Start () 
+	public void Start () 
 	{
 		GameObject obj = GameObject.Find ("TileMap");
 		tiley = obj.GetComponent<TileMap> ();
 	}
 
 	//searches within x spaces of the given tile for all enemies.
-	LinkedList<Tile> close_search (Tile origin, int MP) 
+	public LinkedList<Tile> close_search (Tile origin, int MP) 
 	{
 		int xcoord = (int)origin.getPosition ().x;
 		int ycoord = (int)origin.getPosition ().y;
@@ -27,7 +27,6 @@ public class Pathfinding : MonoBehaviour {
 		Tile right = tiley.getTile (xcoord + 1, ycoord); //to the right
 		Tile bot = tiley.getTile (xcoord, ycoord - 1); //underneath
 		Tile left = tiley.getTile (xcoord - 1, ycoord); //to the left
-		Character blank = new Character ();
 		//Tile target = origin; //its where the nearest enemy is.  by default its the tile the character starts on
 		Tile iter; //an iterator tile to reference
 		bool found = false;
@@ -43,9 +42,9 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x + k, (int)iter.getPosition().y + k);
 
-					if (iter.getOccupant() != blank && found == false)
+					if (iter.getOccupant() != null && found == false)
 					{
-						if (iter.getOccupant().isAlly == false)
+						if (iter.getOccupant().isAlly == false && iter.getOccupant().isStealthed == false)
 						{
 							listy.AddLast(iter);
 						}
@@ -59,9 +58,9 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x - k, (int)iter.getPosition().y + k);
 					
-					if (iter.getOccupant() != blank && found == false)
+					if (iter.getOccupant() != null && found == false)
 					{
-						if (iter.getOccupant().isAlly == false)
+						if (iter.getOccupant().isAlly == false && iter.getOccupant().isStealthed == false)
 						{
 							listy.AddLast(iter);
 						}
@@ -77,7 +76,7 @@ public class Pathfinding : MonoBehaviour {
 					
 					if (iter.getOccupant() != null && found == false)
 					{
-						if (iter.getOccupant().isAlly == false)
+						if (iter.getOccupant().isAlly == false && iter.getOccupant().isStealthed == false)
 						{
 							listy.AddLast(iter);
 						}
@@ -93,7 +92,7 @@ public class Pathfinding : MonoBehaviour {
 					
 					if (iter.getOccupant() != null && found == false)
 					{
-						if (iter.getOccupant().isAlly == false)
+						if (iter.getOccupant().isAlly == false && iter.getOccupant().isStealthed == false)
 						{
 							listy.AddLast(iter);
 						}
@@ -104,7 +103,7 @@ public class Pathfinding : MonoBehaviour {
 		return listy;
 	}
 
-	LinkedList<Tile> far_search (Tile origin, int MP) //will search within 25 tiles to find a target, still attempting to find the closest one
+	public LinkedList<Tile> far_search (Tile origin, int MP) //will search within 25 tiles to find a target, still attempting to find the closest one
 	{
 		int xcoord = (int)origin.getPosition ().x;
 		int ycoord = (int)origin.getPosition ().y;
@@ -116,7 +115,6 @@ public class Pathfinding : MonoBehaviour {
 		//Tile target = origin; //its where the nearest enemy is.  by default its the tile the character starts on
 		Tile iter; //an iterator tile to reference
 		bool found = false;
-		Character blank = new Character ();
 		//i need to search in a diamond pattern in a growing radius around the origin
 		int i = MP;
 		while (found == false) 
@@ -128,9 +126,9 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x + k, (int)iter.getPosition().y + k);
 					
-					if (iter.getOccupant() != blank && found == false)
+					if (iter.getOccupant() != null && found == false)
 					{
-						if (iter.getOccupant().isAlly == false)
+						if (iter.getOccupant().isAlly == false && iter.getOccupant().isStealthed == false)
 						{
 							listy.AddLast(iter);
 
@@ -145,9 +143,9 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x - k, (int)iter.getPosition().y + k);
 					
-					if (iter.getOccupant() != blank && found == false)
+					if (iter.getOccupant() != null && found == false)
 					{
-						if (iter.getOccupant().isAlly == false)
+						if (iter.getOccupant().isAlly == false && iter.getOccupant().isStealthed == false)
 						{
 							listy.AddLast(iter);
 						}
@@ -161,9 +159,9 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x - k, (int)iter.getPosition().y + k);
 					
-					if (iter.getOccupant() != blank && found == false)
+					if (iter.getOccupant() != null && found == false)
 					{
-						if (iter.getOccupant().isAlly == false)
+						if (iter.getOccupant().isAlly == false && iter.getOccupant().isStealthed == false)
 						{
 							listy.AddLast(iter);
 						}
@@ -177,9 +175,9 @@ public class Pathfinding : MonoBehaviour {
 				{
 					iter = tiley.getTile((int)iter.getPosition().x - k, (int)iter.getPosition().y + k);
 					
-					if (iter.getOccupant() != blank && found == false)
+					if (iter.getOccupant() != null && found == false)
 					{
-						if (iter.getOccupant().isAlly == false)
+						if (iter.getOccupant().isAlly == false && iter.getOccupant().isStealthed == false)
 						{
 							listy.AddLast(iter);
 						}
@@ -190,27 +188,7 @@ public class Pathfinding : MonoBehaviour {
 		return listy;
 	}
 
-	public struct Path
-	{
-		public LinkedList<Tile> route;
-		public int cost;
-
-		public Path(LinkedList<Tile> rout, int cos)
-		{
-			route = rout;
-			cost = cos;
-		}
-		public void addition(Tile til)
-		{
-			route.AddLast (til);
-		}
-		public void addcost(int co)
-		{
-			cost = cost + co;
-		}
-	}
-
-	ArrayList pathfind(Tile origin, LinkedList<Tile> listy, int MP)
+	public ArrayList pathfind(Tile origin, LinkedList<Tile> listy, int MP)
 	{
 //		int xcoord = (int)origin.getPosition ().x;
 //		int ycoord = (int)origin.getPosition ().y;
@@ -220,7 +198,6 @@ public class Pathfinding : MonoBehaviour {
 //		Tile left = tiley.getTile (xcoord - 1, ycoord); //to the left
 		//LinkedList<Path> Paths = new LinkedList<Path>(); //this will hold all the paths, from closest to farthest kinda
 		ArrayList Paths = new ArrayList();
-		Character blank = new Character ();
 
 		foreach(Tile tyler in listy)
 		{
@@ -242,7 +219,7 @@ public class Pathfinding : MonoBehaviour {
 					if (j == 0)
 					{
 						iter = tiley.getTile((int)iter.getPosition().x, (int)iter.getPosition().y + 1);
-						if (iter.getOccupant() != blank)
+						if (iter.getOccupant() != null)
 						{
 							g = 9999;
 						}
@@ -258,7 +235,7 @@ public class Pathfinding : MonoBehaviour {
 					{
 						iter = tiley.getTile((int)iter.getPosition().x + 1, (int)iter.getPosition().y - 1);
 						int gtemp;
-						if (iter.getOccupant() != blank)
+						if (iter.getOccupant() != null)
 						{
 							gtemp = 9999;
 						}
@@ -280,7 +257,7 @@ public class Pathfinding : MonoBehaviour {
 					{
 						iter = tiley.getTile((int)iter.getPosition().x - 1, (int)iter.getPosition().y - 1);
 						int gtemp;
-						if (iter.getOccupant() != blank)
+						if (iter.getOccupant() != null)
 						{
 							gtemp = 9999;
 						}
@@ -302,7 +279,7 @@ public class Pathfinding : MonoBehaviour {
 					{
 						iter = tiley.getTile((int)iter.getPosition().x - 1, (int)iter.getPosition().y + 1);
 						int gtemp;
-						if (iter.getOccupant() != blank)
+						if (iter.getOccupant() != null)
 						{
 							gtemp = 9999;
 						}
@@ -340,11 +317,24 @@ public class Pathfinding : MonoBehaviour {
 	}
 
 
+}
 
-
-
-
-
-
-
+public struct Path
+{
+	public LinkedList<Tile> route;
+	public int cost;
+	
+	public Path(LinkedList<Tile> rout, int cos)
+	{
+		route = rout;
+		cost = cos;
+	}
+	public void addition(Tile til)
+	{
+		route.AddLast (til);
+	}
+	public void addcost(int co)
+	{
+		cost = cost + co;
+	}
 }
